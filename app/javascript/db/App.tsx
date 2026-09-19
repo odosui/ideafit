@@ -3,11 +3,14 @@ import { SETTINGS_PATH } from '../shared/settingsPath'
 import AccountPage from './account/AccountPage'
 import { CurrentUserProvider } from './account/CurrentUserContext'
 import BoardsPage from './BoardsPage'
+import ParticipantHomePage from './participant/ParticipantHomePage'
 import BoardSettingsPage from './settings/BoardSettingsPage'
 import Shell from './Shell'
 
 const CurrentPage: React.FC = () => {
   if (window.board) return <BoardSettingsPage board={window.board} />
+  if (window.participantBoards)
+    return <ParticipantHomePage boards={window.participantBoards} />
   if (window.location.pathname === SETTINGS_PATH) return <AccountPage />
   return <BoardsPage />
 }

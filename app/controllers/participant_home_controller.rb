@@ -1,5 +1,5 @@
 class ParticipantHomeController < ApplicationController
-  layout 'auth'
+  layout 'db'
 
   before_action :authenticate_user!
 

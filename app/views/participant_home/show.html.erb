@@ -1,16 +1,4 @@
-<% content_for :title, "Your boards" %>
-<h1>Your boards</h1>
-<% if @boards.any? %>
-  <p>Boards you've posted or voted on.</p>
-  <ul class="auth-boards">
-    <% @boards.each do |board| %>
-      <li><%= link_to board.name, "/b/#{board.pid}" %></li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>Boards are shared by link. Ask the board owner for one.</p>
-<% end %>
-<div class="auth-footer">
-  <%= link_to "Account settings", db_settings_path %> ·
-  <%= link_to "Log out", destroy_user_session_path %>
-</div>
+<script>
+  window.user = <%= raw(UserSerializer.new(current_user).to_json) %>
+  window.participantBoards = <%= raw(@boards.map { |board| BoardSerializer.new(board) }.to_json) %>
+</script>
