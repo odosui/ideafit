@@ -11,11 +11,12 @@
     "react-dom": "^17.0.2",
     "react-modal": "^3.13.1",
     "sass": "^1.32.12",
-    "typescript": "^5.2.2"
+    "typescript": "^7.0.2"
   },
   "version": "0.1.0",
   "devDependencies": {
     "@playwright/test": "^1.61.0",
+    "@types/node": "^26.6.2",
     "vite": "^8.0.16",
     "vite-plugin-ruby": "^5.2.4"
   },

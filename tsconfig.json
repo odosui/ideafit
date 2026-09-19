@@ -6,15 +6,16 @@
     "experimentalDecorators": true,
     "lib": [
       "dom",
-      "es2015"
+      "es2020"
     ],
-    "module": "es6",
-    "moduleResolution": "node",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "sourceMap": true,
-    "target": "es5",
+    "target": "es2020",
     "jsx": "react",
     "noEmit": true,
-    "strict": true
+    "strict": true,
+    "types": ["vite/client", "node"]
   },
   "exclude": [
     "**/*.spec.ts",
