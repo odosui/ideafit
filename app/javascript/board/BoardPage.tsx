@@ -12,6 +12,7 @@ import StatusBadge from './items/StatusBadge'
 import StatusSelect from './items/StatusSelect'
 import { Item, ItemKind } from './types'
 import showToast from '../shared/toaster'
+import { labelsForKind } from './items/kindLabels'
 
 const { isOwner } = readServerData()
 
@@ -39,6 +40,7 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
   } = useContext(StateContext)
 
   const [showForm, setShowForm] = useState(false)
+  const labels = labelsForKind(kindTab)
 
   const formAnimations = useSpring({
     opacity: showForm ? 1 : 0,
@@ -52,9 +54,9 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
   const ideasWithAnimations = useTransition(items ?? [], IDEA_LIST_ANIMATIONS)
 
   const handleCreate = async (title: string, description: string) => {
-    await createItem('idea', title, description)
+    await createItem(kindTab, title, description)
     setShowForm(false)
-    showToast('Idea added! 🍕')
+    showToast(labels.added)
   }
 
   const handleVoterClicked = async (itemId: number) => {
@@ -78,9 +80,9 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
   }
 
   const handleDelete = async (id: number) => {
-    if (!window.confirm('Are you sure want to delete this idea?')) return
+    if (!window.confirm(labels.confirmDelete)) return
     await removeItem(id)
-    showToast('Idea successfully deleted! 🍕')
+    showToast(labels.deleted)
   }
 
   return (
@@ -105,13 +107,14 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
                   <div className="add-new-btn">
                     <Button onClick={handleShowIdeaForm}>
                       <i className="ti-plus" />
-                      Add Idea
+                      {labels.addButton}
                     </Button>
                   </div>
                 )}
                 {showForm && (
                   <animated.div style={formAnimations}>
                     <CreateIdeaForm
+                      submitLabel={labels.addButton}
                       onCancel={() => setShowForm(false)}
                       onCreate={handleCreate}
                     />
@@ -169,7 +172,7 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
             </div>
           </div>
           {!loading && items && items.length === 0 && (
-            <div className="no-data">Be the first to add an idea! 💡</div>
+            <div className="no-data">{labels.empty}</div>
           )}
         </main>
       </div>
@@ -180,9 +183,10 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
 export default BoardPage
 
 const CreateIdeaForm: React.FC<{
+  submitLabel: string
   onCancel: () => void
   onCreate: (title: string, description: string) => Promise<void>
-}> = ({ onCancel, onCreate }) => {
+}> = ({ submitLabel, onCancel, onCreate }) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
 
@@ -215,7 +219,7 @@ const CreateIdeaForm: React.FC<{
         </div>
         <div className="form-group">
           <Button type="submit" loading={false}>
-            Add Idea
+            {submitLabel}
           </Button>
           <a
             href="#"
