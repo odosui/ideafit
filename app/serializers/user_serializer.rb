@@ -7,6 +7,7 @@ class UserSerializer
     {
       email: @user.email,
       name: @user.name,
+      admin: @user.admin?,
     }
   end
 end

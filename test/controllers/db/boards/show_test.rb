@@ -9,12 +9,21 @@ class Db::BoardsShowTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "someone else gets 404" do
-    sign_in users(:author)
+  test "another admin gets 404" do
+    users(:stranger).update!(admin: true)
+    sign_in users(:stranger)
 
     get db_board_path(boards(:roadmap).pid)
 
     assert_response :not_found
+  end
+
+  test "a participant is sent to their home" do
+    sign_in users(:author)
+
+    get db_board_path(boards(:roadmap).pid)
+
+    assert_redirected_to participant_home_path
   end
 
   test "signed-out visitor is sent to sign-in" do

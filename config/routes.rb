@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "db/boards#index"
+  get "home", to: "participant_home#show", as: :participant_home
 
   get "b/:pid(/:kind)", to: "boards#show", constraints: { kind: /ideas|bugs|questions/ }
 

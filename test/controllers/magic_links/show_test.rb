@@ -11,7 +11,7 @@ class MagicLinksShowTest < ActionDispatch::IntegrationTest
     get magic_link_path(link_token, return_to: "/b/roadmap0pid")
 
     assert_redirected_to "/b/roadmap0pid"
-    get root_path
+    get participant_home_path
     assert_response :success
   end
 
@@ -54,7 +54,37 @@ class MagicLinksShowTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_session_path
   end
 
+  test "the first person to sign in becomes admin" do
+    User.update_all(admin: false)
+
+    get magic_link_path(link_token)
+
+    assert @user.reload.admin?
+  end
+
+  test "a later sign-in stays a participant" do
+    get magic_link_path(link_token)
+
+    assert_not @user.reload.admin?
+  end
+
+  test "an email listed in ADMIN_EMAILS becomes admin" do
+    with_admin_emails(" Author@Example.com , boss@example.com") do
+      get magic_link_path(link_token)
+    end
+
+    assert @user.reload.admin?
+  end
+
   private
+
+  def with_admin_emails(value)
+    previous = ENV["ADMIN_EMAILS"]
+    ENV["ADMIN_EMAILS"] = value
+    yield
+  ensure
+    ENV["ADMIN_EMAILS"] = previous
+  end
 
   def delete_session_cookie
     cookies.delete("_ideafit_session")

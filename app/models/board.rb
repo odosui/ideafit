@@ -13,6 +13,11 @@ class Board < ApplicationRecord
 
   before_validation :set_pid
 
+  scope :participated_by, ->(user) {
+    where(id: user.items.select(:board_id))
+      .or(where(id: Item.joins(:votes).where(votes: { user_id: user.id }).select(:board_id)))
+  }
+
   def owned_by?(someone)
     someone.present? && user_id == someone.id
   end

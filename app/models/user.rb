@@ -1,7 +1,10 @@
 class User < ApplicationRecord
+  include AdminGrant
+
   devise :rememberable
 
   has_many :boards, inverse_of: :user, dependent: :destroy
+  has_many :items
   has_many :votes, dependent: :destroy
 
   normalizes :email, with: ->(email) { email.strip.downcase }

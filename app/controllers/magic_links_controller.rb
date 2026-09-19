@@ -32,6 +32,7 @@ class MagicLinksController < ApplicationController
     end
 
     user.consume_magic_link!
+    user.grant_admin_if_eligible!
     user.remember_me = true
     return_to = return_to_param || stored_location_for(:user) || root_path
     sign_in(user)

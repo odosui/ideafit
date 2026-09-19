@@ -13,6 +13,10 @@ class Api::BoardsController < Api::BaseController
   end
 
   def create
+    unless BoardCreationPolicy.allowed?(current_user)
+      return render_forbidden('Only admins can create boards')
+    end
+
     board = current_user.boards.create!(board_params)
     render json: BoardSerializer.new(board)
   end
