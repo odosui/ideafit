@@ -11,7 +11,7 @@ const CurrentUserContext = React.createContext<CurrentUserState>({
   setUser: () => {},
 })
 
-export const CurrentUserProvider: React.FC = ({ children }) => {
+export const CurrentUserProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [user, setUser] = React.useState(window.user)
   return (
     <CurrentUserContext.Provider value={{ user, setUser }}>

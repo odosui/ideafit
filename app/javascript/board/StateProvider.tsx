@@ -81,7 +81,7 @@ export const INITIAL_STATE: IState = {
 
 export const StateContext = createContext<IState>(INITIAL_STATE)
 
-export const StateProvider: React.FC<{ kindTab: ItemKind }> = ({
+export const StateProvider: React.FC<React.PropsWithChildren<{ kindTab: ItemKind }>> = ({
   kindTab,
   children,
 }) => {

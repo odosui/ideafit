@@ -14,11 +14,13 @@ import Modal from 'react-modal'
 
 Modal.setAppElement('#app')
 
-const GenericModal: React.FC<{
-  isOpen: boolean
-  title: string
-  onRequestClose: () => void
-}> = ({ children, isOpen, title, onRequestClose }) => {
+const GenericModal: React.FC<
+  React.PropsWithChildren<{
+    isOpen: boolean
+    title: string
+    onRequestClose: () => void
+  }>
+> = ({ children, isOpen, title, onRequestClose }) => {
   return (
     <Modal
       isOpen={isOpen}

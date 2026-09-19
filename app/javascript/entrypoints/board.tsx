@@ -1,12 +1,12 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import App from '../board/App'
 import '../styles/board.scss'
 import readServerData from '../shared/server'
 import showToast from '../shared/toaster'
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<App />, document.getElementById('app'))
+  createRoot(document.getElementById('app')!).render(<App />)
 })
 
 window.addEventListener('load', () => {
