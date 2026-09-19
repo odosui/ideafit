@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    image: hiquest/ideafit:latest
     env_file: .env
     environment:
       DATABASE_URL: postgres://ideafit:ideafit@db/ideafit

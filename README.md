@@ -1,24 +1,30 @@
-# README
+# Ideafit
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A self-hosted feedback board. Collect ideas, bugs and questions from your users, let them vote, and track what's in progress. Share a public board link or embed it on your site.
 
-Things you may want to cover:
+## Run it
 
-* Ruby version
+```sh
+curl -O https://raw.githubusercontent.com/odosui/ideafit/main/docker-compose.yml
+curl -o .env https://raw.githubusercontent.com/odosui/ideafit/main/.env.example
+docker compose up -d
+```
 
-* System dependencies
+Open http://localhost:3000. A demo board lives at http://localhost:3000/b/demo.
 
-* Configuration
+Sign-in is by email link. Without SMTP settings in `.env`, the link is printed to `docker compose logs app`.
 
-* Database creation
+## Embed
 
-* Database initialization
+```html
+<script id="ideafit" src="https://your-ideafit-host/embed.js" data-board="BOARD_ID"></script>
+<button onclick="IdeaFit.show()">Feedback</button>
+```
 
-* How to run the test suite
+## Develop
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```sh
+bundle install && npm install
+bin/rails db:prepare
+bin/dev
+```
