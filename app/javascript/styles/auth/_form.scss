@@ -1,0 +1,47 @@
+@use '../modules/vars' as *;
+
+.auth-form {
+  label {
+    display: block;
+    margin-bottom: $unit1;
+    font-size: $text1;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  input[type='email'] {
+    display: block;
+    width: 100%;
+    margin-bottom: $unit3;
+    padding: $unit2;
+    font: inherit;
+    border: 1px solid var(--color-line-strong);
+    border-radius: $unit1;
+    background-color: white;
+    transition: border-color 0.15s, box-shadow 0.15s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px var(--color-primary-soft);
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: $unit2;
+    font: inherit;
+    font-weight: 600;
+    color: white;
+    border: 0;
+    border-radius: $unit1;
+    background-color: var(--color-primary);
+    box-shadow: var(--shadow-cta);
+    cursor: pointer;
+    transition: background-color 0.15s;
+
+    &:hover {
+      background-color: var(--color-primary-hover);
+    }
+  }
+}

@@ -1,0 +1,29 @@
+dark_mode:
+  board: roadmap
+  user: author
+  kind: idea
+  title: Dark mode
+  votes_count: 2
+
+export_csv:
+  board: roadmap
+  user: author
+  kind: idea
+  title: Export to CSV
+  votes_count: 0
+
+crash_on_login:
+  board: roadmap
+  user: stranger
+  kind: bug
+  title: Crash on login
+  status: done
+  votes_count: 1
+
+spam:
+  board: roadmap
+  user: stranger
+  kind: idea
+  title: Buy cheap stuff
+  status: rejected
+  votes_count: 0

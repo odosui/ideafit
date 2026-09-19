@@ -1,0 +1,114 @@
+@import '../modules/vars';
+
+.board-settings {
+  display: flex;
+  flex-direction: column;
+  gap: $unit4;
+  max-width: $unit14;
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: $unit1;
+    margin-bottom: -$unit2;
+    font-size: $text1;
+    color: var(--color-text-lighter);
+
+    i {
+      font-size: $text0;
+    }
+
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      margin: 0;
+      font-family: Poppins, sans-serif;
+      font-weight: 500;
+    }
+  }
+
+  &__open {
+    display: inline-flex;
+    align-items: center;
+    gap: $unit1;
+    padding: $unit1 $unit3;
+    border: 1px solid var(--color-line-strong);
+    border-radius: $unit1;
+    font-size: $text1;
+    font-weight: 500;
+    color: var(--color-text-light);
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+
+    i {
+      font-size: $text0;
+    }
+
+    &:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $unit1;
+    font-size: $text1;
+    font-weight: 500;
+    color: var(--color-text-light);
+
+    input,
+    textarea {
+      margin: 0;
+      padding: $unit2 $unit3;
+      font-family: inherit;
+      font-size: $text2;
+      font-weight: 400;
+      border: 1px solid var(--color-line-strong);
+      border-radius: $unit1;
+      background-color: white;
+      color: var(--color-text);
+
+      &:focus {
+        outline: none;
+        border-color: var(--color-primary);
+      }
+    }
+
+    textarea {
+      min-height: $unit8;
+      resize: vertical;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $unit3;
+    font-size: $text1;
+
+    button {
+      margin: 0;
+      padding: $unit2 $unit4;
+      font-size: $text2;
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: normal;
+      border-radius: $unit1;
+    }
+  }
+
+  &__error {
+    color: var(--color-error);
+  }
+}

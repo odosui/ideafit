@@ -1,0 +1,18 @@
+# In production everything, including Solid Queue/Cache/Cable, lives in the one
+# database given by DATABASE_URL.
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: if_development
+
+test:
+  <<: *default
+  database: if_test
+
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>

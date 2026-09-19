@@ -1,0 +1,63 @@
+@use '../modules/vars' as *;
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  padding: $unit5;
+  border-radius: $unit2;
+  background-color: white;
+  box-shadow: var(--shadow-md);
+
+  h1 {
+    margin-bottom: $unit1;
+    font-family: Domine, serif;
+    font-size: $text5;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  p {
+    margin-bottom: $unit4;
+    color: var(--color-text-lighter);
+  }
+
+  strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+}
+
+.auth-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $unit6;
+  height: $unit6;
+  margin-bottom: $unit3;
+  border-radius: 50%;
+  font-size: $text5;
+  background-color: var(--color-primary-soft);
+}
+
+.auth-alert {
+  margin-bottom: $unit4;
+  padding: $unit2 $unit3;
+  border-radius: $unit1;
+  font-size: $text1;
+  color: #92400e;
+  background-color: #fef3c7;
+}
+
+.auth-footer {
+  margin-top: $unit4;
+  font-size: $text1;
+
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

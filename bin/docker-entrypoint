@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+# Without SECRET_KEY_BASE, generate one once and keep it in the storage volume
+if [ -z "$SECRET_KEY_BASE" ]; then
+  secret_file=storage/secret_key_base
+  [ -f "$secret_file" ] || ruby -rsecurerandom -e 'puts SecureRandom.hex(64)' > "$secret_file"
+  export SECRET_KEY_BASE=$(cat "$secret_file")
+fi
+
+# Create or migrate the database before starting the server
+if [[ "$*" == *"rails server"* ]]; then
+  bin/rails db:prepare
+fi
+
+exec "$@"

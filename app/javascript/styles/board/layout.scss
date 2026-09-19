@@ -1,0 +1,14 @@
+@import '../modules/vars';
+
+.board-layout {
+  display: grid;
+  gap: $unit5;
+  max-width: $unit16 + $unit7;
+  margin: $unit5 auto;
+
+  @media (min-width: $bp-tablet) {
+    grid-template-columns: $unit11 minmax(0, 1fr);
+    align-items: start;
+    gap: $unit6;
+  }
+}

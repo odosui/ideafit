@@ -1,0 +1,72 @@
+@import '../modules/vars';
+
+.board-aside {
+  @media (min-width: $bp-tablet) {
+    position: sticky;
+    top: $app-header-height + $unit5;
+  }
+}
+
+.board-intro {
+  margin-bottom: $unit4;
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    gap: $unit1;
+    margin-bottom: $unit1;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: Domine, serif;
+    font-size: $text5;
+  }
+
+  &__description {
+    font-size: $text2;
+    white-space: pre-line;
+    color: var(--color-text-lighter);
+  }
+
+  &__settings {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: $unit5;
+    height: $unit5;
+    border-radius: 50%;
+    font-size: $text1;
+    color: var(--color-text-lighter);
+
+    &:hover {
+      color: var(--color-primary);
+      background-color: var(--color-bg-hover-intense);
+    }
+  }
+}
+
+.kind-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $unit1;
+
+  &__tab {
+    padding: $unit0 $unit2;
+    border-radius: $unit3;
+    font-size: $text1;
+    font-weight: 600;
+    color: var(--color-text-lighter);
+
+    &:hover {
+      color: var(--color-text);
+      background-color: var(--color-bg-hover-intense);
+    }
+
+    &--active,
+    &--active:hover {
+      color: var(--color-primary);
+      background-color: var(--color-primary-soft);
+    }
+  }
+}

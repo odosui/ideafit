@@ -1,0 +1,9 @@
+roadmap:
+  user: board_owner
+  name: Roadmap
+  pid: roadmap0pid
+
+side_project:
+  user: stranger
+  name: Side project
+  pid: side0pid

@@ -1,0 +1,11 @@
+author_likes_dark_mode:
+  item: dark_mode
+  user: author
+
+owner_likes_dark_mode:
+  item: dark_mode
+  user: board_owner
+
+author_hits_crash:
+  item: crash_on_login
+  user: author

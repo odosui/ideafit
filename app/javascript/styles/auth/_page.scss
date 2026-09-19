@@ -1,0 +1,39 @@
+@use '../modules/vars' as *;
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $unit4 $unit3;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: $text2;
+  line-height: 1.5;
+  color: var(--color-text-light);
+  background-color: var(--color-bg);
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: $unit1;
+  margin-bottom: $unit4;
+  font-family: Domine, serif;
+  font-size: $text4;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.auth-brand__mark {
+  width: $unit4;
+  height: $unit4;
+  border-radius: 50%;
+  border: 6px solid var(--color-primary);
+}

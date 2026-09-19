@@ -1,0 +1,4 @@
+<script>
+  window.user = <%= raw(current_user.slice(:email).to_json) %>
+  window.board = <%= raw(BoardSerializer.new(@board).to_json) %>
+</script>

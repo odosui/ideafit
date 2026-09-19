@@ -1,0 +1,8 @@
+board_owner:
+  email: owner@example.com
+
+author:
+  email: author@example.com
+
+stranger:
+  email: stranger@example.com

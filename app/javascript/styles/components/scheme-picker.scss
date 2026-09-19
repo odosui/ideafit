@@ -1,0 +1,52 @@
+@import '../modules/vars';
+
+.scheme-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $unit2;
+
+  &__option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $unit1;
+    padding: $unit1;
+    border: 2px solid transparent;
+    border-radius: $unit2;
+    font-weight: 400;
+    color: var(--color-text-light);
+    cursor: pointer;
+
+    input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &--selected {
+      border-color: var(--color-primary);
+    }
+
+    &:focus-within {
+      outline: 2px solid var(--color-primary-soft);
+    }
+  }
+
+  &__swatch {
+    display: flex;
+    align-items: flex-end;
+    width: $unit8;
+    height: $unit6;
+    padding: $unit1;
+    border: 1px solid var(--color-line);
+    border-radius: $unit1;
+    background-color: var(--color-bg);
+  }
+
+  &__accent {
+    width: 100%;
+    height: $unit2;
+    border-radius: $unit0;
+    background-color: var(--color-primary);
+  }
+}

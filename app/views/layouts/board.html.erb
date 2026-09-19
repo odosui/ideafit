@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title><%= @board.name %> · Ideafit</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag 'board.tsx' %>
+
+    <link href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap&subset=cyrillic" rel="stylesheet">
+  </head>
+
+  <% user = current_user ? { email: current_user.email } : nil %>
+
+  <body data-pid="<%= params['pid'] %>" data-board-name="<%= @board.name %>" data-board-description="<%= @board.description %>" data-color-scheme="<%= @board.color_scheme %>" data-user="<%= user.to_json %>" data-owner="<%= @board.owned_by?(current_user) %>" data-info="<%= js_data.to_json %>">
+    <%= yield %>
+  </body>
+</html>

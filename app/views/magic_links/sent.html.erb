@@ -1,0 +1,9 @@
+<div class="auth-card__icon">✉️</div>
+<h1>Check your email</h1>
+<p>
+  We sent a sign-in link to <strong><%= params[:email] %></strong>.
+  It works once and expires in 15 minutes.
+</p>
+<div class="auth-footer">
+  <%= link_to "Use a different email", new_user_session_path(return_to: params[:return_to]) %>
+</div>
