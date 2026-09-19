@@ -1,0 +1,41 @@
+// Animates height via grid rows so content below slides instead of jumping
+.collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    grid-template-rows 0.25s ease,
+    opacity 0.15s ease,
+    transform 0.25s ease;
+
+  .collapse__inner {
+    overflow: hidden;
+    min-height: 0;
+    visibility: hidden;
+    transition: visibility 0s linear 0.25s;
+  }
+}
+
+.collapse--open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: none;
+  transition:
+    grid-template-rows 0.25s ease,
+    opacity 0.2s ease 0.05s,
+    transform 0.25s ease;
+
+  .collapse__inner {
+    visibility: visible;
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collapse,
+  .collapse--open,
+  .collapse .collapse__inner {
+    transition: none;
+  }
+}

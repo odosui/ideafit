@@ -1,6 +1,7 @@
-import { animated, config, useSpring, useTransition } from '@react-spring/web'
+import { animated, useTransition } from '@react-spring/web'
 import React, { useContext, useState } from 'react'
 import Button from '../shared/Button'
+import Collapse from '../shared/Collapse'
 import Spinner from '../shared/Spinner'
 import readServerData from '../shared/server'
 import { StateContext } from './StateProvider'
@@ -10,6 +11,7 @@ import Header from './Header'
 import BoardAside from './aside/BoardAside'
 import StatusBadge from './items/StatusBadge'
 import StatusSelect from './items/StatusSelect'
+import CreateItemForm from './items/CreateItemForm'
 import { Item, ItemKind } from './types'
 import showToast from '../shared/toaster'
 import { labelsForKind } from './items/kindLabels'
@@ -41,15 +43,6 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
 
   const [showForm, setShowForm] = useState(false)
   const labels = labelsForKind(kindTab)
-
-  const formAnimations = useSpring({
-    opacity: showForm ? 1 : 0,
-    transform: showForm ? 'translate3d(0,0,0)' : 'translate3d(0,-100%,0)',
-    config: {
-      ...config.gentle,
-      duration: 200,
-    },
-  })
 
   const ideasWithAnimations = useTransition(items ?? [], IDEA_LIST_ANIMATIONS)
 
@@ -103,23 +96,22 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
               className="tabbed-content"
             >
               <div className="idea-form">
-                {!showForm && (
+                <Collapse open={!showForm}>
                   <div className="add-new-btn">
                     <Button onClick={handleShowIdeaForm}>
                       <i className="ti-plus" />
                       {labels.addButton}
                     </Button>
                   </div>
-                )}
-                {showForm && (
-                  <animated.div style={formAnimations}>
-                    <CreateIdeaForm
-                      submitLabel={labels.addButton}
-                      onCancel={() => setShowForm(false)}
-                      onCreate={handleCreate}
-                    />
-                  </animated.div>
-                )}
+                </Collapse>
+                <Collapse open={showForm}>
+                  <CreateItemForm
+                    open={showForm}
+                    submitLabel={labels.addButton}
+                    onCancel={() => setShowForm(false)}
+                    onCreate={handleCreate}
+                  />
+                </Collapse>
               </div>
               <div className="ideas">
                 {loading && (
@@ -181,58 +173,3 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
 }
 
 export default BoardPage
-
-const CreateIdeaForm: React.FC<{
-  submitLabel: string
-  onCancel: () => void
-  onCreate: (title: string, description: string) => Promise<void>
-}> = ({ submitLabel, onCancel, onCreate }) => {
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (!title || !description) return
-    await onCreate(title, description)
-  }
-
-  return (
-    <div className="create-idea-form">
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input
-            autoFocus={true}
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <textarea
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <Button type="submit" loading={false}>
-            {submitLabel}
-          </Button>
-          <a
-            href="#"
-            style={{ marginLeft: '8px' }}
-            onClick={(e) => {
-              e.preventDefault()
-              onCancel()
-            }}
-          >
-            Cancel
-          </a>
-        </div>
-      </form>
-    </div>
-  )
-}
