@@ -2,7 +2,10 @@ import * as React from 'react'
 import { DEFAULT_BOARD_DESCRIPTION } from '../../shared/boardDescription'
 import api from '../api'
 import { Board, BoardChanges } from '../types'
+import CopyLinkButton from '../links/CopyLinkButton'
+import { publicBoardUrl } from '../links/publicBoardUrl'
 import ColorSchemePicker from './ColorSchemePicker'
+import DeleteBoardSection from './DeleteBoardSection'
 
 interface Props {
   board: Board
@@ -45,15 +48,22 @@ const BoardSettingsPage: React.FC<Props> = ({ board }) => {
 
       <div className="board-settings__heading">
         <h2>Board settings</h2>
-        <a
-          className="board-settings__open"
-          href={`/b/${board.pid}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open board
-          <i className="fas fa-external-link-alt" aria-hidden="true" />
-        </a>
+        <div className="board-settings__links">
+          <CopyLinkButton
+            url={publicBoardUrl(board.pid)}
+            className="board-settings__open"
+            showLabel
+          />
+          <a
+            className="board-settings__open"
+            href={`/b/${board.pid}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open board
+            <i className="fas fa-external-link-alt" aria-hidden="true" />
+          </a>
+        </div>
       </div>
 
       <label className="board-settings__field">
@@ -92,6 +102,8 @@ const BoardSettingsPage: React.FC<Props> = ({ board }) => {
           <span className="board-settings__error">Something went wrong. Please try again.</span>
         )}
       </div>
+
+      <DeleteBoardSection board={board} />
     </form>
   )
 }

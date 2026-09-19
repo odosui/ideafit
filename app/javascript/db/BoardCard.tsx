@@ -1,4 +1,6 @@
 import * as React from 'react'
+import CopyLinkButton from './links/CopyLinkButton'
+import { publicBoardUrl } from './links/publicBoardUrl'
 import { Board } from './types'
 
 interface Props {
@@ -13,8 +15,12 @@ const BoardCard: React.FC<Props> = ({ board }) => (
         {board.items_count} {board.items_count === 1 ? 'item' : 'items'}
       </span>
     </a>
+    <CopyLinkButton
+      url={publicBoardUrl(board.pid)}
+      className="db-board-card__action"
+    />
     <a
-      className="db-board-card__public"
+      className="db-board-card__action"
       href={`/b/${board.pid}`}
       target="_blank"
       rel="noopener noreferrer"

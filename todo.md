@@ -20,8 +20,8 @@ Launch chores (CI, README, release) live in `phase1.md`.
 
 - [x] Owner page for a board (name, description, color scheme)
 - [x] Rename a board
-- [ ] Delete a board
-- [ ] Copy the public link
+- [x] Delete a board
+- [x] Copy the public link
 
 ## Embedded
 

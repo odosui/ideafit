@@ -8,5 +8,7 @@ export default {
       api('post', '/boards', { name, description }),
     update: (pid: string, changes: BoardChanges): Promise<Board> =>
       api('PATCH', `/boards/${pid}`, { ...changes }),
+    remove: (pid: string): Promise<{ success: boolean }> =>
+      api('DELETE', `/boards/${pid}`),
   },
 }

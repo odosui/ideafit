@@ -10,12 +10,12 @@ interface Props {
 
 const BoardList: React.FC<Props> = ({ boards, onCreated }) => (
   <>
-    <NewBoardToggle onCreated={onCreated} />
     <ul className="db-board-list">
       {boards.map((board) => (
         <BoardCard key={board.id} board={board} />
       ))}
     </ul>
+    <NewBoardToggle onCreated={onCreated} />
   </>
 )
 

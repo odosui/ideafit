@@ -103,11 +103,15 @@ $db-sidebar-width: $unit10;
 
 .db-board-list {
   list-style: none;
-  margin: $unit5 0 0;
+  margin: 0;
   padding: 0;
   display: grid;
   gap: $unit3;
   grid-template-columns: repeat(auto-fill, minmax($unit11, 1fr));
+
+  & + .db-new-board-button {
+    margin-top: $unit4;
+  }
 
   &__empty {
     margin-top: $unit5;
@@ -142,17 +146,28 @@ $db-sidebar-width: $unit10;
     min-width: 0;
   }
 
-  &__public {
+  &__action {
     flex: none;
     display: flex;
     align-items: center;
     justify-content: center;
     width: $unit6;
-    color: var(--color-text-lighter);
+    margin: 0;
+    padding: 0;
+    border: none;
     border-left: 1px solid var(--color-line);
+    border-radius: 0;
+    background: none;
+    font-size: $text2;
+    color: var(--color-text-lighter);
     transition: color 0.15s ease;
 
+    i {
+      margin: 0;
+    }
+
     &:hover {
+      background: none;
       color: var(--color-primary);
     }
   }

@@ -27,6 +27,16 @@ class Api::BoardsController < Api::BaseController
     render json: BoardSerializer.new(board)
   end
 
+  def destroy
+    board = Board.find_by_pid!(params[:pid])
+    unless board.owned_by?(current_user)
+      return render_forbidden('Only the board owner can delete the board')
+    end
+
+    board.destroy!
+    render json: { success: true }
+  end
+
   private
 
   def board_params
