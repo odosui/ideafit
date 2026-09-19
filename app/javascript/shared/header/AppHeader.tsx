@@ -1,12 +1,14 @@
 import * as React from 'react'
 import { signInPath, signOutPath } from '../authPaths'
+import { CurrentUser, displayName } from '../currentUser'
+import { SETTINGS_PATH } from '../settingsPath'
 
 interface Props {
-  email: string | null
+  user: CurrentUser | null
   onSignIn?: () => void
 }
 
-const AppHeader: React.FC<Props> = ({ email, onSignIn }) => {
+const AppHeader: React.FC<Props> = ({ user, onSignIn }) => {
   const handleSignIn: React.MouseEventHandler = (e) => {
     if (!onSignIn) return
     e.preventDefault()
@@ -21,9 +23,15 @@ const AppHeader: React.FC<Props> = ({ email, onSignIn }) => {
       </a>
 
       <div className="app-header__user">
-        {email ? (
+        {user ? (
           <>
-            <span className="app-header__email">{email}</span>
+            <a
+              className="app-header__account"
+              href={SETTINGS_PATH}
+              title={user.email}
+            >
+              {displayName(user)}
+            </a>
             <a className="app-header__link" href={signOutPath()}>
               Log out
             </a>

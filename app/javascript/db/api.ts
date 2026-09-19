@@ -1,4 +1,5 @@
 import { api } from '../shared/api'
+import { CurrentUser } from '../shared/currentUser'
 import { Board, BoardChanges } from './types'
 
 export default {
@@ -10,5 +11,9 @@ export default {
       api('PATCH', `/boards/${pid}`, { ...changes }),
     remove: (pid: string): Promise<{ success: boolean }> =>
       api('DELETE', `/boards/${pid}`),
+  },
+  account: {
+    update: (name: string): Promise<CurrentUser> =>
+      api('PATCH', '/account', { name }),
   },
 }

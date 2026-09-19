@@ -1,3 +1,5 @@
+import { CurrentUser } from './currentUser'
+
 function readServerData() {
   const body = document.querySelector('body')
   if (!body) {
@@ -8,7 +10,7 @@ function readServerData() {
   const boardDescription = body.dataset.boardDescription ?? ''
 
   const userStr = body.dataset.user
-  let user: { email: string } | null = null
+  let user: CurrentUser | null = null
   if (userStr) {
     try {
       user = JSON.parse(userStr)

@@ -1,4 +1,4 @@
 interface Window {
-  user: { email: string } | null
+  user: import('./shared/currentUser').CurrentUser | null
   board?: import('./db/types').Board
 }

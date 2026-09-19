@@ -1,16 +1,21 @@
 import * as React from 'react'
+import { SETTINGS_PATH } from '../shared/settingsPath'
 
 type NavItem = {
   label: string
   icon: string
   href: string
-  active?: boolean
 }
 
 const navItems: NavItem[] = [
-  { label: 'Boards', icon: 'fas fa-th-large', href: '/', active: true },
-  { label: 'Settings', icon: 'fas fa-cog', href: '#' },
+  { label: 'Boards', icon: 'fas fa-th-large', href: '/' },
+  { label: 'Settings', icon: 'fas fa-cog', href: SETTINGS_PATH },
 ]
+
+const isActive = (item: NavItem) => {
+  const onSettings = window.location.pathname === SETTINGS_PATH
+  return item.href === SETTINGS_PATH ? onSettings : !onSettings
+}
 
 const Sidebar: React.FC = () => {
   return (
@@ -21,7 +26,7 @@ const Sidebar: React.FC = () => {
             key={item.label}
             href={item.href}
             className={`db-sidebar__item${
-              item.active ? ' db-sidebar__item--active' : ''
+              isActive(item) ? ' db-sidebar__item--active' : ''
             }`}
           >
             <i className={item.icon} />

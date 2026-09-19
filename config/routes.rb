@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :boards, only: [:index, :create, :update, :destroy], param: :pid
+    resource :account, only: :update
 
     resources :items, only: [:index, :create, :update, :destroy] do
       member do
@@ -25,5 +26,6 @@ Rails.application.routes.draw do
 
   namespace :db do
     resources :boards, only: [:index, :show], param: :pid
+    resource :settings, only: :show
   end
 end

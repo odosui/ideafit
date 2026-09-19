@@ -13,7 +13,7 @@ function Header() {
     },
   } = useContext(StateContext)
 
-  return <AppHeader email={user?.email ?? null} onSignIn={showLoginForm} />
+  return <AppHeader user={user} onSignIn={showLoginForm} />
 }
 
 export default Header

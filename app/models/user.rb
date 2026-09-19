@@ -5,7 +5,9 @@ class User < ApplicationRecord
   has_many :votes, dependent: :destroy
 
   normalizes :email, with: ->(email) { email.strip.downcase }
+  normalizes :name, with: ->(name) { name.strip.presence }
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :name, length: { maximum: 50 }
 
   generates_token_for :magic_link, expires_in: 15.minutes do
     magic_link_used_at

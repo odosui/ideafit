@@ -95,6 +95,11 @@
         outline: none;
         border-color: var(--color-primary);
       }
+
+      &:disabled {
+        background-color: transparent;
+        color: var(--color-text-lighter);
+      }
     }
 
     textarea {

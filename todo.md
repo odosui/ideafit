@@ -1,12 +1,5 @@
 # TODO — missing functionality
 
-Launch chores (CI, README, release) live in `phase1.md`.
-
-## Broken
-
-- [x] Dashboard: clicking a board name goes to `/db/boards/:pid`, which doesn't exist (404)
-- [ ] Dashboard: the sidebar "Settings" link goes nowhere
-
 ## Board page
 
 - [x] Show the board name
@@ -16,21 +9,10 @@ Launch chores (CI, README, release) live in `phase1.md`.
 - [ ] Edit an item's title and text (author or owner)
 - [ ] Show each item's author and date
 
-## Dashboard
-
-- [x] Owner page for a board (name, description, color scheme)
-- [x] Rename a board
-- [x] Delete a board
-- [x] Copy the public link
-
 ## Embedded
 
 - [ ] Embed: the board can't be shown in an iframe on other sites (Rails sends `X-Frame-Options: SAMEORIGIN`)
 - [ ] dashboard / Copy the embed snippet
-
-## Accounts
-
-- [ ] Set a display name (`users.name` and `users.username` exist but nothing uses them)
 
 ## Later (out of scope for v0.1)
 

@@ -41,8 +41,12 @@ $app-header-height: $unit6;
     font-size: $text1;
   }
 
-  &__email {
+  &__account {
     color: var(--color-header-text-muted);
+
+    &:hover {
+      color: var(--color-header-text);
+    }
 
     @media (max-width: $bp-tablet) {
       display: none;
