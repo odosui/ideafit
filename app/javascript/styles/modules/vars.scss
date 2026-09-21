@@ -33,8 +33,8 @@ $tablet: 768px;
 $bp-tablet: 768px;
 
 :root {
-  --color-bg: #fbfaf7;
-  --color-bg-darker: #f4f1e8;
+  --color-bg: #f6f4ee;
+  --color-bg-darker: #eeebe1;
   --color-text: #0a0a0a;
   --color-text-light: #1f2937;
   --color-text-lighter: #525864;
@@ -43,9 +43,9 @@ $bp-tablet: 768px;
   --color-primary-bright: #14b8a6;
   --color-primary-soft: #0d94881a;
   --color-secondary: #525864;
-  --color-error: #ef4444;
-  --color-bg-hover: #f4f1e8;
-  --color-bg-hover-intense: #ece7d8;
+  --color-error: #dc2626;
+  --color-bg-hover: #eeebe1;
+  --color-bg-hover-intense: #e5e0d0;
   --color-table-border: #e5e1d6;
   --color-table-header: #f4f1e8;
   --color-table-row-hover: #faf8f2;
@@ -57,13 +57,13 @@ $bp-tablet: 768px;
   --color-header-text: #f3f4f6;
   --color-header-text-muted: #a1a7b0;
 
-  --color-line: #00000014;
-  --color-line-strong: #00000024;
+  --color-line: #0000001f;
+  --color-line-strong: #00000033;
 
   --color-orange: #f59e0b;
   --color-green: #22c55e;
 
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.06);
   --shadow-md:
     0 6px 24px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.04);
   --shadow-cta: 0 4px 14px rgba(15, 118, 110, 0.35);

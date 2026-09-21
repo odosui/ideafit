@@ -234,7 +234,7 @@ html {
       cursor: pointer;
       margin-bottom: 0;
       padding-bottom: $unit0;
-      color: var(--color-primary);
+      color: var(--color-text-lighter);
 
       font-size: $text0;
       font-family: 'Open Sans', sans-serif;
@@ -255,7 +255,7 @@ html {
 
       &.active {
         // font-weight: 700;
-        color: var(--color-secondary);
+        color: var(--color-primary);
         cursor: text;
         // background: var(--color-bg-hover);
         border-bottom: 2px solid var(--color-primary);
