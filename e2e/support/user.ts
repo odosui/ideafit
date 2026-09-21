@@ -1,5 +1,5 @@
 import { railsRunner } from './rails'
 
-export function createUser(): string {
-  return railsRunner('e2e/support/create_user.rb').trim()
+export function createAdmin(): string {
+  return railsRunner('e2e/support/create_admin.rb').trim()
 }

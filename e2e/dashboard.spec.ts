@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { createOwnedBoard } from './support/ownedBoard'
 import { signIn } from './support/magicLink'
-import { createUser } from './support/user'
+import { createAdmin } from './support/user'
 
 test('an owner with a board can create another one', async ({ page }) => {
   const board = createOwnedBoard()
@@ -18,8 +18,8 @@ test('an owner with a board can create another one', async ({ page }) => {
   await expect(page.getByPlaceholder('New board name')).toHaveCount(0)
 })
 
-test('someone without boards sees the form right away', async ({ page }) => {
-  await signIn(page, createUser())
+test('an admin without boards sees the form right away', async ({ page }) => {
+  await signIn(page, createAdmin())
   await page.goto('/')
 
   await expect(page.getByPlaceholder('New board name')).toBeVisible()
