@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= render "layouts/icons" %>
 
     <%= vite_client_tag %>
     <%= vite_stylesheet_tag 'auth.scss' %>
@@ -16,7 +17,7 @@
   </head>
   <body>
     <div class="auth-brand">
-      <div class="auth-brand__mark"></div>
+      <img class="auth-brand__mark" src="/logo.png" alt="">
       Ideafit
     </div>
     <main class="auth-card">

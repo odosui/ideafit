@@ -18,7 +18,7 @@ const AppHeader: React.FC<Props> = ({ user, onSignIn }) => {
   return (
     <header className="app-header">
       <a className="app-header__brand" href="/">
-        <span className="app-header__mark" />
+        <img className="app-header__mark" src="/logo.png" alt="" />
         Ideafit
       </a>
 
