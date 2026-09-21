@@ -54,3 +54,7 @@ node_modules
 
 # Embed widget build
 /public/embed.js
+
+# Personal todo notes
+/todo.md
+/*.todo.md
