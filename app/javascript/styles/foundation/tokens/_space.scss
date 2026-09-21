@@ -1,0 +1,17 @@
+@use '../scale' as *;
+
+:root {
+  --space-0: #{$unit0};
+  --space-1: #{$unit1};
+  --space-2: #{$unit2};
+  --space-3: #{$unit3};
+  --space-4: #{$unit4};
+  --space-5: #{$unit5};
+  --space-6: #{$unit6};
+  --space-7: #{$unit7};
+  --space-8: #{$unit8};
+
+  --measure-narrow: #{$unit12};
+  --measure-content: #{$unit14};
+  --measure-page: #{$unit16};
+}

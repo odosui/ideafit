@@ -13,9 +13,7 @@
 
     <link href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap&subset=cyrillic" rel="stylesheet">
+    <%= render "layouts/fonts" %>
   </head>
 
   <% user = current_user && UserSerializer.new(current_user) %>

@@ -1,0 +1,22 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-0) var(--space-1);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-0);
+  font-weight: 600;
+  background-color: var(--color-surface-active);
+  color: var(--color-text-muted);
+}
+
+.chip--success {
+  background-color: var(--color-success-soft);
+}
+
+.chip--warning {
+  background-color: var(--color-warning-soft);
+}
+
+.chip--danger {
+  background-color: var(--color-danger-soft);
+}

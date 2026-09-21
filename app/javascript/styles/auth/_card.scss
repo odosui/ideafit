@@ -1,24 +1,15 @@
-@use '../modules/vars' as *;
-
 .auth-card {
   width: 100%;
   max-width: 400px;
-  padding: $unit5;
-  border-radius: $unit2;
-  background-color: white;
-  box-shadow: var(--shadow-md);
+  padding: var(--space-5);
 
   h1 {
-    margin-bottom: $unit1;
-    font-family: Domine, serif;
-    font-size: $text5;
-    font-weight: 700;
-    color: var(--color-text);
+    margin-bottom: var(--space-1);
   }
 
   p {
-    margin-bottom: $unit4;
-    color: var(--color-text-lighter);
+    margin-bottom: var(--space-4);
+    color: var(--color-text-faint);
   }
 
   strong {
@@ -31,33 +22,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: $unit6;
-  height: $unit6;
-  margin-bottom: $unit3;
+  width: var(--space-6);
+  height: var(--space-6);
+  margin-bottom: var(--space-3);
   border-radius: 50%;
-  font-size: $text5;
-  background-color: var(--color-primary-soft);
+  font-size: var(--text-5);
+  background-color: var(--color-accent-soft);
 }
 
 .auth-alert {
-  margin-bottom: $unit4;
-  padding: $unit2 $unit3;
-  border-radius: $unit1;
-  font-size: $text1;
-  color: #92400e;
-  background-color: #fef3c7;
+  margin-bottom: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-1);
+  color: var(--color-warning-text);
+  background-color: var(--color-warning-bg);
 }
 
 .auth-footer {
-  margin-top: $unit4;
-  font-size: $text1;
+  margin-top: var(--space-4);
+  font-size: var(--text-1);
 
-  a {
-    color: var(--color-primary);
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
+  a:hover {
+    text-decoration: underline;
   }
 }

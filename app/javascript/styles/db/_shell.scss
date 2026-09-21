@@ -1,0 +1,65 @@
+@use '../foundation' as *;
+
+$sidebar-width: $unit10;
+
+.db-sidebar {
+  position: fixed;
+  top: $app-header-height;
+  bottom: 0;
+  left: 0;
+  z-index: var(--layer-sidebar);
+  width: $sidebar-width;
+  padding: var(--space-4) var(--space-2);
+  background-color: var(--color-bg-muted);
+  border-right: 1px solid var(--color-line);
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-0);
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    transition:
+      background-color var(--duration-fast) var(--ease),
+      color var(--duration-fast) var(--ease);
+
+    i {
+      width: var(--space-3);
+      text-align: center;
+      color: var(--color-text-faint);
+    }
+
+    &:hover {
+      background-color: var(--color-surface-active);
+      color: var(--color-text);
+    }
+
+    &--active,
+    &--active:hover {
+      background-color: var(--color-accent-soft);
+      color: var(--color-accent);
+      font-weight: 600;
+
+      i {
+        color: var(--color-accent);
+      }
+    }
+  }
+}
+
+.db-main {
+  margin-left: $sidebar-width;
+  padding-top: $app-header-height;
+  min-height: 100vh;
+
+  &__inner {
+    padding: var(--space-6);
+  }
+}

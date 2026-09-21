@@ -1,0 +1,22 @@
+@use '../scale' as *;
+
+:root {
+  --font-display: 'Domine', Georgia, 'Times New Roman', serif;
+  --font-body: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --text-0: #{$text0};
+  --text-1: #{$text1};
+  --text-2: #{$text2};
+  --text-3: #{$text3};
+  --text-4: #{$text4};
+  --text-5: #{$text5};
+  --text-6: #{$text6};
+  --text-7: #{$text7};
+  --text-8: #{$text8};
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  --tracking-caps: 0.06em;
+}

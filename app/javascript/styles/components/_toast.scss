@@ -1,0 +1,27 @@
+.toast {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  z-index: var(--layer-toast);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  max-width: var(--measure-page);
+  padding: var(--space-1) var(--space-2);
+  border: 2px solid var(--color-success);
+  border-radius: var(--radius-md);
+  font-size: var(--text-1);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  transition: top var(--duration-slow) var(--ease);
+
+  &--visible {
+    top: var(--space-2);
+  }
+
+  &--error {
+    border-color: var(--color-danger);
+  }
+}

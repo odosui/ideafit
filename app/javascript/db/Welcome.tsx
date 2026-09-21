@@ -8,7 +8,7 @@ interface Props {
 
 const Welcome: React.FC<Props> = ({ onCreated }) => (
   <div className="db-welcome">
-    <h2 className="db-welcome__title">Welcome to Ideafit 👋</h2>
+    <h2>Welcome to Ideafit 👋</h2>
     <p className="db-welcome__text">
       Boards are where your users share and vote on ideas. You don't have any
       yet — create your first one to get started.

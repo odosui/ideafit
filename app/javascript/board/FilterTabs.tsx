@@ -14,17 +14,18 @@ const FilterTabs: React.FC<{
   isOwner: boolean
   onChange: (filter: Filter) => void
 }> = ({ filter, isOwner, onChange }) => (
-  <div className="tabbed-tabs" role="tablist">
+  <div className="underline-tabs" role="tablist">
     {(isOwner ? OWNER_TABS : PUBLIC_TABS).map(([value, label]) => (
-      <h3
+      <button
         key={value}
+        type="button"
         role="tab"
         aria-selected={filter === value}
         onClick={() => onChange(value)}
-        className={filter === value ? 'active' : ''}
+        className={`underline-tabs__tab${filter === value ? ' underline-tabs__tab--active' : ''}`}
       >
         {label}
-      </h3>
+      </button>
     ))}
   </div>
 )

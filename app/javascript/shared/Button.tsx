@@ -6,10 +6,12 @@ const Button: React.FC<
     type?: 'submit' | 'button'
   }
 > = ({ loading = false, type = 'button', className, children, ...attrs }) => {
-  const classes: string = `${className} ${loading ? 'loading' : ''}`
+  const classes = ['btn', className, loading && 'btn--loading']
+    .filter(Boolean)
+    .join(' ')
   return (
     <button {...attrs} className={classes} type={type}>
-      {loading ? <div className="spinner2" /> : children}
+      {loading ? <div className="spinner-bars" /> : children}
     </button>
   )
 }

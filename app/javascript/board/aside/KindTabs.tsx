@@ -17,13 +17,13 @@ const opensInNewTab = (e: React.MouseEvent) =>
   e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0
 
 const KindTabs: React.FC<Props> = ({ kind, onChange }) => (
-  <nav className="kind-tabs" aria-label="Item kinds">
+  <nav className="pill-tabs" aria-label="Item kinds">
     {KIND_LABELS.map(([value, label]) => (
       <a
         key={value}
         href={boardPathForKind(value)}
         aria-current={kind === value ? 'page' : undefined}
-        className={`kind-tabs__tab${kind === value ? ' kind-tabs__tab--active' : ''}`}
+        className={`pill-tabs__tab${kind === value ? ' pill-tabs__tab--active' : ''}`}
         onClick={(e) => {
           if (opensInNewTab(e)) return
           e.preventDefault()

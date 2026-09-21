@@ -13,7 +13,7 @@ const StatusSelect: React.FC<{
   onChange: (status: ItemStatus) => void
 }> = ({ status, onChange }) => (
   <select
-    className="status-select"
+    className="select select--sm"
     aria-label="Status"
     value={status}
     onChange={(e) => onChange(e.target.value as ItemStatus)}

@@ -40,22 +40,22 @@ const BoardSettingsPage: React.FC<Props> = ({ board }) => {
   }
 
   return (
-    <form className="board-settings" onSubmit={handleSubmit}>
-      <a className="board-settings__back" href="/">
+    <form className="settings-form" onSubmit={handleSubmit}>
+      <a className="settings-form__back" href="/">
         <i className="fas fa-arrow-left" aria-hidden="true" />
         All boards
       </a>
 
-      <div className="board-settings__heading">
+      <div className="settings-form__heading">
         <h2>Board settings</h2>
-        <div className="board-settings__links">
+        <div className="settings-form__links">
           <CopyLinkButton
             url={publicBoardUrl(board.pid)}
-            className="board-settings__open"
+            className="btn"
             showLabel
           />
           <a
-            className="board-settings__open"
+            className="btn"
             href={`/b/${board.pid}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -66,9 +66,10 @@ const BoardSettingsPage: React.FC<Props> = ({ board }) => {
         </div>
       </div>
 
-      <label className="board-settings__field">
+      <label className="field">
         Name
         <input
+          className="input"
           type="text"
           value={changes.name}
           onChange={(e) => change({ name: e.target.value })}
@@ -76,16 +77,17 @@ const BoardSettingsPage: React.FC<Props> = ({ board }) => {
         />
       </label>
 
-      <label className="board-settings__field">
+      <label className="field">
         Description
         <textarea
+          className="textarea"
           value={changes.description}
           placeholder={DEFAULT_BOARD_DESCRIPTION}
           onChange={(e) => change({ description: e.target.value })}
         />
       </label>
 
-      <div className="board-settings__field">
+      <div className="field">
         Color scheme
         <ColorSchemePicker
           value={changes.color_scheme}
@@ -93,13 +95,13 @@ const BoardSettingsPage: React.FC<Props> = ({ board }) => {
         />
       </div>
 
-      <div className="board-settings__actions">
-        <button type="submit" disabled={status === 'saving'}>
+      <div className="settings-form__actions">
+        <button className="btn btn--primary" type="submit" disabled={status === 'saving'}>
           {status === 'saving' ? 'Saving…' : 'Save'}
         </button>
         {status === 'saved' && <span>Saved</span>}
         {status === 'error' && (
-          <span className="board-settings__error">Something went wrong. Please try again.</span>
+          <span className="field__error">Something went wrong. Please try again.</span>
         )}
       </div>
 

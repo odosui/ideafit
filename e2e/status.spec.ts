@@ -9,7 +9,7 @@ test('the owner rejects an item and finds it in the Rejected tab', async ({
   await signIn(page, board.email)
   await page.goto(`/b/${board.pid}/ideas`)
 
-  const item = page.locator('.idea', { hasText: 'Dark mode' })
+  const item = page.locator('.item', { hasText: 'Dark mode' })
   await item.getByLabel('Status').selectOption('in_progress')
   await expect(item.getByLabel('Status')).toHaveValue('in_progress')
 

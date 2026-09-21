@@ -83,22 +83,18 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
       <Header />
       <div className="board-layout">
         <BoardAside kind={kindTab} onKindChange={onKindChange} />
-        <main className="ideas-page">
-          <div className="tabbed">
+        <main className="board-main">
+          <div>
             <FilterTabs
               filter={filter}
               isOwner={isOwner}
               onChange={setFilter}
             />
-            <div
-              aria-live="polite"
-              role="tabpanel"
-              className="tabbed-content"
-            >
-              <div className="idea-form">
+            <div aria-live="polite" role="tabpanel">
+              <div className="item-form-area">
                 <Collapse open={!showForm}>
-                  <div className="add-new-btn">
-                    <Button onClick={handleShowIdeaForm}>
+                  <div className="item-form-toggle">
+                    <Button className="btn--primary" onClick={handleShowIdeaForm}>
                       <i className="ti-plus" />
                       {labels.addButton}
                     </Button>
@@ -113,20 +109,20 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
                   />
                 </Collapse>
               </div>
-              <div className="ideas">
+              <div className="item-list">
                 {loading && (
-                  <div className="spinner-wrapper">
+                  <div className="board-loading">
                     <Spinner />
                   </div>
                 )}
 
                 {ideasWithAnimations((style, idea) => (
-                  <animated.div className="idea" style={style} key={idea.id}>
-                    <div className="idea-title">
-                      <h3>{idea.title}</h3>
-                      <p>{idea.text}</p>
-                      <div className="idea-actions">
-                        <div className="left">
+                  <animated.div className="item" style={style} key={idea.id}>
+                    <div className="item__body">
+                      <h3 className="item__title">{idea.title}</h3>
+                      <p className="item__text">{idea.text}</p>
+                      <div className="item__footer">
+                        <div>
                           {isOwner ? (
                             <StatusSelect
                               status={idea.status}
@@ -138,10 +134,10 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
                             <StatusBadge status={idea.status} />
                           )}
                         </div>
-                        <div className="right">
+                        <div>
                           {idea.can_edit && (
                             <Button
-                              className="mini transparent danger"
+                              className="btn--ghost btn--danger btn--sm"
                               onClick={(e) => {
                                 e.preventDefault()
                                 handleDelete(idea.id)
@@ -164,7 +160,7 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
             </div>
           </div>
           {!loading && items && items.length === 0 && (
-            <div className="no-data">{labels.empty}</div>
+            <div className="board-empty">{labels.empty}</div>
           )}
         </main>
       </div>

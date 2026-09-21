@@ -24,14 +24,15 @@ const AccountPage: React.FC = () => {
   }
 
   return (
-    <form className="board-settings" onSubmit={handleSubmit}>
-      <div className="board-settings__heading">
+    <form className="settings-form" onSubmit={handleSubmit}>
+      <div className="settings-form__heading">
         <h2>Settings</h2>
       </div>
 
-      <label className="board-settings__field">
+      <label className="field">
         Name
         <input
+          className="input"
           type="text"
           value={name}
           maxLength={50}
@@ -43,18 +44,18 @@ const AccountPage: React.FC = () => {
         />
       </label>
 
-      <label className="board-settings__field">
+      <label className="field">
         Email
-        <input type="email" value={user?.email ?? ''} disabled />
+        <input className="input" type="email" value={user?.email ?? ''} disabled />
       </label>
 
-      <div className="board-settings__actions">
-        <button type="submit" disabled={status === 'saving'}>
+      <div className="settings-form__actions">
+        <button className="btn btn--primary" type="submit" disabled={status === 'saving'}>
           {status === 'saving' ? 'Saving…' : 'Save'}
         </button>
         {status === 'saved' && <span>Saved</span>}
         {status === 'error' && (
-          <span className="board-settings__error">
+          <span className="field__error">
             Something went wrong. Please try again.
           </span>
         )}

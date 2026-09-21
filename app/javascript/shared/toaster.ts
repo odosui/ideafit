@@ -7,11 +7,12 @@ export default function showToast(
 ) {
   const toast = document.createElement('div')
   toast.className = 'toast'
-  toast.classList.add(`toast-${type}`)
+  if (type === 'error') toast.classList.add('toast--error')
   toast.textContent = message
 
   const closeBtn = document.createElement('button')
-  closeBtn.className = 'toast-close transparent mini'
+  closeBtn.className = 'btn btn--ghost btn--sm'
+  closeBtn.setAttribute('aria-label', 'Close')
 
   const closeIcon = document.createElement('i')
   closeIcon.className = 'ti-close'
@@ -25,7 +26,7 @@ export default function showToast(
   document.body.appendChild(toast)
 
   setTimeout(() => {
-    toast.classList.add('toast-show')
+    toast.classList.add('toast--visible')
   }, 0)
 
   setTimeout(() => {
@@ -33,7 +34,7 @@ export default function showToast(
   }, AUTO_REMOVE_IN)
 
   function close() {
-    toast.classList.remove('toast-show')
+    toast.classList.remove('toast--visible')
     setTimeout(() => {
       toast.remove()
     }, 500)

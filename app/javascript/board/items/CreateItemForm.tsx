@@ -25,40 +25,31 @@ const CreateItemForm: React.FC<{
   }
 
   return (
-    <div className="create-idea-form">
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input
-            ref={titleInput}
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <textarea
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <Button type="submit" loading={false}>
+    <div className="card">
+      <form className="item-form" onSubmit={handleSubmit}>
+        <input
+          className="input"
+          ref={titleInput}
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        <textarea
+          className="textarea"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+        <div className="item-form__actions">
+          <Button className="btn--primary" type="submit" loading={false}>
             {submitLabel}
           </Button>
-          <a
-            href="#"
-            style={{ marginLeft: '8px' }}
-            onClick={(e) => {
-              e.preventDefault()
-              onCancel()
-            }}
-          >
+          <Button className="btn--ghost" onClick={onCancel}>
             Cancel
-          </a>
+          </Button>
         </div>
       </form>
     </div>

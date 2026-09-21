@@ -1,0 +1,27 @@
+.pill-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.pill-tabs__tab {
+  padding: var(--space-0) var(--space-2);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-1);
+  font-weight: 600;
+  color: var(--color-text-faint);
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease);
+
+  &:hover {
+    color: var(--color-text);
+    background-color: var(--color-surface-active);
+  }
+
+  &--active,
+  &--active:hover {
+    color: var(--color-accent);
+    background-color: var(--color-accent-soft);
+  }
+}

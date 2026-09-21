@@ -1,0 +1,44 @@
+@use '../foundation' as *;
+
+.board-aside {
+  @media (min-width: $bp-tablet) {
+    position: sticky;
+    top: $app-header-height + $unit5;
+  }
+}
+
+.board-intro {
+  margin-bottom: var(--space-4);
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-bottom: var(--space-1);
+  }
+
+  &__title {
+    font-size: var(--text-5);
+  }
+
+  &__description {
+    white-space: pre-line;
+    color: var(--color-text-faint);
+  }
+
+  &__settings {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--space-5);
+    height: var(--space-5);
+    border-radius: 50%;
+    font-size: var(--text-1);
+    color: var(--color-text-faint);
+
+    &:hover {
+      color: var(--color-accent);
+      background-color: var(--color-surface-active);
+    }
+  }
+}

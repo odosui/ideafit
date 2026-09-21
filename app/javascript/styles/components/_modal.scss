@@ -1,0 +1,43 @@
+@use '../foundation' as *;
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--layer-overlay);
+  background-color: rgb(33 33 33 / 80%);
+}
+
+.modal {
+  position: fixed;
+  inset: var(--space-3);
+  z-index: var(--layer-modal);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+
+  @media (min-width: $bp-tablet) {
+    inset: 40% auto auto 50%;
+    transform: translate(-50%, -40%);
+  }
+
+  &__header {
+    position: relative;
+    padding: var(--space-4) var(--space-4) 0;
+  }
+
+  &__close {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    font-size: var(--text-5);
+    color: var(--color-text-muted);
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+
+  &__body {
+    padding: 0 var(--space-4) var(--space-4);
+  }
+}

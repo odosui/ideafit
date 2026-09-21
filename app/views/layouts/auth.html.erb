@@ -11,16 +11,14 @@
     <%= vite_client_tag %>
     <%= vite_stylesheet_tag 'auth.scss' %>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <%= render "layouts/fonts" %>
   </head>
   <body>
     <div class="auth-brand">
       <img class="auth-brand__mark" src="/logo.png" alt="">
       Ideafit
     </div>
-    <main class="auth-card">
+    <main class="auth-card card card--raised">
       <%= yield %>
     </main>
   </body>

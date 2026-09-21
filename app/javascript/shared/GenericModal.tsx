@@ -27,24 +27,21 @@ const GenericModal: React.FC<
       onAfterOpen={() => {}}
       onRequestClose={onRequestClose}
       contentLabel={title}
-      className="generic-modal"
-      overlayClassName="Overlay"
+      className="modal"
+      overlayClassName="modal-overlay"
     >
-      <div className="modal-header">
+      <div className="modal__header">
         <h1>{title}</h1>
-        <div className="close-modal">
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault()
-              onRequestClose()
-            }}
-          >
-            <i className="fas fa-times" />
-          </a>
-        </div>
+        <button
+          type="button"
+          className="modal__close"
+          aria-label="Close"
+          onClick={onRequestClose}
+        >
+          <i className="ti-close" />
+        </button>
       </div>
-      <div className="modal-body">{children}</div>
+      <div className="modal__body">{children}</div>
     </Modal>
   )
 }

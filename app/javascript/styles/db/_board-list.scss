@@ -1,0 +1,64 @@
+@use '../foundation' as *;
+
+.db-board-list {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax($unit11, 1fr));
+
+  & + .db-new-board-toggle {
+    margin-top: var(--space-4);
+  }
+}
+
+.db-board-card {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease);
+
+  &:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+
+  &__link {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+    padding: var(--space-4);
+    color: var(--color-text);
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-size: var(--text-3);
+    font-weight: 700;
+  }
+
+  &__meta {
+    font-size: var(--text-1);
+    color: var(--color-text-faint);
+  }
+
+  &__action {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--space-6);
+    border-left: 1px solid var(--color-line);
+    color: var(--color-text-faint);
+    transition: color var(--duration-fast) var(--ease);
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+}

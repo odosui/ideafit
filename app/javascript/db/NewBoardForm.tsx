@@ -37,9 +37,9 @@ const NewBoardForm: React.FC<Props> = ({ onCreated, autoFocus, onCancel }) => {
   }
 
   return (
-    <form className="db-new-board" onSubmit={handleSubmit}>
+    <form className="db-new-board card card--muted" onSubmit={handleSubmit}>
       <input
-        className="db-new-board__input"
+        className="db-new-board__input input"
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
@@ -48,7 +48,7 @@ const NewBoardForm: React.FC<Props> = ({ onCreated, autoFocus, onCancel }) => {
         disabled={submitting}
       />
       <textarea
-        className="db-new-board__description"
+        className="db-new-board__description textarea"
         aria-label="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
@@ -57,7 +57,7 @@ const NewBoardForm: React.FC<Props> = ({ onCreated, autoFocus, onCancel }) => {
       />
       {onCancel && (
         <button
-          className="db-new-board__cancel"
+          className="db-new-board__cancel btn btn--ghost"
           type="button"
           onClick={onCancel}
           disabled={submitting}
@@ -66,13 +66,13 @@ const NewBoardForm: React.FC<Props> = ({ onCreated, autoFocus, onCancel }) => {
         </button>
       )}
       <button
-        className="db-new-board__submit"
+        className="btn btn--primary"
         type="submit"
         disabled={submitting || !name.trim()}
       >
         {submitting ? 'Creating…' : 'Create'}
       </button>
-      {error && <p className="db-new-board__error">{error}</p>}
+      {error && <p className="db-new-board__error field__error">{error}</p>}
     </form>
   )
 }

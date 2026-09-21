@@ -1,0 +1,17 @@
+@use '../foundation' as *;
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-4);
+
+  @media (min-width: $bp-tablet) {
+    width: var(--measure-narrow);
+  }
+
+  h1 {
+    text-align: center;
+  }
+}

@@ -28,19 +28,19 @@ const DeleteBoardSection: React.FC<Props> = ({ board }) => {
   }
 
   return (
-    <section className="board-settings__danger">
+    <section className="settings-form__danger">
       <div>
         <h3>Delete board</h3>
         <p>
           Removes the board with all its items and votes. This can't be undone.
         </p>
         {failed && (
-          <p className="board-settings__error">
+          <p className="field__error">
             Couldn't delete the board. Please try again.
           </p>
         )}
       </div>
-      <button type="button" onClick={handleDelete} disabled={deleting}>
+      <button className="btn btn--danger" type="button" onClick={handleDelete} disabled={deleting}>
         {deleting ? 'Deleting…' : 'Delete board'}
       </button>
     </section>

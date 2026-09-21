@@ -1,0 +1,8 @@
+.db-welcome {
+  max-width: var(--measure-content);
+
+  &__text {
+    margin-top: var(--space-2);
+    color: var(--color-text-faint);
+  }
+}
