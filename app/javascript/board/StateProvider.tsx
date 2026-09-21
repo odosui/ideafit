@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { createContext, useEffect, useState } from 'react'
 import api from './api'
-import { Item, ItemKind, ItemStatus } from './types'
+import { Item, ItemKind } from './types'
 import readServerData from '../shared/server'
 
 const { boardId } = readServerData()
@@ -47,7 +47,6 @@ interface IState {
       upvote: (id: number) => Promise<void>
       downvote: (id: number) => Promise<void>
       removeItem: (id: number) => Promise<void>
-      changeStatus: (id: number, status: ItemStatus) => Promise<void>
     }
   }
 }
@@ -74,7 +73,6 @@ export const INITIAL_STATE: IState = {
       upvote: async () => {},
       downvote: async () => {},
       removeItem: async () => {},
-      changeStatus: async () => {},
     },
   },
 }
@@ -128,11 +126,6 @@ export const StateProvider: React.FC<React.PropsWithChildren<{ kindTab: ItemKind
     loadItems()
   }
 
-  const changeStatus = async (id: number, status: ItemStatus) => {
-    await api.items.setStatus(id, status)
-    loadItems()
-  }
-
   const upvote = async (id: number) => {
     try {
       await api.items.upvote(id)
@@ -183,7 +176,6 @@ export const StateProvider: React.FC<React.PropsWithChildren<{ kindTab: ItemKind
         upvote,
         downvote,
         removeItem,
-        changeStatus,
       },
     },
   }

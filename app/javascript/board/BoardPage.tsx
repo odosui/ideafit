@@ -10,7 +10,6 @@ import FilterTabs from './FilterTabs'
 import Header from './Header'
 import BoardAside from './aside/BoardAside'
 import StatusBadge from './items/StatusBadge'
-import StatusSelect from './items/StatusSelect'
 import CreateItemForm from './items/CreateItemForm'
 import { Item, ItemKind } from './types'
 import showToast from '../shared/toaster'
@@ -37,7 +36,7 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
       data: {
         items: { loading, data: items },
       },
-      actions: { upvote, downvote, createItem, removeItem, changeStatus },
+      actions: { upvote, downvote, createItem, removeItem },
     },
   } = useContext(StateContext)
 
@@ -85,21 +84,22 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
         <BoardAside kind={kindTab} onKindChange={onKindChange} />
         <main className="board-main">
           <div>
-            <FilterTabs
-              filter={filter}
-              isOwner={isOwner}
-              onChange={setFilter}
-            />
+            <div className="board-toolbar">
+              <FilterTabs
+                filter={filter}
+                isOwner={isOwner}
+                onChange={setFilter}
+              />
+              <Button
+                className={`btn--primary${showForm ? ' board-toolbar__add--hidden' : ''}`}
+                onClick={handleShowIdeaForm}
+              >
+                <i className="ti-plus" />
+                {labels.addButton}
+              </Button>
+            </div>
             <div aria-live="polite" role="tabpanel">
               <div className="item-form-area">
-                <Collapse open={!showForm}>
-                  <div className="item-form-toggle">
-                    <Button className="btn--primary" onClick={handleShowIdeaForm}>
-                      <i className="ti-plus" />
-                      {labels.addButton}
-                    </Button>
-                  </div>
-                </Collapse>
                 <Collapse open={showForm}>
                   <CreateItemForm
                     open={showForm}
@@ -123,16 +123,7 @@ const BoardPage: React.FC<{ onKindChange: (kind: ItemKind) => void }> = ({
                       <p className="item__text">{idea.text}</p>
                       <div className="item__footer">
                         <div>
-                          {isOwner ? (
-                            <StatusSelect
-                              status={idea.status}
-                              onChange={(status) =>
-                                changeStatus(idea.id, status)
-                              }
-                            />
-                          ) : (
-                            <StatusBadge status={idea.status} />
-                          )}
+                          <StatusBadge status={idea.status} />
                         </div>
                         <div>
                           {idea.can_edit && (

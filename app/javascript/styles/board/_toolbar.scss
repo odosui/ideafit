@@ -1,0 +1,25 @@
+.board-toolbar {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--color-line);
+
+  .underline-tabs {
+    align-self: stretch;
+    border-bottom: none;
+  }
+
+  .underline-tabs__tab {
+    margin-bottom: -1px;
+  }
+
+  > .btn {
+    margin-block: var(--space-1);
+  }
+
+  &__add--hidden {
+    visibility: hidden;
+  }
+}
