@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="media/logo.png" alt="Ideafit logo" width="160">
+</p>
+
 # Ideafit
 
 A self-hosted feedback board. Collect ideas, bugs and questions from your users, let them vote, and track what's in progress. Share a public board link or embed it on your site.
