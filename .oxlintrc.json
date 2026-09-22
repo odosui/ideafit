@@ -1,0 +1,31 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc", "react", "import", "jsx-a11y"],
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "react/exhaustive-effect-dependencies": "off",
+    "react/set-state-in-effect": "warn",
+    "react/jsx-key": "error",
+    "react/react-in-jsx-scope": "off",
+    "import/no-cycle": "error",
+    "import/no-unassigned-import": ["warn", { "allow": ["**/*.scss", "**/*.css"] }],
+    "jsx-a11y/no-autofocus": "off",
+    "typescript/no-explicit-any": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["e2e/**", "*.config.ts", "*.config.mts"],
+      "env": { "node": true }
+    }
+  ],
+  "ignorePatterns": ["public/**", "vendor/**", "tmp/**", "test-results/**"]
+}

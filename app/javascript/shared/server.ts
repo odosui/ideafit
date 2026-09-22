@@ -14,7 +14,7 @@ function readServerData() {
   if (userStr) {
     try {
       user = JSON.parse(userStr)
-    } catch (e) {
+    } catch {
       user = null
     }
   }

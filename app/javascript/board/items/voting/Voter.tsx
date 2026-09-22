@@ -17,7 +17,7 @@ const Voter: React.FC<{
         range: [0, 0.25, 0.5, 0.75, 1],
         output: [1, 0.97, 0.9, 1.5, 1],
       })
-      .interpolate((x) => `scale(${x})`),
+      .interpolate((scale) => `scale(${scale})`),
   }
 
   return (
