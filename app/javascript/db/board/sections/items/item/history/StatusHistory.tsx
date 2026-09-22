@@ -13,7 +13,10 @@ const StatusHistory: React.FC<Props> = ({ item }) => {
   if (changes === null) return <p className="status-history__note">Loading…</p>
 
   return (
-    <ol className="status-history" aria-label={`Status history of ${item.title}`}>
+    <ol
+      className="status-history"
+      aria-label={`Status history of ${item.title}`}
+    >
       {changes.map((change) => (
         <HistoryEntry
           key={change.id}

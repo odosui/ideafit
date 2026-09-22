@@ -17,7 +17,10 @@ export default {
   items: {
     list: (pid: string, query: ItemQuery): Promise<BoardItem[]> =>
       api('get', `/boards/${pid}/items`, query),
-    setStatus: (id: number, status: ItemStatus): Promise<{ status: ItemStatus }> =>
+    setStatus: (
+      id: number,
+      status: ItemStatus,
+    ): Promise<{ status: ItemStatus }> =>
       api('PATCH', `/items/${id}`, { status }),
     statusChanges: (id: number): Promise<StatusChange[]> =>
       api('get', `/items/${id}/status_changes`),

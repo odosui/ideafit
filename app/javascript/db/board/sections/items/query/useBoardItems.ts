@@ -22,8 +22,9 @@ export const useBoardItems = (pid: string, query: ItemQuery) => {
   }, [pid, kind, status, sort, q])
 
   const replaceItem = (changed: BoardItem) =>
-    setItems((prev) =>
-      prev?.map((item) => (item.id === changed.id ? changed : item)) ?? prev,
+    setItems(
+      (prev) =>
+        prev?.map((item) => (item.id === changed.id ? changed : item)) ?? prev,
     )
 
   return { items, replaceItem }

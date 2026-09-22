@@ -1,10 +1,5 @@
 export type BoardSectionKey =
-  | 'share'
-  | 'settings'
-  | 'kanban'
-  | 'items'
-  | 'participants'
-  | 'analytics'
+  'share' | 'settings' | 'kanban' | 'items' | 'participants' | 'analytics'
 
 export interface BoardSection {
   key: BoardSectionKey

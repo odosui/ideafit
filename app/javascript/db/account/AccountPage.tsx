@@ -46,11 +46,20 @@ const AccountPage: React.FC = () => {
 
       <label className="field">
         Email
-        <input className="input" type="email" value={user?.email ?? ''} disabled />
+        <input
+          className="input"
+          type="email"
+          value={user?.email ?? ''}
+          disabled
+        />
       </label>
 
       <div className="settings-form__actions">
-        <button className="btn btn--primary" type="submit" disabled={status === 'saving'}>
+        <button
+          className="btn btn--primary"
+          type="submit"
+          disabled={status === 'saving'}
+        >
           {status === 'saving' ? 'Saving…' : 'Save'}
         </button>
         {status === 'saved' && <span>Saved</span>}

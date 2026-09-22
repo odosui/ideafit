@@ -10,7 +10,8 @@ interface Props {
 
 const ItemsResult: React.FC<Props> = ({ pid, items, onChanged }) => {
   if (items === null) return <p className="items-page__note">Loading…</p>
-  if (items.length === 0) return <p className="items-page__note">No items found.</p>
+  if (items.length === 0)
+    return <p className="items-page__note">No items found.</p>
   return <ItemsTable pid={pid} items={items} onChanged={onChanged} />
 }
 

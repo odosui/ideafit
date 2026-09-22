@@ -1,4 +1,5 @@
-export type ItemStatus = 'fresh' | 'planned' | 'in_progress' | 'done' | 'rejected'
+export type ItemStatus =
+  'fresh' | 'planned' | 'in_progress' | 'done' | 'rejected'
 
 export type StatusTone = 'neutral' | 'accent' | 'warning' | 'success' | 'danger'
 

@@ -11,7 +11,11 @@ const NewBoardToggle: React.FC<Props> = ({ onCreated }) => {
 
   if (!open) {
     return (
-      <button className="db-new-board-toggle btn btn--primary" type="button" onClick={() => setOpen(true)}>
+      <button
+        className="db-new-board-toggle btn btn--primary"
+        type="button"
+        onClick={() => setOpen(true)}
+      >
         <i className="fas fa-plus" aria-hidden="true" />
         New board
       </button>

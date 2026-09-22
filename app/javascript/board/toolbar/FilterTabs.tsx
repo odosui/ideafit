@@ -7,7 +7,10 @@ const PUBLIC_TABS: [ItemFilter, string][] = [
   ['done', 'Done'],
 ]
 
-const OWNER_TABS: [ItemFilter, string][] = [...PUBLIC_TABS, ['rejected', 'Rejected']]
+const OWNER_TABS: [ItemFilter, string][] = [
+  ...PUBLIC_TABS,
+  ['rejected', 'Rejected'],
+]
 
 const FilterTabs: React.FC<{
   filter: ItemFilter

@@ -24,7 +24,9 @@ const IdeaFit: {
       IdeaFit.boardId = boardId
 
       // optional options, defaults to the origin the script was served from
-      IdeaFit.host = script.getAttribute('data-host') || new URL((script as HTMLScriptElement).src).origin
+      IdeaFit.host =
+        script.getAttribute('data-host') ||
+        new URL((script as HTMLScriptElement).src).origin
     }
   },
   show: () => {

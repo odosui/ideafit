@@ -17,7 +17,8 @@ const StatusSelect: React.FC<Props> = ({ item, onChanged }) => {
     setSaving(true)
     const saved = await api.items.setStatus(item.id, status).catch(() => null)
     setSaving(false)
-    if (!saved?.status) return showToast("Couldn't change the status. Please try again.", 'error')
+    if (!saved?.status)
+      return showToast("Couldn't change the status. Please try again.", 'error')
 
     onChanged({ ...item, status: saved.status })
     showToast(`Status changed to ${labelOfStatus(saved.status)}`)

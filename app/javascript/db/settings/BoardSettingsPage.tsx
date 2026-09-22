@@ -17,7 +17,9 @@ const changesFrom = (board: Board): BoardChanges => ({
 
 const BoardSettingsPage: React.FC<Props> = ({ board }) => {
   const [changes, setChanges] = React.useState(changesFrom(board))
-  const [status, setStatus] = React.useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
+  const [status, setStatus] = React.useState<
+    'idle' | 'saving' | 'saved' | 'error'
+  >('idle')
 
   const change = (fields: Partial<BoardChanges>) => {
     setChanges((prev) => ({ ...prev, ...fields }))
@@ -69,12 +71,18 @@ const BoardSettingsPage: React.FC<Props> = ({ board }) => {
       </div>
 
       <div className="settings-form__actions">
-        <button className="btn btn--primary" type="submit" disabled={status === 'saving'}>
+        <button
+          className="btn btn--primary"
+          type="submit"
+          disabled={status === 'saving'}
+        >
           {status === 'saving' ? 'Saving…' : 'Save'}
         </button>
         {status === 'saved' && <span>Saved</span>}
         {status === 'error' && (
-          <span className="field__error">Something went wrong. Please try again.</span>
+          <span className="field__error">
+            Something went wrong. Please try again.
+          </span>
         )}
       </div>
 

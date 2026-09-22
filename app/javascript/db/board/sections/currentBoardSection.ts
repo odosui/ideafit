@@ -1,4 +1,8 @@
-import { BOARD_SECTIONS, BoardSection, DEFAULT_BOARD_SECTION } from './boardSections'
+import {
+  BOARD_SECTIONS,
+  BoardSection,
+  DEFAULT_BOARD_SECTION,
+} from './boardSections'
 
 const sectionSegment = (pathname: string) => pathname.split('/')[4]
 

@@ -17,6 +17,9 @@
   "devDependencies": {
     "@playwright/test": "^1.61.0",
     "@types/node": "^26.6.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.5.1",
+    "prettier": "^3.9.8",
     "vite": "^8.0.16",
     "vite-plugin-ruby": "^5.2.4"
   },
@@ -26,6 +29,12 @@
     "typesonce": "tsc --project tsconfig.json --noEmit",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "build:embed": "vite build --config vite.embed.config.mts"
+    "build:embed": "vite build --config vite.embed.config.mts",
+    "format": "prettier --write \"**/*.{ts,tsx,scss,sass}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,scss,sass}\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,scss,sass}": "prettier --write"
   }
 }

@@ -8,7 +8,8 @@ const pathInBoard = () => window.location.pathname.replace(BOARD_ROOT, '')
 // Old links looked like /b/<pid>#/ideas
 const legacyHashPath = () => window.location.hash.replace(/^#/, '')
 
-export const boardPathForKind = (kind: ItemKind) => boardRoot() + pathForKind(kind)
+export const boardPathForKind = (kind: ItemKind) =>
+  boardRoot() + pathForKind(kind)
 
 export const kindFromLocation = (): ItemKind =>
   kindFromPath(pathInBoard()) ?? kindFromPath(legacyHashPath()) ?? 'idea'
@@ -21,5 +22,9 @@ export const showKindInLocation = (kind: ItemKind) => {
 }
 
 export const pushKindToLocation = (kind: ItemKind) => {
-  window.history.pushState(null, '', boardPathForKind(kind) + window.location.search)
+  window.history.pushState(
+    null,
+    '',
+    boardPathForKind(kind) + window.location.search,
+  )
 }

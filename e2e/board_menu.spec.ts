@@ -16,7 +16,9 @@ test('the owner switches board sections from the sidebar', async ({ page }) => {
   await expect(page.getByLabel('Name')).toBeVisible()
 })
 
-test('the owner switches to another board keeping the section', async ({ page }) => {
+test('the owner switches to another board keeping the section', async ({
+  page,
+}) => {
   const board = createOwnedBoard()
   const other = addBoard(board.email, 'Other board')
   await signIn(page, board.email)
@@ -26,10 +28,14 @@ test('the owner switches to another board keeping the section', async ({ page })
   await page.getByRole('menuitem', { name: 'Other board' }).click()
 
   await expect(page).toHaveURL(new RegExp(`/db/boards/${other.pid}/items$`))
-  await expect(page.getByRole('button', { name: /Switch board, current: Other board/ })).toBeVisible()
+  await expect(
+    page.getByRole('button', { name: /Switch board, current: Other board/ }),
+  ).toBeVisible()
 })
 
-test('the owner opens the public board in a new tab from the sidebar', async ({ page }) => {
+test('the owner opens the public board in a new tab from the sidebar', async ({
+  page,
+}) => {
   const board = createOwnedBoard()
   await signIn(page, board.email)
   await page.goto(`/db/boards/${board.pid}`)

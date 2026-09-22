@@ -14,4 +14,5 @@ const DATE_TIME_FORMAT = new Intl.DateTimeFormat(undefined, {
   minute: '2-digit',
 })
 
-export const formatDateTime = (iso: string) => DATE_TIME_FORMAT.format(new Date(iso))
+export const formatDateTime = (iso: string) =>
+  DATE_TIME_FORMAT.format(new Date(iso))

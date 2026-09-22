@@ -8,7 +8,8 @@ import ParticipantHomePage from './participant/ParticipantHomePage'
 import Shell from './Shell'
 
 const CurrentPage: React.FC = () => {
-  if (window.board) return <BoardDashboard board={window.board} item={window.item} />
+  if (window.board)
+    return <BoardDashboard board={window.board} item={window.item} />
   if (window.participantBoards)
     return <ParticipantHomePage boards={window.participantBoards} />
   if (window.location.pathname === SETTINGS_PATH) return <AccountPage />

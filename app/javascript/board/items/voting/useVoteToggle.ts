@@ -8,7 +8,9 @@ export const useVoteToggle = (onToggled: (item: Item) => void) => {
 
   return (item: Item) =>
     requireSignIn(async () => {
-      await (item.voted ? api.items.downvote(item.id) : api.items.upvote(item.id))
+      await (item.voted
+        ? api.items.downvote(item.id)
+        : api.items.upvote(item.id))
       onToggled(toggleVote(item))
     })
 }

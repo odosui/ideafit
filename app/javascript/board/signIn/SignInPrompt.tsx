@@ -3,7 +3,9 @@ import SignInModal from './SignInModal'
 
 const SignInPromptContext = React.createContext<() => void>(() => {})
 
-export const SignInPromptProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const SignInPromptProvider: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
   const [open, setOpen] = React.useState(false)
 
   return (

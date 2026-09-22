@@ -12,14 +12,26 @@ interface Props<T extends string> {
   onChange: (value: T) => void
 }
 
-const FilterSelect = <T extends string>({ label, value, options, onChange }: Props<T>) => {
+const FilterSelect = <T extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: Props<T>) => {
   const selected = options.find((option) => option.value === value)
 
   return (
     <div className="filter-select">
-      <span className="filter-select__label" aria-hidden="true">{label}</span>
-      <span className="filter-select__value" aria-hidden="true">{selected?.label}</span>
-      <i className="fas fa-chevron-down filter-select__chevron" aria-hidden="true" />
+      <span className="filter-select__label" aria-hidden="true">
+        {label}
+      </span>
+      <span className="filter-select__value" aria-hidden="true">
+        {selected?.label}
+      </span>
+      <i
+        className="fas fa-chevron-down filter-select__chevron"
+        aria-hidden="true"
+      />
       <select
         className="filter-select__control"
         aria-label={label}

@@ -40,7 +40,12 @@ const DeleteBoardSection: React.FC<Props> = ({ board }) => {
           </p>
         )}
       </div>
-      <button className="btn btn--danger" type="button" onClick={handleDelete} disabled={deleting}>
+      <button
+        className="btn btn--danger"
+        type="button"
+        onClick={handleDelete}
+        disabled={deleting}
+      >
         {deleting ? 'Deleting…' : 'Delete board'}
       </button>
     </section>

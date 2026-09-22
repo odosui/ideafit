@@ -2,6 +2,7 @@
   --shadow-sm: 0 1px 3px rgb(15 23 42 / 8%), 0 0 0 1px rgb(15 23 42 / 6%);
   --shadow-md: 0 6px 24px rgb(15 23 42 / 6%), 0 0 0 1px rgb(15 23 42 / 4%);
   --shadow-lg: 0 12px 40px rgb(15 23 42 / 18%);
-  --shadow-accent: 0 4px 14px color-mix(in srgb, var(--color-accent) 35%, transparent);
+  --shadow-accent: 0 4px 14px
+    color-mix(in srgb, var(--color-accent) 35%, transparent);
   --shadow-focus: 0 0 0 3px var(--color-accent-soft);
 }

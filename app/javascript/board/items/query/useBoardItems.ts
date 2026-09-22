@@ -4,7 +4,11 @@ import api from '../../api'
 import { Item } from '../../types'
 import { ItemFilter } from './itemFilter'
 
-export const useBoardItems = (pid: string, kind: ItemKind, filter: ItemFilter) => {
+export const useBoardItems = (
+  pid: string,
+  kind: ItemKind,
+  filter: ItemFilter,
+) => {
   const [items, setItems] = React.useState<Item[] | null>(null)
   const [version, setVersion] = React.useState(0)
 
@@ -22,8 +26,9 @@ export const useBoardItems = (pid: string, kind: ItemKind, filter: ItemFilter) =
   const reload = () => setVersion((v) => v + 1)
 
   const replaceItem = (changed: Item) =>
-    setItems((prev) =>
-      prev?.map((item) => (item.id === changed.id ? changed : item)) ?? prev,
+    setItems(
+      (prev) =>
+        prev?.map((item) => (item.id === changed.id ? changed : item)) ?? prev,
     )
 
   return { items, reload, replaceItem }

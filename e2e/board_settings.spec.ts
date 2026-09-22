@@ -2,11 +2,16 @@ import { test, expect } from '@playwright/test'
 import { createOwnedBoard } from './support/ownedBoard'
 import { signIn } from './support/magicLink'
 
-test('the owner changes the color scheme in board settings', async ({ page }) => {
+test('the owner changes the color scheme in board settings', async ({
+  page,
+}) => {
   const board = createOwnedBoard()
   await signIn(page, board.email)
   await page.goto(`/b/${board.pid}/ideas`)
-  await expect(page.locator('body')).toHaveAttribute('data-color-scheme', 'teal')
+  await expect(page.locator('body')).toHaveAttribute(
+    'data-color-scheme',
+    'teal',
+  )
 
   await page.getByRole('link', { name: 'Board settings' }).click()
   await page.getByText('Plum').click()
@@ -14,7 +19,10 @@ test('the owner changes the color scheme in board settings', async ({ page }) =>
   await expect(page.getByText('Saved')).toBeVisible()
 
   await page.goto(`/b/${board.pid}/ideas`)
-  await expect(page.locator('body')).toHaveAttribute('data-color-scheme', 'plum')
+  await expect(page.locator('body')).toHaveAttribute(
+    'data-color-scheme',
+    'plum',
+  )
 })
 
 test('the dashboard card opens the board', async ({ page }) => {
@@ -32,10 +40,14 @@ test('visitors see no settings link', async ({ page }) => {
   await page.goto(`/b/${board.pid}/ideas`)
 
   await expect(page.getByText('Dark mode')).toBeVisible()
-  await expect(page.getByRole('link', { name: 'Board settings' })).toHaveCount(0)
+  await expect(page.getByRole('link', { name: 'Board settings' })).toHaveCount(
+    0,
+  )
 })
 
-test('the owner goes back to all boards from the board switcher', async ({ page }) => {
+test('the owner goes back to all boards from the board switcher', async ({
+  page,
+}) => {
   const board = createOwnedBoard()
   await signIn(page, board.email)
   await page.goto(`/db/boards/${board.pid}`)

@@ -13,9 +13,7 @@ export default defineConfig({
     baseURL,
     trace: 'on-first-retry',
   },
-  projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-  ],
+  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   // Boots Vite + Rails (same as `bin/dev`). Reuses an already-running
   // dev server locally so the test suite starts instantly.
   webServer: {

@@ -11,7 +11,12 @@ interface Props {
   onDelete: (item: Item) => void
 }
 
-const ItemCard: React.FC<Props> = ({ item, deleteConfirmation, onVote, onDelete }) => (
+const ItemCard: React.FC<Props> = ({
+  item,
+  deleteConfirmation,
+  onVote,
+  onDelete,
+}) => (
   <>
     <div className="item__body">
       <h3 className="item__title">{item.title}</h3>

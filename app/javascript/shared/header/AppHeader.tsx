@@ -37,7 +37,11 @@ const AppHeader: React.FC<Props> = ({ user, onSignIn }) => {
             </a>
           </>
         ) : (
-          <a className="app-header__link" href={signInPath()} onClick={handleSignIn}>
+          <a
+            className="app-header__link"
+            href={signInPath()}
+            onClick={handleSignIn}
+          >
             Sign in
           </a>
         )}

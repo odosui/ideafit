@@ -21,7 +21,10 @@ const Voter: React.FC<{
   }
 
   return (
-    <button className={`voter${voted ? ' voter--voted' : ''}`} onClick={onClick}>
+    <button
+      className={`voter${voted ? ' voter--voted' : ''}`}
+      onClick={onClick}
+    >
       <i className="ti-angle-up" />
       <animated.span className="voter__count" style={styles}>
         {count}

@@ -15,7 +15,10 @@ const ExternalSidebarLink: React.FC<Props> = ({ href, icon, label }) => (
   >
     <i className={icon} aria-hidden="true" />
     <span>{label}</span>
-    <i className="fas fa-external-link-alt db-sidebar__external-icon" aria-hidden="true" />
+    <i
+      className="fas fa-external-link-alt db-sidebar__external-icon"
+      aria-hidden="true"
+    />
   </a>
 )
 
