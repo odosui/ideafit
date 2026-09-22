@@ -84,7 +84,7 @@ const IdeaFit: {
   },
 }
 
-;(window as any).IdeaFit = IdeaFit
+Object.assign(window, { IdeaFit })
 
 document.addEventListener('DOMContentLoaded', function () {
   IdeaFit.setup()

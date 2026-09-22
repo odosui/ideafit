@@ -4,32 +4,44 @@ import api from '../../api'
 import { Item } from '../../types'
 import { ItemFilter } from './itemFilter'
 
+interface Loaded {
+  queryKey: string
+  items: Item[]
+}
+
 export const useBoardItems = (
   pid: string,
   kind: ItemKind,
   filter: ItemFilter,
 ) => {
-  const [items, setItems] = React.useState<Item[] | null>(null)
+  const [loaded, setLoaded] = React.useState<Loaded | null>(null)
   const [version, setVersion] = React.useState(0)
+  const queryKey = [pid, kind, filter, version].join('/')
 
   React.useEffect(() => {
     let current = true
-    setItems(null)
     api.items.list(pid, kind, filter).then((data) => {
-      if (current) setItems(data || [])
+      if (current) setLoaded({ queryKey, items: data || [] })
     })
     return () => {
       current = false
     }
-  }, [pid, kind, filter, version])
+  }, [pid, kind, filter, queryKey])
 
   const reload = () => setVersion((v) => v + 1)
 
   const replaceItem = (changed: Item) =>
-    setItems(
+    setLoaded(
       (prev) =>
-        prev?.map((item) => (item.id === changed.id ? changed : item)) ?? prev,
+        prev && {
+          ...prev,
+          items: prev.items.map((item) =>
+            item.id === changed.id ? changed : item,
+          ),
+        },
     )
+
+  const items = loaded?.queryKey === queryKey ? loaded.items : null
 
   return { items, reload, replaceItem }
 }

@@ -47,3 +47,17 @@ test('the owner deletes an item from the public board', async ({ page }) => {
   await expect(page.getByText('Idea successfully deleted!')).toBeVisible()
   await expect(page.locator('.item', { hasText: 'Dark mode' })).toHaveCount(0)
 })
+
+test('a cancelled item form opens empty next time', async ({ page }) => {
+  const board = createOwnedBoard()
+  await signIn(page, board.email)
+  await page.goto(`/b/${board.pid}/ideas`)
+
+  await page.getByRole('button', { name: 'Add Idea' }).click()
+  await page.getByPlaceholder('Title').fill('Half-written idea')
+  await page.getByRole('button', { name: 'Cancel' }).click()
+  await page.getByRole('button', { name: 'Add Idea' }).click()
+
+  await expect(page.getByPlaceholder('Title')).toHaveValue('')
+  await expect(page.getByPlaceholder('Title')).toBeFocused()
+})

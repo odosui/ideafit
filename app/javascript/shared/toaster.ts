@@ -50,5 +50,3 @@ export default function showToast(
     }, 500)
   }
 }
-
-;(window as any).showToast = showToast

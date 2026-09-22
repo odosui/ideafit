@@ -12,16 +12,24 @@ const CreateItemForm: React.FC<{
   const titleInput = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (!open) return
+    if (open) titleInput.current?.focus({ preventScroll: true })
+  }, [open])
+
+  const clear = () => {
     setTitle('')
     setDescription('')
-    titleInput.current?.focus({ preventScroll: true })
-  }, [open])
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!title || !description) return
     await onCreate(title, description)
+    clear()
+  }
+
+  const handleCancel = () => {
+    clear()
+    onCancel()
   }
 
   return (
@@ -47,7 +55,7 @@ const CreateItemForm: React.FC<{
           <Button className="btn--primary" type="submit" loading={false}>
             {submitLabel}
           </Button>
-          <Button className="btn--ghost" onClick={onCancel}>
+          <Button className="btn--ghost" onClick={handleCancel}>
             Cancel
           </Button>
         </div>
