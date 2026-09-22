@@ -1,7 +1,7 @@
 import { api } from '../shared/api'
 import { CurrentUser } from '../shared/currentUser'
 import { ItemQuery } from './board/sections/items/query/itemQuery'
-import { Board, BoardChanges, BoardItem, ItemStatus } from './types'
+import { Board, BoardChanges, BoardItem, ItemStatus, StatusChange } from './types'
 
 export default {
   boards: {
@@ -18,6 +18,8 @@ export default {
       api('get', `/boards/${pid}/items`, query),
     setStatus: (id: number, status: ItemStatus): Promise<{ status: ItemStatus }> =>
       api('PATCH', `/items/${id}`, { status }),
+    statusChanges: (id: number): Promise<StatusChange[]> =>
+      api('get', `/items/${id}/status_changes`),
   },
   account: {
     update: (name: string): Promise<CurrentUser> =>

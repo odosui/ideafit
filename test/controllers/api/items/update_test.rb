@@ -14,6 +14,16 @@ class Api::ItemsUpdateTest < ActionDispatch::IntegrationTest
     assert @item.reload.in_progress?
   end
 
+  test "status change is recorded in the history" do
+    sign_in users(:board_owner)
+
+    patch api_item_path(@item), params: { status: "done" }, as: :json
+
+    change = @item.status_changes.last
+    assert_equal users(:board_owner), change.user
+    assert_equal "done", change.status
+  end
+
   test "board owner can reject an item" do
     sign_in users(:board_owner)
 
@@ -39,6 +49,7 @@ class Api::ItemsUpdateTest < ActionDispatch::IntegrationTest
 
     assert_response :forbidden
     assert @item.reload.fresh?
+    assert_empty @item.status_changes
   end
 
   test "stranger cannot change the status" do

@@ -35,7 +35,7 @@ class Api::ItemsController < Api::BaseController
       return render_forbidden('Only the board owner can change the status')
     end
 
-    item.update!(status: params[:status])
+    item.change_status!(params[:status], by: current_user)
     render json: ItemSerializer.new(item, viewer: current_user, voted: item.votes.exists?(user: current_user))
   end
 

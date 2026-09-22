@@ -1,0 +1,5 @@
+<script>
+  window.user = <%= raw(UserSerializer.new(current_user).to_json) %>
+  window.board = <%= raw(BoardSerializer.new(@board).to_json) %>
+  window.item = <%= raw(Db::ItemSerializer.new(@item).to_json) %>
+</script>

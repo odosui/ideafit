@@ -11,7 +11,7 @@ class Db::ItemSerializer
       text: @item.text,
       status: @item.status,
       votes: @item.votes_count,
-      author: @item.user.name || @item.user.email,
+      author: @item.user.display_name,
       created_at: @item.created_at,
     }
   end

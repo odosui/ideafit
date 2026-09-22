@@ -14,4 +14,12 @@ class UserTest < ActiveSupport::TestCase
   test "limits the name to 50 characters" do
     assert_not users(:author).update(name: "a" * 51)
   end
+
+  test "display name falls back to the email" do
+    user = users(:author)
+    assert_equal "author@example.com", user.display_name
+
+    user.name = "Ann"
+    assert_equal "Ann", user.display_name
+  end
 end

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         post :upvote
         post :downvote
       end
+      resources :status_changes, only: :index, module: :items
     end
   end
 
@@ -31,6 +32,8 @@ Rails.application.routes.draw do
     resources :boards, only: [:index, :show], param: :pid
     get "boards/:pid/:section", to: "boards#show", as: :board_section,
       constraints: { section: /settings|kanban|items|participants|analytics/ }
+    get "boards/:pid/items/:id(/:tab)", to: "items#show", as: :board_item,
+      constraints: { tab: /history/ }
     resource :settings, only: :show
   end
 end

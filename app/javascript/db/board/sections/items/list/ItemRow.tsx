@@ -1,18 +1,22 @@
 import * as React from 'react'
 import { BoardItem } from '../../../../types'
+import { itemPath } from '../item/itemPath'
 import { labelOfKind } from '../options/itemKinds'
-import { formatDate } from './formatDate'
-import StatusSelect from './StatusSelect'
+import { formatDate } from '../dates/formatDate'
+import StatusSelect from '../status/StatusSelect'
 
 interface Props {
+  pid: string
   item: BoardItem
   onChanged: (item: BoardItem) => void
 }
 
-const ItemRow: React.FC<Props> = ({ item, onChanged }) => (
+const ItemRow: React.FC<Props> = ({ pid, item, onChanged }) => (
   <tr className="items-table__row">
     <td className="items-table__main">
-      <span className="items-table__title">{item.title}</span>
+      <a className="items-table__title" href={itemPath(pid, item.id)}>
+        {item.title}
+      </a>
       {item.text && <span className="items-table__text">{item.text}</span>}
     </td>
     <td>

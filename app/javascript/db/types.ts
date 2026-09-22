@@ -13,6 +13,13 @@ export interface BoardItem {
   created_at: string
 }
 
+export interface StatusChange {
+  id: number
+  status: ItemStatus
+  changed_by: string
+  created_at: string
+}
+
 export type ColorScheme = 'teal' | 'indigo' | 'terracotta' | 'ink' | 'plum'
 
 export interface Board {

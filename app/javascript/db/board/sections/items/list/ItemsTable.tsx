@@ -3,11 +3,12 @@ import { BoardItem } from '../../../../types'
 import ItemRow from './ItemRow'
 
 interface Props {
+  pid: string
   items: BoardItem[]
   onChanged: (item: BoardItem) => void
 }
 
-const ItemsTable: React.FC<Props> = ({ items, onChanged }) => (
+const ItemsTable: React.FC<Props> = ({ pid, items, onChanged }) => (
   <table className="items-table">
     <thead>
       <tr>
@@ -21,7 +22,7 @@ const ItemsTable: React.FC<Props> = ({ items, onChanged }) => (
     </thead>
     <tbody>
       {items.map((item) => (
-        <ItemRow key={item.id} item={item} onChanged={onChanged} />
+        <ItemRow key={item.id} pid={pid} item={item} onChanged={onChanged} />
       ))}
     </tbody>
   </table>

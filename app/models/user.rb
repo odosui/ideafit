@@ -20,6 +20,10 @@ class User < ApplicationRecord
     find_by_token_for(:magic_link, token)
   end
 
+  def display_name
+    name || email
+  end
+
   def consume_magic_link!
     update!(magic_link_used_at: Time.current)
   end
