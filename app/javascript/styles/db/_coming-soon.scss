@@ -1,0 +1,19 @@
+.board-coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-8) var(--space-4);
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  color: var(--color-text-faint);
+
+  i {
+    font-size: var(--text-4);
+  }
+
+  h2 {
+    color: var(--color-text);
+  }
+}

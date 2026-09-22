@@ -4,34 +4,6 @@
   gap: var(--space-4);
   max-width: var(--measure-content);
 
-  &__back {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-1);
-    margin-bottom: calc(var(--space-2) * -1);
-    font-size: var(--text-1);
-    color: var(--color-text-faint);
-
-    i {
-      font-size: var(--text-0);
-    }
-
-    &:hover {
-      color: var(--color-accent);
-    }
-  }
-
-  &__heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &__links {
-    display: flex;
-    gap: var(--space-2);
-  }
-
   &__actions {
     display: flex;
     align-items: center;

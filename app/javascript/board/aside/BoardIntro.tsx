@@ -11,7 +11,7 @@ const BoardIntro: React.FC = () => (
       {isOwner && (
         <a
           className="board-intro__settings"
-          href={`/db/boards/${boardId}`}
+          href={`/db/boards/${boardId}/settings`}
           aria-label="Board settings"
           title="Board settings"
         >

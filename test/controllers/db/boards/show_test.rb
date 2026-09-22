@@ -9,6 +9,14 @@ class Db::BoardsShowTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "the owner opens a board section" do
+    sign_in users(:board_owner)
+
+    get db_board_section_path(boards(:roadmap).pid, "settings")
+
+    assert_response :success
+  end
+
   test "another admin gets 404" do
     users(:stranger).update!(admin: true)
     sign_in users(:stranger)

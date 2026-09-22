@@ -1,0 +1,36 @@
+.share-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: var(--measure-content);
+}
+
+.share-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+
+  h3 {
+    margin-bottom: var(--space-1);
+    font-size: var(--text-2);
+  }
+
+  p {
+    font-size: var(--text-1);
+    color: var(--color-text-faint);
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+
+    .input {
+      flex: 1;
+    }
+  }
+}

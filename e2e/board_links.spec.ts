@@ -21,7 +21,7 @@ test('the owner copies the public link from the dashboard', async ({
   expect(await readClipboard(page)).toBe(`${baseURL}/b/${board.pid}`)
 })
 
-test('the owner copies the public link from board settings', async ({
+test('the owner copies the public link from the share page', async ({
   page,
   baseURL,
 }) => {

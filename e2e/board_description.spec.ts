@@ -12,7 +12,7 @@ test('a board without a description shows the default text', async ({ page }) =>
 test('a description set in board settings shows on the board', async ({ page }) => {
   const board = createOwnedBoard()
   await signIn(page, board.email)
-  await page.goto(`/db/boards/${board.pid}`)
+  await page.goto(`/db/boards/${board.pid}/settings`)
 
   await page.getByLabel('Description').fill('Tell us what to build next')
   await page.getByRole('button', { name: 'Save' }).click()

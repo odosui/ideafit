@@ -2,8 +2,6 @@ import * as React from 'react'
 import { DEFAULT_BOARD_DESCRIPTION } from '../../shared/boardDescription'
 import api from '../api'
 import { Board, BoardChanges } from '../types'
-import CopyLinkButton from '../links/CopyLinkButton'
-import { publicBoardUrl } from '../links/publicBoardUrl'
 import ColorSchemePicker from './ColorSchemePicker'
 import DeleteBoardSection from './DeleteBoardSection'
 
@@ -41,30 +39,7 @@ const BoardSettingsPage: React.FC<Props> = ({ board }) => {
 
   return (
     <form className="settings-form" onSubmit={handleSubmit}>
-      <a className="settings-form__back" href="/">
-        <i className="fas fa-arrow-left" aria-hidden="true" />
-        All boards
-      </a>
-
-      <div className="settings-form__heading">
-        <h2>Board settings</h2>
-        <div className="settings-form__links">
-          <CopyLinkButton
-            url={publicBoardUrl(board.pid)}
-            className="btn"
-            showLabel
-          />
-          <a
-            className="btn"
-            href={`/b/${board.pid}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open board
-            <i className="fas fa-external-link-alt" aria-hidden="true" />
-          </a>
-        </div>
-      </div>
+      <h2>Board settings</h2>
 
       <label className="field">
         Name

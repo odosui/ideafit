@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   namespace :db do
     resources :boards, only: [:index, :show], param: :pid
+    get "boards/:pid/:section", to: "boards#show", as: :board_section,
+      constraints: { section: /settings|kanban|items|participants|analytics/ }
     resource :settings, only: :show
   end
 end
