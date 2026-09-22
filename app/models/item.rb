@@ -36,8 +36,8 @@ class Item < ApplicationRecord
     end
   }
 
-  def deletable_by?(someone)
-    someone.present? && (user_id == someone.id || board.owned_by?(someone))
+  def authored_by?(someone)
+    someone.present? && user_id == someone.id
   end
 
 end

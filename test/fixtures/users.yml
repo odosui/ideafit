@@ -1,6 +1,5 @@
 board_owner:
   email: owner@example.com
-  admin: true
 
 author:
   email: author@example.com

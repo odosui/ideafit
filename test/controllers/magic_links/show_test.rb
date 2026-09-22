@@ -55,7 +55,7 @@ class MagicLinksShowTest < ActionDispatch::IntegrationTest
   end
 
   test "the first person to sign in becomes admin" do
-    User.update_all(admin: false)
+    Workspace::Membership.delete_all
 
     get magic_link_path(link_token)
 

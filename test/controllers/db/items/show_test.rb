@@ -32,7 +32,7 @@ class Db::ItemsShowTest < ActionDispatch::IntegrationTest
   end
 
   test "an item from another board gets 404" do
-    other = users(:board_owner).boards.create!(name: "Other")
+    other = workspaces(:main).boards.create!(user: users(:board_owner), name: "Other")
     sign_in users(:board_owner)
 
     get db_board_item_path(other.pid, @item)
@@ -40,8 +40,17 @@ class Db::ItemsShowTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  test "another admin gets 404" do
-    users(:stranger).update!(admin: true)
+  test "another admin of the workspace sees it too" do
+    workspaces(:main).add_member(users(:stranger))
+    sign_in users(:stranger)
+
+    get db_board_item_path(@board.pid, @item)
+
+    assert_response :success
+  end
+
+  test "an admin of another workspace gets 404" do
+    workspaces(:elsewhere).add_member(users(:stranger))
     sign_in users(:stranger)
 
     get db_board_item_path(@board.pid, @item)

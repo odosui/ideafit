@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_22_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_22_130001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,8 +22,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_22_120000) do
     t.string "pid", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.bigint "workspace_id", null: false
     t.index ["pid"], name: "index_boards_on_pid", unique: true
     t.index ["user_id"], name: "index_boards_on_user_id"
+    t.index ["workspace_id"], name: "index_boards_on_workspace_id"
   end
 
   create_table "item_status_changes", force: :cascade do |t|
@@ -192,7 +194,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_22_120000) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
     t.datetime "magic_link_used_at"
@@ -213,7 +214,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_22_120000) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  create_table "workspace_memberships", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "workspace_id", null: false
+    t.index ["user_id"], name: "index_workspace_memberships_on_user_id"
+    t.index ["workspace_id", "user_id"], name: "index_workspace_memberships_on_workspace_id_and_user_id", unique: true
+    t.index ["workspace_id"], name: "index_workspace_memberships_on_workspace_id"
+  end
+
+  create_table "workspaces", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "boards", "users"
+  add_foreign_key "boards", "workspaces"
   add_foreign_key "item_status_changes", "items"
   add_foreign_key "item_status_changes", "users"
   add_foreign_key "items", "boards"
@@ -226,4 +244,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_22_120000) do
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "votes", "items"
   add_foreign_key "votes", "users"
+  add_foreign_key "workspace_memberships", "users"
+  add_foreign_key "workspace_memberships", "workspaces"
 end

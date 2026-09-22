@@ -64,12 +64,11 @@ class ItemTest < ActiveSupport::TestCase
     assert_equal items(:dark_mode), Item.most_voted_first.first
   end
 
-  test "deletable by the author and the board owner only" do
+  test "authored by its user only" do
     item = items(:dark_mode)
 
-    assert item.deletable_by?(users(:author))
-    assert item.deletable_by?(users(:board_owner))
-    assert_not item.deletable_by?(users(:stranger))
-    assert_not item.deletable_by?(nil)
+    assert item.authored_by?(users(:author))
+    assert_not item.authored_by?(users(:board_owner))
+    assert_not item.authored_by?(nil)
   end
 end

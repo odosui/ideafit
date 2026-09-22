@@ -3,7 +3,7 @@ class Api::BoardsController < Api::BaseController
   before_action :authenticate_user!
 
   def index
-    boards = current_user.boards
+    boards = BoardManagementPolicy.scope(current_user)
       .left_joins(:items)
       .select('boards.*, COUNT(items.id) AS items_count')
       .group('boards.id')
@@ -17,14 +17,14 @@ class Api::BoardsController < Api::BaseController
       return render_forbidden('Only admins can create boards')
     end
 
-    board = current_user.boards.create!(board_params)
+    board = current_user.home_workspace.boards.create!(board_params.merge(user: current_user))
     render json: BoardSerializer.new(board)
   end
 
   def update
     board = Board.find_by_pid!(params[:pid])
-    unless board.owned_by?(current_user)
-      return render_forbidden('Only the board owner can edit the board')
+    unless BoardManagementPolicy.allowed?(current_user, board)
+      return render_forbidden('Only workspace admins can edit the board')
     end
 
     board.update!(board_params)
@@ -33,8 +33,8 @@ class Api::BoardsController < Api::BaseController
 
   def destroy
     board = Board.find_by_pid!(params[:pid])
-    unless board.owned_by?(current_user)
-      return render_forbidden('Only the board owner can delete the board')
+    unless BoardManagementPolicy.allowed?(current_user, board)
+      return render_forbidden('Only workspace admins can delete the board')
     end
 
     board.destroy!

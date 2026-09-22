@@ -19,7 +19,7 @@ class ItemSerializer
       voted: @voted,
       votes: @item.votes_count,
       status: @item.status,
-      can_edit: @item.deletable_by?(@viewer),
+      can_edit: ItemDeletionPolicy.allowed?(@viewer, @item),
     }
   end
 end

@@ -17,8 +17,17 @@ class Db::BoardsShowTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "another admin gets 404" do
-    users(:stranger).update!(admin: true)
+  test "another admin of the workspace sees it too" do
+    workspaces(:main).add_member(users(:stranger))
+    sign_in users(:stranger)
+
+    get db_board_path(boards(:roadmap).pid)
+
+    assert_response :success
+  end
+
+  test "an admin of another workspace gets 404" do
+    workspaces(:elsewhere).add_member(users(:stranger))
     sign_in users(:stranger)
 
     get db_board_path(boards(:roadmap).pid)

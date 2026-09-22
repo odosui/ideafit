@@ -4,8 +4,8 @@ class Api::ItemsController < Api::BaseController
 
   def index
     board = Board.find_by_pid!(params[:board_pid])
-    if params[:filter] == 'rejected' && !board.owned_by?(current_user)
-      return render_forbidden('Only the board owner can see rejected items')
+    if params[:filter] == 'rejected' && !BoardManagementPolicy.allowed?(current_user, board)
+      return render_forbidden('Only workspace admins can see rejected items')
     end
 
     items = board.items
@@ -31,8 +31,8 @@ class Api::ItemsController < Api::BaseController
 
   def update
     item = Item.find(params[:id])
-    unless item.board.owned_by?(current_user)
-      return render_forbidden('Only the board owner can change the status')
+    unless BoardManagementPolicy.allowed?(current_user, item.board)
+      return render_forbidden('Only workspace admins can change the status')
     end
 
     item.change_status!(params[:status], by: current_user)
@@ -53,7 +53,7 @@ class Api::ItemsController < Api::BaseController
 
   def destroy
     item = Item.find(params[:id])
-    unless item.deletable_by?(current_user)
+    unless ItemDeletionPolicy.allowed?(current_user, item)
       return render_forbidden('You are not allowed to delete this item')
     end
 

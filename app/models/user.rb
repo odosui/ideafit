@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Workspaces
   include AdminGrant
 
   devise :rememberable

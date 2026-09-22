@@ -6,6 +6,6 @@ class Db::BoardsController < ApplicationController
   def index; end
 
   def show
-    @board = current_user.boards.find_by!(pid: params[:pid])
+    @board = BoardManagementPolicy.scope(current_user).find_by!(pid: params[:pid])
   end
 end

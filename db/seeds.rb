@@ -3,6 +3,7 @@ owner = User.find_or_create_by!(email: "demo@example.com")
 board = Board.find_or_create_by!(pid: "demo") do |new_board|
   new_board.name = "Demo board"
   new_board.user = owner
+  new_board.workspace = Workspace.primary
 end
 
 if board.items.none?

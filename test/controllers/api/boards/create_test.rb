@@ -4,7 +4,7 @@ class Api::BoardsCreateTest < ActionDispatch::IntegrationTest
   test "creates a board for the viewer" do
     sign_in users(:board_owner)
 
-    assert_difference -> { users(:board_owner).boards.count }, 1 do
+    assert_difference -> { workspaces(:main).boards.count }, 1 do
       post api_boards_path, params: { name: "Ideas" }, as: :json
     end
     assert_response :success

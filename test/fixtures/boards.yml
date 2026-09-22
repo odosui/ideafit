@@ -1,9 +1,11 @@
 roadmap:
+  workspace: main
   user: board_owner
   name: Roadmap
   pid: roadmap0pid
 
 side_project:
+  workspace: elsewhere
   user: stranger
   name: Side project
   pid: side0pid

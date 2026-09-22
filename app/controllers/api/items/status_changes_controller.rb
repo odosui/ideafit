@@ -3,8 +3,8 @@ class Api::Items::StatusChangesController < Api::BaseController
 
   def index
     item = Item.find(params[:item_id])
-    unless item.board.owned_by?(current_user)
-      return render_forbidden('Only the board owner can see the status history')
+    unless BoardManagementPolicy.allowed?(current_user, item.board)
+      return render_forbidden('Only workspace admins can see the status history')
     end
 
     changes = item.status_changes.reorder(created_at: :desc, id: :desc).includes(:user)

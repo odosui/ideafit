@@ -4,7 +4,7 @@ class Db::ItemsController < ApplicationController
   layout 'db'
 
   def show
-    @board = current_user.boards.find_by!(pid: params[:pid])
+    @board = BoardManagementPolicy.scope(current_user).find_by!(pid: params[:pid])
     @item = @board.items.find(params[:id])
   end
 end
