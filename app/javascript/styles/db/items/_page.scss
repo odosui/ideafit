@@ -1,0 +1,11 @@
+.items-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+
+  &__note {
+    padding: var(--space-6) 0;
+    text-align: center;
+    color: var(--color-text-faint);
+  }
+}

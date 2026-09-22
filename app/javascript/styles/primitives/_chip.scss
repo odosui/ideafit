@@ -9,6 +9,11 @@
   color: var(--color-text-muted);
 }
 
+.chip--accent {
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
 .chip--success {
   background-color: var(--color-success-soft);
 }

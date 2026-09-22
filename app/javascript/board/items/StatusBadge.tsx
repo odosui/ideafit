@@ -2,6 +2,7 @@ import * as React from 'react'
 import { ItemStatus } from '../types'
 
 const BADGES: Partial<Record<ItemStatus, [string, string]>> = {
+  planned: ['Planned', 'chip--accent'],
   done: ['Done', 'chip--success'],
   in_progress: ['Work in progress', 'chip--warning'],
   rejected: ['Rejected', 'chip--danger'],

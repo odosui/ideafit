@@ -18,6 +18,33 @@ class ItemTest < ActiveSupport::TestCase
     assert_not_includes Item.with_progress("open"), items(:crash_on_login)
   end
 
+  test "with_progress counts planned items as open" do
+    items(:export_csv).planned!
+
+    assert_includes Item.with_progress("open"), items(:export_csv)
+  end
+
+  test "with_status filters by status unless blank" do
+    assert_equal [items(:spam)], Item.with_status("rejected").to_a
+    assert_equal Item.count, Item.with_status(nil).count
+  end
+
+  test "matching searches title and text" do
+    items(:export_csv).update!(text: "Spreadsheets please")
+
+    assert_equal [items(:export_csv)], Item.matching("spreadsheet").to_a
+    assert_equal [items(:dark_mode)], Item.matching("DARK").to_a
+    assert_equal Item.count, Item.matching(" ").count
+  end
+
+  test "sorted_by falls back to newest first" do
+    items(:spam).update_columns(created_at: 1.minute.from_now)
+
+    assert_equal items(:spam), Item.sorted_by(nil).first
+    assert_equal items(:spam), Item.sorted_by("bogus").first
+    assert_equal items(:dark_mode), Item.sorted_by("most_voted").first
+  end
+
   test "with_progress hides rejected items unless asked for them" do
     assert_equal [items(:spam)], Item.with_progress("rejected").to_a
     assert_not_includes Item.with_progress("open"), items(:spam)

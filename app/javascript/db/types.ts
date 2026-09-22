@@ -1,3 +1,18 @@
+export type ItemKind = 'idea' | 'bug' | 'question'
+
+export type ItemStatus = 'fresh' | 'planned' | 'in_progress' | 'done' | 'rejected'
+
+export interface BoardItem {
+  id: number
+  kind: ItemKind
+  title: string
+  text: string | null
+  status: ItemStatus
+  votes: number
+  author: string
+  created_at: string
+}
+
 export type ColorScheme = 'teal' | 'indigo' | 'terracotta' | 'ink' | 'plum'
 
 export interface Board {

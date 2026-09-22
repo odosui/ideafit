@@ -24,7 +24,7 @@ test('the dashboard card opens the board', async ({ page }) => {
 
   await page.locator('.db-board-card__link').click()
   await expect(page).toHaveURL(new RegExp(`/db/boards/${board.pid}$`))
-  await expect(page.getByRole('heading', { name: 'Share' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Public link' })).toBeVisible()
 })
 
 test('visitors see no settings link', async ({ page }) => {

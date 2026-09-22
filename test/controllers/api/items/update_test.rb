@@ -23,6 +23,15 @@ class Api::ItemsUpdateTest < ActionDispatch::IntegrationTest
     assert @item.reload.rejected?
   end
 
+  test "board owner can plan an item" do
+    sign_in users(:board_owner)
+
+    patch api_item_path(@item), params: { status: "planned" }, as: :json
+
+    assert_response :success
+    assert @item.reload.planned?
+  end
+
   test "author cannot change the status" do
     sign_in users(:author)
 

@@ -1,6 +1,7 @@
 import { api } from '../shared/api'
 import { CurrentUser } from '../shared/currentUser'
-import { Board, BoardChanges } from './types'
+import { ItemQuery } from './board/sections/items/query/itemQuery'
+import { Board, BoardChanges, BoardItem, ItemStatus } from './types'
 
 export default {
   boards: {
@@ -11,6 +12,12 @@ export default {
       api('PATCH', `/boards/${pid}`, { ...changes }),
     remove: (pid: string): Promise<{ success: boolean }> =>
       api('DELETE', `/boards/${pid}`),
+  },
+  items: {
+    list: (pid: string, query: ItemQuery): Promise<BoardItem[]> =>
+      api('get', `/boards/${pid}/items`, query),
+    setStatus: (id: number, status: ItemStatus): Promise<{ status: ItemStatus }> =>
+      api('PATCH', `/items/${id}`, { status }),
   },
   account: {
     update: (name: string): Promise<CurrentUser> =>

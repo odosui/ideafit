@@ -39,8 +39,6 @@ const BoardSettingsPage: React.FC<Props> = ({ board }) => {
 
   return (
     <form className="settings-form" onSubmit={handleSubmit}>
-      <h2>Board settings</h2>
-
       <label className="field">
         Name
         <input

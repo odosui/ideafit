@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get "b/:pid(/:kind)", to: "boards#show", constraints: { kind: /ideas|bugs|questions/ }
 
   namespace :api do
-    resources :boards, only: [:index, :create, :update, :destroy], param: :pid
+    resources :boards, only: [:index, :create, :update, :destroy], param: :pid do
+      resources :items, only: :index, module: :boards
+    end
     resource :account, only: :update
 
     resources :items, only: [:index, :create, :update, :destroy] do

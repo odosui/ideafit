@@ -1,4 +1,7 @@
 class Item < ApplicationRecord
+  include Sortable
+  include Searchable
+
   belongs_to :user # author
   belongs_to :board
 
@@ -12,6 +15,7 @@ class Item < ApplicationRecord
 
   enum :status, {
     fresh: "fresh",
+    planned: "planned",
     in_progress: "in_progress",
     done: "done",
     rejected: 'rejected'
@@ -20,11 +24,12 @@ class Item < ApplicationRecord
   validates_presence_of :user, :title, :kind
 
   scope :of_kind, ->(kind) { kind.present? ? where(kind:) : all }
+  scope :with_status, ->(status) { status.present? ? where(status:) : all }
   scope :most_voted_first, -> { order(votes_count: :desc, created_at: :desc) }
   scope :with_progress, ->(filter) {
     case filter
     when 'done' then done
-    when 'open' then fresh.or(in_progress)
+    when 'open' then where(status: %w[fresh planned in_progress])
     when 'rejected' then rejected
     else not_rejected
     end

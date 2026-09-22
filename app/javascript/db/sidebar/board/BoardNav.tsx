@@ -3,6 +3,7 @@ import { BOARD_SECTIONS } from '../../board/sections/boardSections'
 import { boardSectionPath } from '../../board/sections/boardSectionPath'
 import { currentBoardSection } from '../../board/sections/currentBoardSection'
 import { Board } from '../../types'
+import ExternalSidebarLink from '../ExternalSidebarLink'
 import SidebarLink from '../SidebarLink'
 import BoardSwitcher from './BoardSwitcher'
 
@@ -26,6 +27,11 @@ const BoardNav: React.FC<Props> = ({ board }) => {
             active={section.key === active.key}
           />
         ))}
+        <ExternalSidebarLink
+          href={`/b/${board.pid}`}
+          icon="fas fa-globe"
+          label="Public board"
+        />
       </nav>
     </div>
   )

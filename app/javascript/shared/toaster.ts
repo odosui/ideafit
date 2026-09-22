@@ -1,5 +1,14 @@
 const AUTO_REMOVE_IN = 50000
 
+const ICONS = { success: 'ti-check', error: 'ti-alert' }
+
+function createIcon(type: 'success' | 'error') {
+  const icon = document.createElement('i')
+  icon.className = `toast__icon ${ICONS[type]}`
+  icon.setAttribute('aria-hidden', 'true')
+  return icon
+}
+
 // toaster that is used instead of alertify
 export default function showToast(
   message: string,
@@ -8,7 +17,8 @@ export default function showToast(
   const toast = document.createElement('div')
   toast.className = 'toast'
   if (type === 'error') toast.classList.add('toast--error')
-  toast.textContent = message
+  toast.appendChild(createIcon(type))
+  toast.appendChild(document.createTextNode(message))
 
   const closeBtn = document.createElement('button')
   closeBtn.className = 'btn btn--ghost btn--sm'

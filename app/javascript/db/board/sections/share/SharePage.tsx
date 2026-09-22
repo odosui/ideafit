@@ -8,7 +8,6 @@ interface Props {
 
 const SharePage: React.FC<Props> = ({ board }) => (
   <section className="share-page">
-    <h2>Share</h2>
     <PublicLinkCard pid={board.pid} />
   </section>
 )

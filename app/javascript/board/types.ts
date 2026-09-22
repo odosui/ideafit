@@ -1,6 +1,6 @@
 export type ItemKind = 'idea' | 'bug' | 'question'
 
-export type ItemStatus = 'fresh' | 'in_progress' | 'done' | 'rejected'
+export type ItemStatus = 'fresh' | 'planned' | 'in_progress' | 'done' | 'rejected'
 
 export interface Item {
   id: number

@@ -1,0 +1,25 @@
+.status-select {
+  font-weight: 600;
+  cursor: pointer;
+
+  &--neutral {
+    background-color: var(--color-surface-active);
+  }
+
+  &--accent {
+    background-color: var(--color-accent-soft);
+    color: var(--color-accent);
+  }
+
+  &--warning {
+    background-color: var(--color-warning-soft);
+  }
+
+  &--success {
+    background-color: var(--color-success-soft);
+  }
+
+  &--danger {
+    background-color: var(--color-danger-soft);
+  }
+}

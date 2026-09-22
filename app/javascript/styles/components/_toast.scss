@@ -17,11 +17,21 @@
   background-color: var(--color-surface);
   transition: top var(--duration-slow) var(--ease);
 
+  &__icon {
+    font-size: var(--text-1);
+    font-weight: 700;
+    color: var(--color-success);
+  }
+
   &--visible {
     top: var(--space-2);
   }
 
   &--error {
     border-color: var(--color-danger);
+
+    .toast__icon {
+      color: var(--color-danger);
+    }
   }
 }
