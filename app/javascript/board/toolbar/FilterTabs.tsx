@@ -1,18 +1,18 @@
 import * as React from 'react'
-import { Filter } from './StateProvider'
+import { ItemFilter } from '../items/query/itemFilter'
 
-const PUBLIC_TABS: [Filter, string][] = [
+const PUBLIC_TABS: [ItemFilter, string][] = [
   ['all', 'All'],
   ['open', 'Open'],
   ['done', 'Done'],
 ]
 
-const OWNER_TABS: [Filter, string][] = [...PUBLIC_TABS, ['rejected', 'Rejected']]
+const OWNER_TABS: [ItemFilter, string][] = [...PUBLIC_TABS, ['rejected', 'Rejected']]
 
 const FilterTabs: React.FC<{
-  filter: Filter
+  filter: ItemFilter
   isOwner: boolean
-  onChange: (filter: Filter) => void
+  onChange: (filter: ItemFilter) => void
 }> = ({ filter, isOwner, onChange }) => (
   <div className="underline-tabs" role="tablist">
     {(isOwner ? OWNER_TABS : PUBLIC_TABS).map(([value, label]) => (

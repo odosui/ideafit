@@ -1,6 +1,5 @@
-export type ItemKind = 'idea' | 'bug' | 'question'
-
-export type ItemStatus = 'fresh' | 'planned' | 'in_progress' | 'done' | 'rejected'
+import { ItemKind } from '../shared/items/itemKind'
+import { ItemStatus } from '../shared/items/itemStatus'
 
 export interface BoardItem {
   id: number

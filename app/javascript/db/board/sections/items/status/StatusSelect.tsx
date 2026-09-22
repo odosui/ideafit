@@ -1,8 +1,9 @@
 import * as React from 'react'
 import showToast from '../../../../../shared/toaster'
 import api from '../../../../api'
-import { BoardItem, ItemStatus } from '../../../../types'
-import { ITEM_STATUSES, labelOfStatus, toneOf } from '../options/itemStatuses'
+import { BoardItem } from '../../../../types'
+import { ItemStatus, toneOf } from '../../../../../shared/items/itemStatus'
+import { ITEM_STATUSES, labelOfStatus } from '../options/itemStatuses'
 
 interface Props {
   item: BoardItem

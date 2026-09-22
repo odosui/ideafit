@@ -1,4 +1,5 @@
-import { ItemKind, ItemStatus } from '../../../../types'
+import { ItemKind } from '../../../../../shared/items/itemKind'
+import { ItemStatus } from '../../../../../shared/items/itemStatus'
 import { ItemSort } from '../options/itemSorts'
 
 export type ItemQuery = {

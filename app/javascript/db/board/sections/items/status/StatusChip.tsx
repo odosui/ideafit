@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { ItemStatus } from '../../../../types'
-import { labelOfStatus, toneOf } from '../options/itemStatuses'
+import { ItemStatus, toneOf } from '../../../../../shared/items/itemStatus'
+import { labelOfStatus } from '../options/itemStatuses'
 
 const StatusChip: React.FC<{ status: ItemStatus }> = ({ status }) => (
   <span className={`chip chip--${toneOf(status)}`}>{labelOfStatus(status)}</span>

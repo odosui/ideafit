@@ -1,4 +1,4 @@
-import { ItemKind } from '../types'
+import { ItemKind } from '../../shared/items/itemKind'
 
 interface KindLabels {
   addButton: string

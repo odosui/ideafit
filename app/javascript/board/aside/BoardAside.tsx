@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ItemKind } from '../types'
+import { ItemKind } from '../../shared/items/itemKind'
 import BoardIntro from './BoardIntro'
 import KindTabs from './KindTabs'
 

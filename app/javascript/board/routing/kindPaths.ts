@@ -1,4 +1,4 @@
-import { ItemKind } from '../types'
+import { ItemKind } from '../../shared/items/itemKind'
 
 const PATHS_BY_KIND: Record<ItemKind, string> = {
   idea: '/ideas',

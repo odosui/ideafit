@@ -1,4 +1,4 @@
-import { ItemKind } from '../types'
+import { ItemKind } from '../../shared/items/itemKind'
 import { kindFromPath, pathForKind } from './kindPaths'
 
 const BOARD_ROOT = /^\/b\/[^/]+/

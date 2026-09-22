@@ -1,0 +1,71 @@
+import * as React from 'react'
+import { ItemKind } from '../../shared/items/itemKind'
+import showToast from '../../shared/toaster'
+import api from '../api'
+import { useRequireSignIn } from '../signIn/useRequireSignIn'
+import BoardToolbar from '../toolbar/BoardToolbar'
+import { Item } from '../types'
+import NewItemArea from './form/NewItemArea'
+import { labelsForKind } from './kindLabels'
+import ItemList from './list/ItemList'
+import { DEFAULT_ITEM_FILTER, ItemFilter } from './query/itemFilter'
+import { useBoardItems } from './query/useBoardItems'
+import { useVoteToggle } from './voting/useVoteToggle'
+
+interface Props {
+  pid: string
+  kind: ItemKind
+}
+
+const ItemsPanel: React.FC<Props> = ({ pid, kind }) => {
+  const [filter, setFilter] = React.useState<ItemFilter>(DEFAULT_ITEM_FILTER)
+  const [formOpen, setFormOpen] = React.useState(false)
+  const { items, reload, replaceItem } = useBoardItems(pid, kind, filter)
+  const requireSignIn = useRequireSignIn()
+  const toggleVote = useVoteToggle(replaceItem)
+  const labels = labelsForKind(kind)
+
+  const createItem = async (title: string, text: string) => {
+    await api.items.create(pid, kind, title, text)
+    setFormOpen(false)
+    showToast(labels.added)
+    reload()
+  }
+
+  const deleteItem = async (item: Item) => {
+    await api.items.remove(item.id)
+    showToast(labels.deleted)
+    reload()
+  }
+
+  return (
+    <>
+      <div>
+        <BoardToolbar
+          filter={filter}
+          onFilterChange={setFilter}
+          addLabel={labels.addButton}
+          addHidden={formOpen}
+          onAdd={() => requireSignIn(() => setFormOpen(true))}
+        />
+        <div aria-live="polite" role="tabpanel">
+          <NewItemArea
+            open={formOpen}
+            submitLabel={labels.addButton}
+            onCancel={() => setFormOpen(false)}
+            onCreate={createItem}
+          />
+          <ItemList
+            items={items}
+            deleteConfirmation={labels.confirmDelete}
+            onVote={toggleVote}
+            onDelete={deleteItem}
+          />
+        </div>
+      </div>
+      {items?.length === 0 && <div className="board-empty">{labels.empty}</div>}
+    </>
+  )
+}
+
+export default ItemsPanel

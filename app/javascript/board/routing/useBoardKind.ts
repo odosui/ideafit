@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ItemKind } from '../types'
+import { ItemKind } from '../../shared/items/itemKind'
 import {
   kindFromLocation,
   pushKindToLocation,

@@ -1,7 +1,8 @@
 import { api } from '../shared/api'
 import { CurrentUser } from '../shared/currentUser'
 import { ItemQuery } from './board/sections/items/query/itemQuery'
-import { Board, BoardChanges, BoardItem, ItemStatus, StatusChange } from './types'
+import { ItemStatus } from '../shared/items/itemStatus'
+import { Board, BoardChanges, BoardItem, StatusChange } from './types'
 
 export default {
   boards: {

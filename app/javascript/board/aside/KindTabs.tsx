@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { boardPathForKind } from '../routing/boardLocation'
-import { ItemKind } from '../types'
+import { ItemKind } from '../../shared/items/itemKind'
 
 const KIND_LABELS: [ItemKind, string][] = [
   ['idea', 'Ideas'],
