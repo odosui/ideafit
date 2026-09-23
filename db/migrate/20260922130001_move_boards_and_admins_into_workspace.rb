@@ -2,13 +2,13 @@ class MoveBoardsAndAdminsIntoWorkspace < ActiveRecord::Migration[8.1]
   def up
     execute <<~SQL
       INSERT INTO workspaces (name, created_at, updated_at)
-      SELECT 'Ideafit', NOW(), NOW()
+      SELECT 'Ideafit', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
       WHERE EXISTS (SELECT 1 FROM boards) OR EXISTS (SELECT 1 FROM users WHERE admin);
 
       UPDATE boards SET workspace_id = (SELECT MIN(id) FROM workspaces);
 
       INSERT INTO workspace_memberships (workspace_id, user_id, created_at, updated_at)
-      SELECT (SELECT MIN(id) FROM workspaces), id, NOW(), NOW() FROM users WHERE admin;
+      SELECT (SELECT MIN(id) FROM workspaces), id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP FROM users WHERE admin;
     SQL
 
     change_column_null :boards, :workspace_id, false

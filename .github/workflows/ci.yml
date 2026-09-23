@@ -22,16 +22,8 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:17
-        env:
-          POSTGRES_PASSWORD: postgres
-        ports: ["5432:5432"]
-        options: --health-cmd=pg_isready --health-interval=5s --health-retries=10
     env:
       RAILS_ENV: test
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432
     steps:
       - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
@@ -52,16 +44,8 @@ jobs:
 
   e2e:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:17
-        env:
-          POSTGRES_PASSWORD: postgres
-        ports: ["5432:5432"]
-        options: --health-cmd=pg_isready --health-interval=5s --health-retries=10
     env:
       RAILS_ENV: development
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432
     steps:
       - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1

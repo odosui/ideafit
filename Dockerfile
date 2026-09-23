@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-# Production image: docker build -t ideafit . && docker run -p 80:80 --env-file .env ideafit
+# Production image: docker build -t ideafit . && docker run -p 80:80 -v ideafit:/rails/storage ideafit
 
 ARG RUBY_VERSION=3.4.7
 ARG NODE_VERSION=24
@@ -9,7 +9,7 @@ FROM docker.io/library/node:${NODE_VERSION}-slim AS node
 FROM docker.io/library/ruby:${RUBY_VERSION}-slim AS base
 WORKDIR /rails
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y libjemalloc2 libpq5 && \
+    apt-get install --no-install-recommends -y libjemalloc2 && \
     rm -rf /var/lib/apt/lists/*
 ENV RAILS_ENV=production \
     BUNDLE_DEPLOYMENT=1 \
@@ -20,7 +20,7 @@ ENV RAILS_ENV=production \
 
 FROM base AS build
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential libpq-dev libyaml-dev && \
+    apt-get install --no-install-recommends -y build-essential libyaml-dev && \
     rm -rf /var/lib/apt/lists/*
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/npm

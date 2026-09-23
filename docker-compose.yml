@@ -2,31 +2,11 @@ services:
   app:
     image: hiquest/ideafit:latest
     env_file: .env
-    environment:
-      DATABASE_URL: postgres://ideafit:ideafit@db/ideafit
     ports:
       - "3000:80"
     volumes:
       - storage:/rails/storage
-    depends_on:
-      db:
-        condition: service_healthy
-    restart: unless-stopped
-
-  db:
-    image: postgres:17
-    environment:
-      POSTGRES_USER: ideafit
-      POSTGRES_PASSWORD: ideafit
-      POSTGRES_DB: ideafit
-    volumes:
-      - postgres:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ideafit"]
-      interval: 2s
-      retries: 15
     restart: unless-stopped
 
 volumes:
   storage:
-  postgres:

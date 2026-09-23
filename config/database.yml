@@ -1,18 +1,18 @@
-# In production everything, including Solid Queue/Cache/Cable, lives in the one
-# database given by DATABASE_URL.
+# Everything, including Solid Queue/Cache/Cable, lives in one SQLite file per
+# environment under storage/, which is the volume mounted in production.
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlite3
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 
 development:
   <<: *default
-  database: <%= ENV.fetch("DEV_DATABASE", "if_development") %>
+  database: storage/<%= ENV.fetch("DEV_DATABASE", "development") %>.sqlite3
 
 test:
   <<: *default
-  database: if_test
+  database: storage/test.sqlite3
 
 production:
   <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
+  database: storage/production.sqlite3

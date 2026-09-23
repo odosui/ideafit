@@ -9,14 +9,16 @@ A self-hosted feedback board. Collect ideas, bugs and questions from your users,
 ## Run it
 
 ```sh
-curl -O https://raw.githubusercontent.com/odosui/ideafit/main/docker-compose.yml
-curl -o .env https://raw.githubusercontent.com/odosui/ideafit/main/.env.example
-docker compose up -d
+docker run -d --name ideafit -p 3000:80 -v ideafit:/rails/storage hiquest/ideafit
 ```
 
 Open http://localhost:3000. A demo board lives at http://localhost:3000/b/demo.
 
-Sign-in is by email link. Without SMTP settings in `.env`, the link is printed to `docker compose logs app`.
+All data (a SQLite database and uploads) lives in the `ideafit` volume. Back it up and you've backed up everything.
+
+To configure the public URL, email and admins, grab [`.env.example`](.env.example), fill it in and add `--env-file .env` to the command. Prefer Compose? There's a [`docker-compose.yml`](docker-compose.yml) too.
+
+Sign-in is by email link. Without SMTP settings, the link is printed to `docker logs ideafit`.
 
 The first person to sign in becomes the admin. Admins share and manage all boards; everyone else posts and votes on boards shared with them. To add more admins, list their emails in `ADMIN_EMAILS`.
 

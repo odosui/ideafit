@@ -6,7 +6,7 @@ module Item::Searchable
       next all if query.blank?
 
       pattern = "%#{sanitize_sql_like(query.strip)}%"
-      where("items.title ILIKE :pattern OR items.text ILIKE :pattern", pattern:)
+      where(arel_table[:title].matches(pattern, "\\").or(arel_table[:text].matches(pattern, "\\")))
     }
   end
 end
