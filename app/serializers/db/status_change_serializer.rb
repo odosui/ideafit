@@ -5,9 +5,10 @@ class Db::StatusChangeSerializer
 
   def as_json(*)
     {
+      type: 'status_change',
       id: @change.id,
       status: @change.status,
-      changed_by: @change.user.display_name,
+      by: @change.user.display_name,
       created_at: @change.created_at,
     }
   end

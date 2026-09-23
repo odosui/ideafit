@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Button from '../../../shared/Button'
+import ItemFields from './ItemFields'
 
 const CreateItemForm: React.FC<{
   open: boolean
@@ -35,21 +36,12 @@ const CreateItemForm: React.FC<{
   return (
     <div className="card">
       <form className="item-form" onSubmit={handleSubmit}>
-        <input
-          className="input"
-          ref={titleInput}
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <textarea
-          className="textarea"
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
+        <ItemFields
+          title={title}
+          text={description}
+          onTitleChange={setTitle}
+          onTextChange={setDescription}
+          titleRef={titleInput}
         />
         <div className="item-form__actions">
           <Button className="btn--primary" type="submit" loading={false}>

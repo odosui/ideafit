@@ -32,6 +32,17 @@ const ItemsPanel: React.FC<Props> = ({ pid, kind }) => {
     reload()
   }
 
+  const editItem = async (item: Item, title: string, text: string) => {
+    const result = await api.items.edit(item.id, title, text)
+    if (!result || 'success' in result) {
+      showToast('Your changes could not be saved', 'error')
+      reload()
+      return
+    }
+    replaceItem(result)
+    showToast(labels.edited)
+  }
+
   const deleteItem = async (item: Item) => {
     await api.items.remove(item.id)
     showToast(labels.deleted)
@@ -59,6 +70,7 @@ const ItemsPanel: React.FC<Props> = ({ pid, kind }) => {
             items={items}
             deleteConfirmation={labels.confirmDelete}
             onVote={toggleVote}
+            onEdit={editItem}
             onDelete={deleteItem}
           />
         </div>

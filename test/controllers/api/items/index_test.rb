@@ -32,14 +32,25 @@ class Api::ItemsIndexTest < ActionDispatch::IntegrationTest
     get api_items_path, params: { board_pid: "roadmap0pid", kind: "idea" }, as: :json
 
     dark_mode, export_csv = json
-    assert_equal({ "votes" => 2, "voted" => true, "can_edit" => true }, dark_mode.slice("votes", "voted", "can_edit"))
+    assert_equal(
+      { "votes" => 2, "voted" => true, "can_edit" => true, "can_delete" => true },
+      dark_mode.slice("votes", "voted", "can_edit", "can_delete")
+    )
     assert_equal false, export_csv["voted"]
+  end
+
+  test "the board owner may delete but not edit someone else's item" do
+    sign_in users(:board_owner)
+
+    get api_items_path, params: { board_pid: "roadmap0pid", kind: "idea" }, as: :json
+
+    assert_equal({ "can_edit" => false, "can_delete" => true }, json.first.slice("can_edit", "can_delete"))
   end
 
   test "signed-out visitor sees items without votes or edit rights" do
     get api_items_path, params: { board_pid: "roadmap0pid" }, as: :json
 
-    assert json.none? { |item| item["voted"] || item["can_edit"] }
+    assert json.none? { |item| item["voted"] || item["can_edit"] || item["can_delete"] }
   end
 
   test "board owner sees rejected items" do

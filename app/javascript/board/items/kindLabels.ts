@@ -4,6 +4,7 @@ interface KindLabels {
   addButton: string
   empty: string
   added: string
+  edited: string
   deleted: string
   confirmDelete: string
 }
@@ -16,6 +17,7 @@ const labelsFor = (
   addButton: `Add ${noun}`,
   empty: `Be the first to add ${article} ${noun.toLowerCase()}! ${emoji}`,
   added: `${noun} added! 🍕`,
+  edited: `${noun} updated! 🍕`,
   deleted: `${noun} successfully deleted! 🍕`,
   confirmDelete: `Are you sure want to delete this ${noun.toLowerCase()}?`,
 })

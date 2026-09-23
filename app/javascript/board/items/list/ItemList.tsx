@@ -15,6 +15,7 @@ interface Props {
   items: Item[] | null
   deleteConfirmation: string
   onVote: (item: Item) => void
+  onEdit: (item: Item, title: string, text: string) => Promise<void>
   onDelete: (item: Item) => void
 }
 

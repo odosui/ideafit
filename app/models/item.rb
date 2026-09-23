@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   include Sortable
   include Searchable
   include StatusHistory
+  include EditHistory
 
   belongs_to :user # author
   belongs_to :board

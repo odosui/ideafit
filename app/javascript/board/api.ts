@@ -1,7 +1,7 @@
 import { api } from '../shared/api'
 import { ItemKind } from '../shared/items/itemKind'
 import { ItemFilter } from './items/query/itemFilter'
-import { Item } from './types'
+import { ApiError, Item } from './types'
 
 export default {
   items: {
@@ -20,6 +20,8 @@ export default {
       api('post', `/items/${id}/upvote`, {}),
     downvote: (id: number): Promise<void> =>
       api('post', `/items/${id}/downvote`, {}),
+    edit: (id: number, title: string, text: string): Promise<Item | ApiError> =>
+      api('post', `/items/${id}/edits`, { title, text }),
     remove: (id: number): Promise<void> => api('DELETE', `/items/${id}`),
   },
 }

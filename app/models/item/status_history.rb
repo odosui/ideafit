@@ -11,4 +11,8 @@ module Item::StatusHistory
       status_changes.create!(user: by, status:) if saved_change_to_status?
     end
   end
+
+  def triaged?
+    !fresh? || status_changes.exists?
+  end
 end

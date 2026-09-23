@@ -1,13 +1,14 @@
 import * as React from 'react'
+import EditItemForm from '../edit/EditItemForm'
 import { Item } from '../../types'
 import Voter from '../voting/Voter'
-import DeleteItemButton from './DeleteItemButton'
-import StatusBadge from './StatusBadge'
+import ItemContent from './ItemContent'
 
 interface Props {
   item: Item
   deleteConfirmation: string
   onVote: (item: Item) => void
+  onEdit: (item: Item, title: string, text: string) => Promise<void>
   onDelete: (item: Item) => void
 }
 
@@ -15,28 +16,41 @@ const ItemCard: React.FC<Props> = ({
   item,
   deleteConfirmation,
   onVote,
+  onEdit,
   onDelete,
-}) => (
-  <>
-    <div className="item__body">
-      <h3 className="item__title">{item.title}</h3>
-      <p className="item__text">{item.text}</p>
-      <div className="item__footer">
-        <div>
-          <StatusBadge status={item.status} />
-        </div>
-        <div>
-          {item.can_edit && (
-            <DeleteItemButton
-              confirmation={deleteConfirmation}
-              onDelete={() => onDelete(item)}
-            />
-          )}
-        </div>
+}) => {
+  const [editing, setEditing] = React.useState(false)
+
+  const save = async (title: string, text: string) => {
+    await onEdit(item, title, text)
+    setEditing(false)
+  }
+
+  return (
+    <>
+      <div className="item__body">
+        {editing ? (
+          <EditItemForm
+            item={item}
+            onSave={save}
+            onCancel={() => setEditing(false)}
+          />
+        ) : (
+          <ItemContent
+            item={item}
+            deleteConfirmation={deleteConfirmation}
+            onEditStart={() => setEditing(true)}
+            onDelete={() => onDelete(item)}
+          />
+        )}
       </div>
-    </div>
-    <Voter voted={item.voted} count={item.votes} onClick={() => onVote(item)} />
-  </>
-)
+      <Voter
+        voted={item.voted}
+        count={item.votes}
+        onClick={() => onVote(item)}
+      />
+    </>
+  )
+}
 
 export default ItemCard

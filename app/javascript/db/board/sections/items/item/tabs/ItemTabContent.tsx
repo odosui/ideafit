@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { BoardItem } from '../../../../../types'
 import ItemDetails from '../details/ItemDetails'
-import StatusHistory from '../history/StatusHistory'
+import ItemHistory from '../history/ItemHistory'
 import { ItemTabKey } from './itemTabs'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const ItemTabContent: React.FC<Props> = ({ item, tab }) => {
-  if (tab === 'history') return <StatusHistory item={item} />
+  if (tab === 'history') return <ItemHistory item={item} />
   return <ItemDetails item={item} />
 }
 

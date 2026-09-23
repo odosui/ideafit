@@ -24,7 +24,10 @@ Rails.application.routes.draw do
         post :upvote
         post :downvote
       end
-      resources :status_changes, only: :index, module: :items
+      scope module: :items do
+        resources :edits, only: :create
+        resource :history, only: :show, controller: :history
+      end
     end
   end
 

@@ -12,12 +12,24 @@ export interface BoardItem {
   created_at: string
 }
 
-export interface StatusChange {
+interface HistoryEventBase {
   id: number
-  status: ItemStatus
-  changed_by: string
+  by: string
   created_at: string
 }
+
+export interface StatusChange extends HistoryEventBase {
+  type: 'status_change'
+  status: ItemStatus
+}
+
+export interface Edit extends HistoryEventBase {
+  type: 'edit'
+  previous_title: string
+  previous_text: string | null
+}
+
+export type HistoryEvent = StatusChange | Edit
 
 export type ColorScheme = 'teal' | 'indigo' | 'terracotta' | 'ink' | 'plum'
 

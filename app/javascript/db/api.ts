@@ -2,7 +2,7 @@ import { api } from '../shared/api'
 import { CurrentUser } from '../shared/currentUser'
 import { ItemQuery } from './board/sections/items/query/itemQuery'
 import { ItemStatus } from '../shared/items/itemStatus'
-import { Board, BoardChanges, BoardItem, StatusChange } from './types'
+import { Board, BoardChanges, BoardItem, HistoryEvent } from './types'
 
 export default {
   boards: {
@@ -22,8 +22,8 @@ export default {
       status: ItemStatus,
     ): Promise<{ status: ItemStatus }> =>
       api('PATCH', `/items/${id}`, { status }),
-    statusChanges: (id: number): Promise<StatusChange[]> =>
-      api('get', `/items/${id}/status_changes`),
+    history: (id: number): Promise<HistoryEvent[]> =>
+      api('get', `/items/${id}/history`),
   },
   account: {
     update: (name: string): Promise<CurrentUser> =>

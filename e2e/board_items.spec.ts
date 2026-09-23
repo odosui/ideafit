@@ -59,7 +59,7 @@ test('the owner opens an item and sees its status history', async ({
 
   await page.getByRole('link', { name: 'History' }).click()
   await expect(page).toHaveURL(/\/history$/)
-  const history = page.getByLabel('Status history of Dark mode')
+  const history = page.getByLabel('History of Dark mode')
   await expect(history.getByText('Created')).toBeVisible()
   const planned = history.getByRole('listitem').filter({ hasText: 'Planned' })
   await expect(planned).toContainText(`by ${board.email}`)
