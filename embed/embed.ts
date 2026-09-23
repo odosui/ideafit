@@ -79,7 +79,7 @@ const IdeaFit: {
     iframe.frameBorder = '0'
     iframe.style.width = '100%'
     iframe.style.height = 'calc(100% - 50px)'
-    iframe.src = `${IdeaFit.host}/b/${IdeaFit.boardId}`
+    iframe.src = `${IdeaFit.host}/b/${IdeaFit.boardId}?embed=1`
     modalContent.appendChild(iframe)
   },
 }

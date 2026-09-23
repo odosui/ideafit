@@ -20,6 +20,7 @@ function readServerData() {
   }
 
   const isOwner = body.dataset.owner === 'true'
+  const embedded = body.dataset.embedded === 'true'
 
   const infoStr = body.dataset.info
   const info = infoStr ? JSON.parse(infoStr) : null
@@ -32,6 +33,7 @@ function readServerData() {
     boardDescription,
     user,
     isOwner,
+    embedded,
     env,
     flash,
   }

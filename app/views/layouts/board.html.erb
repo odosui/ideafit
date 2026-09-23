@@ -18,7 +18,7 @@
 
   <% user = current_user && UserSerializer.new(current_user) %>
 
-  <body data-pid="<%= params['pid'] %>" data-board-name="<%= @board.name %>" data-board-description="<%= @board.description %>" data-color-scheme="<%= @board.color_scheme %>" data-user="<%= user.to_json %>" data-owner="<%= BoardManagementPolicy.allowed?(current_user, @board) %>" data-info="<%= js_data.to_json %>">
+  <body data-pid="<%= params['pid'] %>" data-board-name="<%= @board.name %>" data-board-description="<%= @board.description %>" data-color-scheme="<%= @board.color_scheme %>" data-user="<%= user.to_json %>" data-owner="<%= BoardManagementPolicy.allowed?(current_user, @board) %>" data-info="<%= js_data.to_json %>" data-embedded="<%= embedded? %>">
     <%= yield %>
   </body>
 </html>

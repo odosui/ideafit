@@ -1,4 +1,6 @@
 class BoardsController < ApplicationController
+  include Embeddable
+
   layout 'board'
 
   def show
