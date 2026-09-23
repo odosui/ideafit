@@ -1,0 +1,11 @@
+.stacked-labels {
+  display: inline-grid;
+
+  > * {
+    grid-area: 1 / 1;
+  }
+
+  &__hidden {
+    visibility: hidden;
+  }
+}

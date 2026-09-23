@@ -1,25 +1,28 @@
+// A chip that opens a status menu. Tone and shape come from `.chip`.
 .status-select {
-  font-weight: 600;
-  cursor: pointer;
+  position: relative;
+  border: 1px solid transparent;
+  transition:
+    border-color var(--duration-fast) var(--ease),
+    box-shadow var(--duration-fast) var(--ease),
+    opacity var(--duration-fast) var(--ease);
 
-  &--neutral {
-    background-color: var(--color-surface-active);
+  &:hover {
+    border-color: color-mix(in srgb, var(--tone) 50%, transparent);
   }
 
-  &--accent {
-    background-color: var(--color-accent-soft);
-    color: var(--color-accent);
+  &:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-focus);
   }
 
-  &--warning {
-    background-color: var(--color-warning-soft);
+  &:has(:disabled) {
+    opacity: 0.6;
   }
 
-  &--success {
-    background-color: var(--color-success-soft);
-  }
-
-  &--danger {
-    background-color: var(--color-danger-soft);
+  &__chevron {
+    margin-left: var(--space-0);
+    font-size: 0.625em;
+    color: var(--color-text-faint);
   }
 }

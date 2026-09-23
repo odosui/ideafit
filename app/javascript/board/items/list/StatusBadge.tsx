@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Chip from '../../../shared/Chip'
 import { ItemStatus, toneOf } from '../../../shared/items/itemStatus'
 
 const PUBLIC_LABELS: Partial<Record<ItemStatus, string>> = {
@@ -12,7 +13,11 @@ const StatusBadge: React.FC<{ status: ItemStatus }> = ({ status }) => {
   const label = PUBLIC_LABELS[status]
   if (!label) return null
 
-  return <span className={`chip chip--${toneOf(status)}`}>{label}</span>
+  return (
+    <Chip tone={toneOf(status)} dot>
+      {label}
+    </Chip>
+  )
 }
 
 export default StatusBadge

@@ -33,7 +33,7 @@ const FilterSelect = <T extends string>({
         aria-hidden="true"
       />
       <select
-        className="filter-select__control"
+        className="select-overlay"
         aria-label={label}
         value={value}
         onChange={(e) => onChange(e.target.value as T)}

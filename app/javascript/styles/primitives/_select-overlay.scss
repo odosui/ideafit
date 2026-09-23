@@ -1,0 +1,13 @@
+// An invisible native <select> stretched over custom-styled markup,
+// so the look is ours while keyboard and screen readers stay native.
+.select-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: progress;
+  }
+}

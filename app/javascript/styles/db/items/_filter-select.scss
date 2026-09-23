@@ -36,12 +36,4 @@
     font-size: 0.625em;
     color: var(--color-text-faint);
   }
-
-  &__control {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    opacity: 0;
-    cursor: pointer;
-  }
 }

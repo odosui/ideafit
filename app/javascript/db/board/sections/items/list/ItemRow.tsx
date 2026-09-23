@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Chip from '../../../../../shared/Chip'
 import { BoardItem } from '../../../../types'
 import { itemPath } from '../item/itemPath'
 import { labelOfKind } from '../options/itemKinds'
@@ -20,7 +21,7 @@ const ItemRow: React.FC<Props> = ({ pid, item, onChanged }) => (
       {item.text && <span className="items-table__text">{item.text}</span>}
     </td>
     <td>
-      <span className="chip">{labelOfKind(item.kind)}</span>
+      <Chip>{labelOfKind(item.kind)}</Chip>
     </td>
     <td className="items-table__votes">{item.votes}</td>
     <td className="items-table__muted">{item.author}</td>

@@ -1,9 +1,13 @@
 import * as React from 'react'
+import Chip from '../../../../../shared/Chip'
+import StackedLabels from '../../../../../shared/StackedLabels'
 import showToast from '../../../../../shared/toaster'
 import api from '../../../../api'
 import { BoardItem } from '../../../../types'
 import { ItemStatus, toneOf } from '../../../../../shared/items/itemStatus'
 import { ITEM_STATUSES, labelOfStatus } from '../options/itemStatuses'
+
+const STATUS_LABELS = ITEM_STATUSES.map((option) => option.label)
 
 interface Props {
   item: BoardItem
@@ -25,19 +29,29 @@ const StatusSelect: React.FC<Props> = ({ item, onChanged }) => {
   }
 
   return (
-    <select
-      className={`select select--sm status-select status-select--${toneOf(item.status)}`}
-      aria-label={`Status of ${item.title}`}
-      value={item.status}
-      disabled={saving}
-      onChange={(e) => handleChange(e.target.value as ItemStatus)}
-    >
-      {ITEM_STATUSES.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </select>
+    <Chip tone={toneOf(item.status)} dot className="status-select">
+      <StackedLabels
+        labels={STATUS_LABELS}
+        current={labelOfStatus(item.status)}
+      />
+      <i
+        className="fas fa-chevron-down status-select__chevron"
+        aria-hidden="true"
+      />
+      <select
+        className="select-overlay"
+        aria-label={`Status of ${item.title}`}
+        value={item.status}
+        disabled={saving}
+        onChange={(e) => handleChange(e.target.value as ItemStatus)}
+      >
+        {ITEM_STATUSES.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </Chip>
   )
 }
 

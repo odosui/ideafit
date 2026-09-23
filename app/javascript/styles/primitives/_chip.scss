@@ -1,27 +1,37 @@
 .chip {
+  --tone: var(--color-text-faint);
+
   display: inline-flex;
   align-items: center;
-  padding: var(--space-0) var(--space-1);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-0);
+  gap: var(--space-1);
+  padding: var(--space-0) var(--space-2);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-1);
   font-weight: 600;
-  background-color: var(--color-surface-active);
-  color: var(--color-text-muted);
-}
+  white-space: nowrap;
+  color: var(--color-text);
+  background-color: color-mix(in srgb, var(--tone) 12%, transparent);
 
-.chip--accent {
-  background-color: var(--color-accent-soft);
-  color: var(--color-accent);
-}
+  &__dot {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background-color: var(--tone);
+  }
 
-.chip--success {
-  background-color: var(--color-success-soft);
-}
+  &--accent {
+    --tone: var(--color-accent);
+  }
 
-.chip--warning {
-  background-color: var(--color-warning-soft);
-}
+  &--warning {
+    --tone: var(--color-warning);
+  }
 
-.chip--danger {
-  background-color: var(--color-danger-soft);
+  &--success {
+    --tone: var(--color-success);
+  }
+
+  &--danger {
+    --tone: var(--color-danger);
+  }
 }
