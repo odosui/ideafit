@@ -7,7 +7,7 @@ default: &default
 
 development:
   <<: *default
-  database: if_development
+  database: <%= ENV.fetch("DEV_DATABASE", "if_development") %>
 
 test:
   <<: *default

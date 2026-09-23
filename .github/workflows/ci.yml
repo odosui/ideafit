@@ -61,8 +61,7 @@ jobs:
         options: --health-cmd=pg_isready --health-interval=5s --health-retries=10
     env:
       RAILS_ENV: development
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432/if_development
-      E2E_SERVER_COMMAND: bin/rails server -p 5100
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432
     steps:
       - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
@@ -74,7 +73,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - run: bin/rails db:prepare
 
       - name: Build frontend
         run: bin/vite build
