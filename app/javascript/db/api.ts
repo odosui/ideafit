@@ -1,5 +1,6 @@
 import { api } from '../shared/api'
 import { CurrentUser } from '../shared/currentUser'
+import { AccountChanges } from './account/accountChanges'
 import { ItemQuery } from './board/sections/items/query/itemQuery'
 import { ItemStatus } from '../shared/items/itemStatus'
 import { Board, BoardChanges, BoardItem, HistoryEvent } from './types'
@@ -26,7 +27,7 @@ export default {
       api('get', `/items/${id}/history`),
   },
   account: {
-    update: (name: string): Promise<CurrentUser> =>
-      api('PATCH', '/account', { name }),
+    update: (changes: AccountChanges): Promise<CurrentUser> =>
+      api('PATCH', '/account', { ...changes }),
   },
 }

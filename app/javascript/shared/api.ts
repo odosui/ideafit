@@ -1,7 +1,7 @@
 import csrfToken from './csrfToken'
 import { signInPath } from './authPaths'
 
-type Params = { [k: string]: string }
+type Params = { [k: string]: string | boolean }
 
 export async function api(method: string, url: string, data?: Params) {
   const isGet = method === 'get'

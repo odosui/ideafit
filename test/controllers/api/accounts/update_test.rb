@@ -11,6 +11,16 @@ class Api::AccountsUpdateTest < ActionDispatch::IntegrationTest
     assert_equal "Ada", users(:author).reload.name
   end
 
+  test "turns email updates off" do
+    sign_in users(:author)
+
+    patch api_account_path, params: { name: "Ada", email_updates: false }, as: :json
+
+    assert_response :success
+    assert_equal false, json["email_updates"]
+    assert_not users(:author).reload.email_updates
+  end
+
   test "does not change the email" do
     sign_in users(:author)
 

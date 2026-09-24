@@ -1,0 +1,10 @@
+<% content_for :title, "Unsubscribed" %>
+<% item = @subscription.item %>
+<h1>You're unsubscribed</h1>
+<p>
+  No more emails about <strong><%= item.title %></strong>.
+  Changed your mind? <%= link_to "Follow it again", public_board_path(item.board.pid, kind: item.kind.pluralize) %> on the board.
+</p>
+<div class="auth-footer">
+  <%= link_to "Stop all Ideafit emails", unsubscribe_all_path(@subscription.user.generate_token_for(:unsubscribe)) %>
+</div>

@@ -1,0 +1,4 @@
+<% content_for :title, "Unsubscribe" %>
+<h1>Stop all Ideafit emails?</h1>
+<p>You won't get updates about any item you follow. Sign-in links still arrive when you ask for them.</p>
+<%= button_to "Unsubscribe from all", unsubscribe_all_path(params[:token]), class: "btn btn--primary btn--block" %>

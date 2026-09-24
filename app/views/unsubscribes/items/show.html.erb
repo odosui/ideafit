@@ -1,0 +1,4 @@
+<% content_for :title, "Unsubscribe" %>
+<h1>Stop emails about this item?</h1>
+<p>You won't hear about updates to <strong><%= @subscription.item.title %></strong> anymore.</p>
+<%= button_to "Unsubscribe", unsubscribe_item_path(params[:token]), class: "btn btn--primary btn--block" %>

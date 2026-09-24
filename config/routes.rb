@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   root "db/boards#index"
   get "home", to: "participant_home#show", as: :participant_home
 
-  get "b/:pid(/:kind)", to: "boards#show", constraints: { kind: /ideas|bugs|questions/ }
+  get "b/:pid(/:kind)", to: "boards#show", as: :public_board, constraints: { kind: /ideas|bugs|questions/ }
+
+  scope "unsubscribe", module: :unsubscribes, as: :unsubscribe do
+    resource :item, path: "item/:token", only: [:show, :create]
+    resource :all, path: "all/:token", only: [:show, :create], controller: :emails
+  end
 
   namespace :api do
     resources :boards, only: [:index, :create, :update, :destroy], param: :pid do

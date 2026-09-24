@@ -30,5 +30,22 @@ test('the name in the header leads to settings', async ({ page }) => {
   await page.locator('.app-header').getByText(board.email).click()
 
   await expect(page).toHaveURL(/\/db\/settings$/)
-  await expect(page.getByLabel('Email')).toHaveValue(board.email)
+  await expect(page.getByLabel('Email', { exact: true })).toHaveValue(
+    board.email,
+  )
+})
+
+test('a user turns email updates off in settings', async ({ page }) => {
+  const board = createOwnedBoard()
+  await signIn(page, board.email)
+  await page.goto('/db/settings')
+
+  const emailUpdates = page.getByRole('checkbox', { name: /Email updates/ })
+  await expect(emailUpdates).toBeChecked()
+  await emailUpdates.uncheck()
+  await page.getByRole('button', { name: 'Save' }).click()
+  await expect(page.getByText('Saved')).toBeVisible()
+
+  await page.reload()
+  await expect(emailUpdates).not.toBeChecked()
 })

@@ -8,6 +8,7 @@ class UserSerializer
       email: @user.email,
       name: @user.name,
       admin: @user.admin?,
+      email_updates: @user.email_updates,
     }
   end
 end

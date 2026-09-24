@@ -9,4 +9,6 @@ class Item::Subscription < ApplicationRecord
   }, prefix: true, validate: true
 
   scope :active, -> { where(unsubscribed_at: nil) }
+
+  generates_token_for :unsubscribe
 end

@@ -1,22 +1,30 @@
 import * as React from 'react'
 import api from '../api'
 import { useCurrentUser } from './CurrentUserContext'
+import EmailUpdatesField from './EmailUpdatesField'
 
 type Status = 'idle' | 'saving' | 'saved' | 'error'
 
 const AccountPage: React.FC = () => {
   const { user, setUser } = useCurrentUser()
   const [name, setName] = React.useState(user?.name ?? '')
+  const [emailUpdates, setEmailUpdates] = React.useState(
+    user?.email_updates ?? true,
+  )
   const [status, setStatus] = React.useState<Status>('idle')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('saving')
     try {
-      const saved = await api.account.update(name)
+      const saved = await api.account.update({
+        name,
+        email_updates: emailUpdates,
+      })
       if (!saved?.email) throw new Error('not saved')
       setUser(saved)
       setName(saved.name ?? '')
+      setEmailUpdates(saved.email_updates)
       setStatus('saved')
     } catch {
       setStatus('error')
@@ -53,6 +61,14 @@ const AccountPage: React.FC = () => {
           disabled
         />
       </label>
+
+      <EmailUpdatesField
+        checked={emailUpdates}
+        onChange={(checked) => {
+          setEmailUpdates(checked)
+          setStatus('idle')
+        }}
+      />
 
       <div className="settings-form__actions">
         <button
