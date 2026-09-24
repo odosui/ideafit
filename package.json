@@ -21,7 +21,7 @@
     "lint-staged": "^17.5.1",
     "oxlint": "^1.85.0",
     "prettier": "^3.9.8",
-    "vite": "^8.0.16",
+    "vite": "^8.3.0",
     "vite-plugin-ruby": "^5.2.4"
   },
   "scripts": {
