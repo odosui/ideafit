@@ -5,10 +5,12 @@ import { Item } from '../../types'
 import { ItemFilter } from './itemFilter'
 
 interface Loaded {
-  queryKey: string
+  listKey: string
   items: Item[]
 }
 
+// Keeps showing the current items until fresh ones arrive, both on reload
+// and when switching kind or filter. `itemsKey` names the list being shown.
 export const useBoardItems = (
   pid: string,
   kind: ItemKind,
@@ -16,17 +18,17 @@ export const useBoardItems = (
 ) => {
   const [loaded, setLoaded] = React.useState<Loaded | null>(null)
   const [version, setVersion] = React.useState(0)
-  const queryKey = [pid, kind, filter, version].join('/')
+  const listKey = [pid, kind, filter].join('/')
 
   React.useEffect(() => {
     let current = true
     api.items.list(pid, kind, filter).then((data) => {
-      if (current) setLoaded({ queryKey, items: data || [] })
+      if (current) setLoaded({ listKey, items: data || [] })
     })
     return () => {
       current = false
     }
-  }, [pid, kind, filter, queryKey])
+  }, [pid, kind, filter, listKey, version])
 
   const reload = () => setVersion((v) => v + 1)
 
@@ -41,7 +43,11 @@ export const useBoardItems = (
         },
     )
 
-  const items = loaded?.queryKey === queryKey ? loaded.items : null
-
-  return { items, reload, replaceItem }
+  return {
+    items: loaded?.items ?? null,
+    itemsKey: loaded?.listKey,
+    loading: loaded?.listKey !== listKey,
+    reload,
+    replaceItem,
+  }
 }

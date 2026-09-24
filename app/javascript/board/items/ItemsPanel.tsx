@@ -20,7 +20,11 @@ interface Props {
 const ItemsPanel: React.FC<Props> = ({ pid, kind }) => {
   const [filter, setFilter] = React.useState<ItemFilter>(DEFAULT_ITEM_FILTER)
   const [formOpen, setFormOpen] = React.useState(false)
-  const { items, reload, replaceItem } = useBoardItems(pid, kind, filter)
+  const { items, itemsKey, loading, reload, replaceItem } = useBoardItems(
+    pid,
+    kind,
+    filter,
+  )
   const requireSignIn = useRequireSignIn()
   const toggleVote = useVoteToggle(replaceItem)
   const labels = labelsForKind(kind)
@@ -68,6 +72,8 @@ const ItemsPanel: React.FC<Props> = ({ pid, kind }) => {
           />
           <ItemList
             items={items}
+            itemsKey={itemsKey}
+            loading={loading}
             deleteConfirmation={labels.confirmDelete}
             onVote={toggleVote}
             onEdit={editItem}
@@ -75,7 +81,9 @@ const ItemsPanel: React.FC<Props> = ({ pid, kind }) => {
           />
         </div>
       </div>
-      {items?.length === 0 && <div className="board-empty">{labels.empty}</div>}
+      {!loading && items?.length === 0 && (
+        <div className="board-empty">{labels.empty}</div>
+      )}
     </>
   )
 }

@@ -27,6 +27,13 @@
   justify-content: center;
   align-items: center;
   height: var(--space-8);
+  animation: board-loading-appear var(--duration) var(--delay-loading) both;
+}
+
+@keyframes board-loading-appear {
+  from {
+    opacity: 0;
+  }
 }
 
 .board-empty {

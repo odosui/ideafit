@@ -1,5 +1,10 @@
 .item-list {
   margin-top: var(--space-3);
+
+  &--loading {
+    opacity: 0.5;
+    transition: opacity var(--duration) var(--ease) var(--delay-loading);
+  }
 }
 
 .item {
