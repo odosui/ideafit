@@ -2,15 +2,14 @@ import api from '../../api'
 import { useRequireSignIn } from '../../signIn/useRequireSignIn'
 import { Item } from '../../types'
 
-// The server answers with the item, since voting may also change following
-export const useVoteToggle = (onToggled: (item: Item) => void) => {
+export const useFollowToggle = (onToggled: (item: Item) => void) => {
   const requireSignIn = useRequireSignIn()
 
   return (item: Item) =>
     requireSignIn(async () => {
-      const changed = await (item.voted
-        ? api.items.downvote(item.id)
-        : api.items.upvote(item.id))
+      const changed = await (item.subscribed
+        ? api.items.unfollow(item.id)
+        : api.items.follow(item.id))
       if (changed) onToggled(changed)
     })
 }

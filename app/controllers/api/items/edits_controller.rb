@@ -8,6 +8,6 @@ class Api::Items::EditsController < Api::BaseController
     end
 
     item.edit!(title: params[:title], text: params[:text], by: current_user)
-    render json: ItemSerializer.new(item, viewer: current_user, voted: item.votes.exists?(user: current_user))
+    render json: ItemSerializer.new(item, viewer: current_user)
   end
 end

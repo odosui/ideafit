@@ -9,6 +9,7 @@ interface Props {
   loading: boolean
   deleteConfirmation: string
   onVote: (item: Item) => void
+  onFollow: (item: Item) => void
   onEdit: (item: Item, title: string, text: string) => Promise<void>
   onDelete: (item: Item) => void
 }

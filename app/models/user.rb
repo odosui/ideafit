@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :boards, inverse_of: :user, dependent: :destroy
   has_many :items
   has_many :votes, dependent: :destroy
+  has_many :item_subscriptions, class_name: "Item::Subscription", dependent: :delete_all
 
   normalizes :email, with: ->(email) { email.strip.downcase }
   normalizes :name, with: ->(name) { name.strip.presence }

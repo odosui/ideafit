@@ -11,6 +11,7 @@ export interface Item {
   text: string | null
   kind: ItemKind
   voted: boolean
+  subscribed: boolean
   votes: number
   status: ItemStatus
   can_edit: boolean

@@ -12,6 +12,14 @@ class Api::ItemsUpvoteTest < ActionDispatch::IntegrationTest
     assert_equal 1, @item.reload.votes_count
   end
 
+  test "subscribes the voter and returns the item" do
+    sign_in users(:stranger)
+
+    post upvote_api_item_path(@item), as: :json
+
+    assert_equal({ "votes" => 1, "voted" => true, "subscribed" => true }, json.slice("votes", "voted", "subscribed"))
+  end
+
   test "voting twice counts once" do
     sign_in users(:stranger)
 

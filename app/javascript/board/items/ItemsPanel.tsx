@@ -5,6 +5,7 @@ import api from '../api'
 import { useRequireSignIn } from '../signIn/useRequireSignIn'
 import BoardToolbar from '../toolbar/BoardToolbar'
 import { Item } from '../types'
+import { useFollowToggle } from './following/useFollowToggle'
 import NewItemArea from './form/NewItemArea'
 import { labelsForKind } from './kindLabels'
 import ItemList from './list/ItemList'
@@ -27,6 +28,7 @@ const ItemsPanel: React.FC<Props> = ({ pid, kind }) => {
   )
   const requireSignIn = useRequireSignIn()
   const toggleVote = useVoteToggle(replaceItem)
+  const toggleFollow = useFollowToggle(replaceItem)
   const labels = labelsForKind(kind)
 
   const createItem = async (title: string, text: string) => {
@@ -76,6 +78,7 @@ const ItemsPanel: React.FC<Props> = ({ pid, kind }) => {
             loading={loading}
             deleteConfirmation={labels.confirmDelete}
             onVote={toggleVote}
+            onFollow={toggleFollow}
             onEdit={editItem}
             onDelete={deleteItem}
           />

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       end
       scope module: :items do
         resources :edits, only: :create
+        resource :subscription, only: [:create, :destroy]
         resource :history, only: :show, controller: :history
       end
     end

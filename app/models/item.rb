@@ -3,11 +3,11 @@ class Item < ApplicationRecord
   include Searchable
   include StatusHistory
   include EditHistory
+  include Voting
+  include Subscriptions
 
   belongs_to :user # author
   belongs_to :board
-
-  has_many :votes, dependent: :destroy
 
   enum :kind, {
     idea: 'idea',

@@ -15,6 +15,15 @@ class Api::ItemsCreateTest < ActionDispatch::IntegrationTest
     assert_equal({ "title" => "Keyboard shortcuts", "votes" => 1, "voted" => true }, json.slice("title", "votes", "voted"))
   end
 
+  test "subscribes the author" do
+    sign_in users(:stranger)
+
+    create_item
+
+    assert json["subscribed"]
+    assert Item.last.subscriptions.find_by(user: users(:stranger)).source_created?
+  end
+
   test "invalid kind returns 422" do
     sign_in users(:stranger)
 

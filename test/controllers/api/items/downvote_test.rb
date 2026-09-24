@@ -12,6 +12,15 @@ class Api::ItemsDownvoteTest < ActionDispatch::IntegrationTest
     assert_equal 1, @item.reload.votes_count
   end
 
+  test "drops the vote's subscription and returns the item" do
+    sign_in users(:stranger)
+    @item.upvote!(users(:stranger))
+
+    post downvote_api_item_path(@item), as: :json
+
+    assert_equal({ "votes" => 2, "voted" => false, "subscribed" => false }, json.slice("votes", "voted", "subscribed"))
+  end
+
   test "does nothing when the viewer has not voted" do
     sign_in users(:stranger)
 

@@ -8,6 +8,7 @@ interface Props {
   item: Item
   deleteConfirmation: string
   onVote: (item: Item) => void
+  onFollow: (item: Item) => void
   onEdit: (item: Item, title: string, text: string) => Promise<void>
   onDelete: (item: Item) => void
 }
@@ -16,6 +17,7 @@ const ItemCard: React.FC<Props> = ({
   item,
   deleteConfirmation,
   onVote,
+  onFollow,
   onEdit,
   onDelete,
 }) => {
@@ -39,6 +41,7 @@ const ItemCard: React.FC<Props> = ({
           <ItemContent
             item={item}
             deleteConfirmation={deleteConfirmation}
+            onFollow={() => onFollow(item)}
             onEditStart={() => setEditing(true)}
             onDelete={() => onDelete(item)}
           />

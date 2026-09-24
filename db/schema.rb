@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_23_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_24_090000) do
   create_table "boards", force: :cascade do |t|
     t.string "color_scheme", default: "teal", null: false
     t.datetime "created_at", null: false
@@ -42,6 +42,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_23_090000) do
     t.integer "user_id", null: false
     t.index ["item_id"], name: "index_item_status_changes_on_item_id"
     t.index ["user_id"], name: "index_item_status_changes_on_user_id"
+  end
+
+  create_table "item_subscriptions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "item_id", null: false
+    t.string "source", null: false
+    t.datetime "unsubscribed_at"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["item_id", "user_id"], name: "index_item_subscriptions_on_item_id_and_user_id", unique: true
+    t.index ["item_id"], name: "index_item_subscriptions_on_item_id"
+    t.index ["user_id"], name: "index_item_subscriptions_on_user_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -243,6 +255,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_23_090000) do
   add_foreign_key "item_edits", "users"
   add_foreign_key "item_status_changes", "items"
   add_foreign_key "item_status_changes", "users"
+  add_foreign_key "item_subscriptions", "items"
+  add_foreign_key "item_subscriptions", "users"
   add_foreign_key "items", "boards"
   add_foreign_key "items", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

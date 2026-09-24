@@ -25,8 +25,9 @@ class Api::ItemsController < Api::BaseController
       text: params[:text]
     )
 
-    item.votes.create!(user: current_user)
-    render json: ItemSerializer.new(item.reload, viewer: current_user, voted: true)
+    item.auto_subscribe!(current_user, source: :created)
+    item.upvote!(current_user)
+    render json: ItemSerializer.new(item.reload, viewer: current_user)
   end
 
   def update
@@ -36,19 +37,19 @@ class Api::ItemsController < Api::BaseController
     end
 
     item.change_status!(params[:status], by: current_user)
-    render json: ItemSerializer.new(item, viewer: current_user, voted: item.votes.exists?(user: current_user))
+    render json: ItemSerializer.new(item, viewer: current_user)
   end
 
   def upvote
     item = Item.find(params[:id])
-    item.votes.find_or_create_by!(user: current_user)
-    render json: { success: true }
+    item.upvote!(current_user)
+    render json: ItemSerializer.new(item.reload, viewer: current_user)
   end
 
   def downvote
     item = Item.find(params[:id])
-    item.votes.find_by(user: current_user)&.destroy!
-    render json: { success: true }
+    item.downvote!(current_user)
+    render json: ItemSerializer.new(item.reload, viewer: current_user)
   end
 
   def destroy

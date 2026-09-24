@@ -16,10 +16,14 @@ export default {
       title: string,
       text: string,
     ): Promise<Item> => api('post', '/items', { board_pid, kind, title, text }),
-    upvote: (id: number): Promise<void> =>
+    upvote: (id: number): Promise<Item> =>
       api('post', `/items/${id}/upvote`, {}),
-    downvote: (id: number): Promise<void> =>
+    downvote: (id: number): Promise<Item> =>
       api('post', `/items/${id}/downvote`, {}),
+    follow: (id: number): Promise<Item> =>
+      api('post', `/items/${id}/subscription`, {}),
+    unfollow: (id: number): Promise<Item> =>
+      api('DELETE', `/items/${id}/subscription`),
     edit: (id: number, title: string, text: string): Promise<Item | ApiError> =>
       api('post', `/items/${id}/edits`, { title, text }),
     remove: (id: number): Promise<void> => api('DELETE', `/items/${id}`),

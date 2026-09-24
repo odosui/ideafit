@@ -6,6 +6,7 @@ import StatusBadge from './StatusBadge'
 interface Props {
   item: Item
   deleteConfirmation: string
+  onFollow: () => void
   onEditStart: () => void
   onDelete: () => void
 }
