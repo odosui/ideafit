@@ -36,3 +36,7 @@ bundle install && npm install
 bin/rails db:prepare
 bin/dev
 ```
+
+## License
+
+[MIT](LICENSE)

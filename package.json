@@ -1,7 +1,7 @@
 {
   "name": "ideafit",
   "private": true,
-  "license": "AGPL-3.0-only",
+  "license": "MIT",
   "dependencies": {
     "@react-spring/web": "^10.1.2",
     "@types/react": "^19.3.0",
