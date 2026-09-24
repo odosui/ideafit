@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { createOwnedBoard } from './support/ownedBoard'
 import { signIn } from './support/magicLink'
+import { chooseItemAction } from './support/itemMenu'
 
 test('a visitor who votes is asked to sign in', async ({ page }) => {
   const board = createOwnedBoard()
@@ -39,10 +40,10 @@ test('the owner deletes an item from the public board', async ({ page }) => {
   await page.goto(`/b/${board.pid}/ideas`)
 
   page.once('dialog', (dialog) => dialog.accept())
-  await page
-    .locator('.item', { hasText: 'Dark mode' })
-    .getByRole('button', { name: 'Delete' })
-    .click()
+  await chooseItemAction(
+    page.locator('.item', { hasText: 'Dark mode' }),
+    'Delete',
+  )
 
   await expect(page.getByText('Idea successfully deleted!')).toBeVisible()
   await expect(page.locator('.item', { hasText: 'Dark mode' })).toHaveCount(0)

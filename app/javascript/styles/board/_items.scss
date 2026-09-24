@@ -15,7 +15,12 @@
   border-radius: var(--radius-md);
   background-color: var(--color-surface);
   box-shadow: var(--shadow-sm);
-  overflow: hidden;
+
+  // Lift the card whose menu is open above the cards below it
+  &:has(.item-menu__popover) {
+    position: relative;
+    z-index: 1;
+  }
 
   &__body {
     flex: 1;
@@ -45,6 +50,7 @@
 
   &__actions {
     display: flex;
+    align-items: center;
     gap: var(--space-1);
   }
 }
@@ -56,6 +62,7 @@
   justify-content: center;
   width: var(--space-7);
   border-left: 1px solid var(--color-line);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
   color: var(--color-text-muted);
   transition: background-color var(--duration-fast) var(--ease);
 

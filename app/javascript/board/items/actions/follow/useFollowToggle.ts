@@ -1,6 +1,6 @@
-import api from '../../api'
-import { useRequireSignIn } from '../../signIn/useRequireSignIn'
-import { Item } from '../../types'
+import api from '../../../api'
+import { useRequireSignIn } from '../../../signIn/useRequireSignIn'
+import { Item } from '../../../types'
 
 export const useFollowToggle = (onToggled: (item: Item) => void) => {
   const requireSignIn = useRequireSignIn()

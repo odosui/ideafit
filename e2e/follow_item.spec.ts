@@ -10,14 +10,19 @@ test('voting follows the item, and unfollowing keeps the vote', async ({
   await page.goto(`/b/${board.pid}/ideas`)
   const item = page.locator('.item', { hasText: 'Dark mode' })
 
-  await expect(item.getByRole('button', { name: 'Follow' })).toBeVisible()
-  await item.locator('.voter').click()
-  await expect(item.getByRole('button', { name: 'Unfollow' })).toBeVisible()
+  const follow = item.locator('.follow-toggle')
 
-  await item.getByRole('button', { name: 'Unfollow' }).click()
+  await expect(follow).toHaveAttribute('aria-pressed', 'false')
+  await item.locator('.voter').click()
+  await expect(follow).toHaveAttribute('aria-pressed', 'true')
+  await expect(follow).toHaveAccessibleName('Following')
+
+  await follow.hover()
+  await expect(follow).toHaveAccessibleName('Unfollow')
+  await follow.click()
   await page.reload()
 
-  await expect(item.getByRole('button', { name: 'Follow' })).toBeVisible()
+  await expect(follow).toHaveAttribute('aria-pressed', 'false')
   await expect(item.locator('.voter')).toHaveText('1')
 })
 
@@ -27,7 +32,7 @@ test('a visitor who follows is asked to sign in', async ({ page }) => {
 
   await page
     .locator('.item', { hasText: 'Dark mode' })
-    .getByRole('button', { name: 'Follow' })
+    .getByRole('button', { name: 'Follow', exact: true })
     .click()
 
   await expect(

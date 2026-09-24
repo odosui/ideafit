@@ -1,0 +1,181 @@
+.follow-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-0);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease);
+
+  &:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  &__icon {
+    display: inline-flex;
+    transform-origin: 50% 15%;
+
+    &--hover {
+      display: none;
+    }
+  }
+
+  // All labels share one cell, so the pill keeps its width as they swap
+  &__labels {
+    display: grid;
+    justify-items: center;
+  }
+
+  &__label {
+    grid-area: 1 / 1;
+    visibility: hidden;
+  }
+
+  &__label--off {
+    visibility: visible;
+  }
+
+  &--on {
+    color: var(--color-accent);
+    background-color: var(--color-accent-soft);
+    border-color: transparent;
+
+    .follow-toggle__label--off {
+      visibility: hidden;
+    }
+
+    .follow-toggle__label--on {
+      visibility: visible;
+    }
+  }
+
+  &--on:hover {
+    color: var(--color-text-faint);
+    background-color: var(--color-surface-hover);
+    border-color: transparent;
+
+    .follow-toggle__icon {
+      display: none;
+    }
+
+    .follow-toggle__icon--hover {
+      display: inline-flex;
+    }
+
+    .follow-toggle__label--on {
+      visibility: hidden;
+    }
+
+    .follow-toggle__label--hover {
+      visibility: visible;
+    }
+  }
+
+  &--ringing .follow-toggle__icon {
+    animation: bell-ring 700ms var(--ease);
+  }
+}
+
+@keyframes bell-ring {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  15% {
+    transform: rotate(16deg);
+  }
+  30% {
+    transform: rotate(-14deg);
+  }
+  45% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-6deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .follow-toggle--ringing .follow-toggle__icon {
+    animation: none;
+  }
+}
+
+.item-menu {
+  position: relative;
+
+  &__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    color: var(--color-text-faint);
+    transition:
+      background-color var(--duration-fast) var(--ease),
+      color var(--duration-fast) var(--ease);
+
+    &:hover,
+    &[aria-expanded='true'] {
+      color: var(--color-text);
+      background-color: var(--color-surface-hover);
+    }
+  }
+
+  &__popover {
+    position: absolute;
+    top: calc(100% + var(--space-1));
+    right: 0;
+    z-index: var(--layer-overlay);
+    display: flex;
+    flex-direction: column;
+    min-width: 140px;
+    padding: var(--space-1);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+    animation: item-menu-in var(--duration) var(--ease);
+    transform-origin: top right;
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-1);
+    text-align: left;
+    color: var(--color-text-muted);
+
+    &:hover {
+      color: var(--color-text);
+      background-color: var(--color-surface-hover);
+    }
+
+    &--danger,
+    &--danger:hover {
+      color: var(--color-danger);
+    }
+  }
+}
+
+@keyframes item-menu-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}

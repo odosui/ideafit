@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Item } from '../../types'
-import ItemActions from './ItemActions'
+import ItemActions from '../actions/ItemActions'
 import StatusBadge from './StatusBadge'
 
 interface Props {

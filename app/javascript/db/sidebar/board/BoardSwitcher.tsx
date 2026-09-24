@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Board } from '../../types'
 import BoardSwitcherMenu from './BoardSwitcherMenu'
-import { useDismiss } from './useDismiss'
+import { useDismiss } from '../../../shared/hooks/useDismiss'
 
 interface Props {
   current: Board
