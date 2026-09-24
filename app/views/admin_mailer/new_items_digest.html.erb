@@ -1,0 +1,10 @@
+<p>New on your boards since the last digest:</p>
+<ul>
+  <% @items.each do |item| %>
+    <li>
+      <%= link_to item.title, dashboard_item_url(item) %>
+      <span style="color: #888;">· <%= item.kind %> on <%= item.board.name %> by <%= item.user.display_name %></span>
+    </li>
+  <% end %>
+</ul>
+<%= render "mailers/admin_footer" %>

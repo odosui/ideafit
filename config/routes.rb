@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   scope "unsubscribe", module: :unsubscribes, as: :unsubscribe do
     resource :item, path: "item/:token", only: [:show, :create]
     resource :all, path: "all/:token", only: [:show, :create], controller: :emails
+    resource :new_items, path: "new_items/:token", only: [:show, :create]
   end
 
   namespace :api do

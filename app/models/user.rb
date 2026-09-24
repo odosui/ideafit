@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include Workspaces
   include AdminGrant
   include EmailUpdates
+  include NewItemEmails
 
   devise :rememberable
 

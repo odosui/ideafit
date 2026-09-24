@@ -1,0 +1,7 @@
+<% content_for :title, "Unsubscribe" %>
+<h1>Stop new-item emails?</h1>
+<p>You won't hear about new items posted on your boards. You can switch to a daily digest in settings instead.</p>
+<%= button_to "Unsubscribe", unsubscribe_new_items_path(params[:token]), class: "btn btn--primary btn--block" %>
+<div class="auth-footer">
+  <%= link_to "Go to settings", db_settings_path %>
+</div>

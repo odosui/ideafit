@@ -24,6 +24,12 @@ class Api::ItemsCreateTest < ActionDispatch::IntegrationTest
     assert Item.last.subscriptions.find_by(user: users(:stranger)).source_created?
   end
 
+  test "tells the workspace admins" do
+    sign_in users(:stranger)
+
+    assert_enqueued_with(job: Item::NewItemNotificationJob) { create_item }
+  end
+
   test "invalid kind returns 422" do
     sign_in users(:stranger)
 

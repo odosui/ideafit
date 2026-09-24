@@ -41,3 +41,13 @@ en:
         in_progress: "The team has started working on it."
         done: "It's done and available now. Thanks for the feedback!"
         rejected: "The team decided not to do it for now."
+  admin_mailer:
+    new_item:
+      subject:
+        idea: "New idea on %{board}: “%{title}”"
+        bug: "New bug on %{board}: “%{title}”"
+        question: "New question on %{board}: “%{title}”"
+    new_items_digest:
+      subject:
+        one: "1 new item on your boards"
+        other: "%{count} new items on your boards"

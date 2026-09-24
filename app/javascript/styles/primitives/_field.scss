@@ -39,3 +39,23 @@
     display: block;
   }
 }
+
+fieldset.field {
+  border: 0;
+  padding: 0;
+  margin: 0;
+
+  legend {
+    padding: 0;
+    margin-bottom: var(--space-1);
+  }
+
+  .field--check {
+    display: flex;
+    font-weight: 400;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}

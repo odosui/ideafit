@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_24_110000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_24_120000) do
   create_table "boards", force: :cascade do |t|
     t.string "color_scheme", default: "teal", null: false
     t.datetime "created_at", null: false
@@ -219,6 +219,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_24_110000) do
     t.boolean "email_updates", default: true, null: false
     t.datetime "magic_link_used_at"
     t.string "name"
+    t.string "new_item_emails", default: "instant", null: false
+    t.datetime "new_items_digested_at"
     t.datetime "remember_created_at", precision: nil
     t.string "remember_token"
     t.datetime "updated_at", null: false

@@ -1,0 +1,7 @@
+<p><%= @item.user.display_name %> posted a new <%= @item.kind %> on <strong><%= @item.board.name %></strong>:</p>
+<p><strong><%= @item.title %></strong></p>
+<% if @item.text.present? %>
+  <p style="white-space: pre-line;"><%= truncate(@item.text, length: 500) %></p>
+<% end %>
+<p><%= link_to "Open in the dashboard", dashboard_item_url(@item) %></p>
+<%= render "mailers/admin_footer" %>

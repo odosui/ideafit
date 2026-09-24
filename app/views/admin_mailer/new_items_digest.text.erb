@@ -1,0 +1,8 @@
+New on your boards since the last digest:
+<% @items.each do |item| %>
+
+- <%= item.title %> (<%= item.kind %> on <%= item.board.name %> by <%= item.user.display_name %>)
+  <%= dashboard_item_url(item) %>
+<% end %>
+
+<%= render "mailers/admin_footer" %>

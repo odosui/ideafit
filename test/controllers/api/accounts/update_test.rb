@@ -21,6 +21,22 @@ class Api::AccountsUpdateTest < ActionDispatch::IntegrationTest
     assert_not users(:author).reload.email_updates
   end
 
+  test "sets how often an admin hears about new items" do
+    sign_in users(:board_owner)
+
+    patch api_account_path, params: { new_item_emails: "daily" }, as: :json
+
+    assert_equal "daily", json["new_item_emails"]
+  end
+
+  test "an unknown new item email option returns 422" do
+    sign_in users(:board_owner)
+
+    patch api_account_path, params: { new_item_emails: "hourly" }, as: :json
+
+    assert_response :unprocessable_content
+  end
+
   test "does not change the email" do
     sign_in users(:author)
 

@@ -1,30 +1,30 @@
 import * as React from 'react'
 import api from '../api'
 import { useCurrentUser } from './CurrentUserContext'
+import { AccountChanges, changesFrom } from './accountChanges'
 import EmailUpdatesField from './EmailUpdatesField'
+import NewItemEmailsField from './NewItemEmailsField'
 
 type Status = 'idle' | 'saving' | 'saved' | 'error'
 
 const AccountPage: React.FC = () => {
   const { user, setUser } = useCurrentUser()
-  const [name, setName] = React.useState(user?.name ?? '')
-  const [emailUpdates, setEmailUpdates] = React.useState(
-    user?.email_updates ?? true,
-  )
+  const [changes, setChanges] = React.useState(changesFrom(user))
   const [status, setStatus] = React.useState<Status>('idle')
+
+  const change = (fields: Partial<AccountChanges>) => {
+    setChanges((prev) => ({ ...prev, ...fields }))
+    setStatus('idle')
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('saving')
     try {
-      const saved = await api.account.update({
-        name,
-        email_updates: emailUpdates,
-      })
+      const saved = await api.account.update(changes)
       if (!saved?.email) throw new Error('not saved')
       setUser(saved)
-      setName(saved.name ?? '')
-      setEmailUpdates(saved.email_updates)
+      setChanges(changesFrom(saved))
       setStatus('saved')
     } catch {
       setStatus('error')
@@ -42,13 +42,10 @@ const AccountPage: React.FC = () => {
         <input
           className="input"
           type="text"
-          value={name}
+          value={changes.name}
           maxLength={50}
           placeholder="How others see you"
-          onChange={(e) => {
-            setName(e.target.value)
-            setStatus('idle')
-          }}
+          onChange={(e) => change({ name: e.target.value })}
         />
       </label>
 
@@ -63,12 +60,17 @@ const AccountPage: React.FC = () => {
       </label>
 
       <EmailUpdatesField
-        checked={emailUpdates}
-        onChange={(checked) => {
-          setEmailUpdates(checked)
-          setStatus('idle')
-        }}
+        checked={changes.email_updates}
+        onChange={(checked) => change({ email_updates: checked })}
       />
+
+      {user?.admin && (
+        <NewItemEmailsField
+          value={changes.new_item_emails}
+          disabled={!changes.email_updates}
+          onChange={(value) => change({ new_item_emails: value })}
+        />
+      )}
 
       <div className="settings-form__actions">
         <button

@@ -49,3 +49,16 @@ test('a user turns email updates off in settings', async ({ page }) => {
   await page.reload()
   await expect(emailUpdates).not.toBeChecked()
 })
+
+test('an admin picks a daily digest for new items', async ({ page }) => {
+  const board = createOwnedBoard()
+  await signIn(page, board.email)
+  await page.goto('/db/settings')
+
+  await page.getByRole('radio', { name: 'Daily digest' }).check()
+  await page.getByRole('button', { name: 'Save' }).click()
+  await expect(page.getByText('Saved')).toBeVisible()
+
+  await page.reload()
+  await expect(page.getByRole('radio', { name: 'Daily digest' })).toBeChecked()
+})

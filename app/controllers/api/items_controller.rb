@@ -18,15 +18,13 @@ class Api::ItemsController < Api::BaseController
 
   def create
     board = Board.find_by_pid!(params[:board_pid])
-    item = board.items.create!(
-      user: current_user,
+    item = board.items.post!(
+      by: current_user,
       kind: params[:kind],
       title: params[:title],
       text: params[:text]
     )
 
-    item.auto_subscribe!(current_user, source: :created)
-    item.upvote!(current_user)
     render json: ItemSerializer.new(item.reload, viewer: current_user)
   end
 
