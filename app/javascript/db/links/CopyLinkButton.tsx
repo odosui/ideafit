@@ -1,5 +1,5 @@
 import * as React from 'react'
-import copyToClipboard from '../../shared/copyToClipboard'
+import useCopied from './useCopied'
 
 interface Props {
   url: string
@@ -7,28 +7,15 @@ interface Props {
   showLabel?: boolean
 }
 
-const COPIED_FEEDBACK_MS = 2000
-
 const CopyLinkButton: React.FC<Props> = ({ url, className, showLabel }) => {
-  const [copied, setCopied] = React.useState(false)
-
-  React.useEffect(() => {
-    if (!copied) return
-    const timer = window.setTimeout(() => setCopied(false), COPIED_FEEDBACK_MS)
-    return () => window.clearTimeout(timer)
-  }, [copied])
-
-  const handleClick = async () => {
-    setCopied(await copyToClipboard(url))
-  }
-
+  const { copied, copy } = useCopied(url)
   const label = copied ? 'Link copied' : 'Copy public link'
 
   return (
     <button
       type="button"
       className={className}
-      onClick={handleClick}
+      onClick={copy}
       title={label}
       aria-label={label}
     >
