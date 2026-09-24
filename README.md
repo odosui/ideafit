@@ -6,6 +6,22 @@
 
 A self-hosted feedback board. Collect ideas, bugs and questions from your users, let them vote, and track what's in progress. Share a public board link or embed it on your site.
 
+![A public Ideafit board with ideas, votes and statuses](media/screenshots/public-board.png)
+
+## What you get
+
+**Voting that closes the loop.** People vote on ideas, bugs and questions. Voting or posting follows the item, and followers get an email when its status changes.
+
+<p align="center">
+  <img src="media/screenshots/voting.gif" alt="Voting on an idea follows it; the Follow button toggles email updates" width="600">
+</p>
+
+**A dashboard for triage.** Search, filter and sort everything posted, set statuses, and see each item's history. Admins get new items by email, right away or as a daily digest.
+
+![The admin dashboard listing items with votes, authors and statuses](media/screenshots/dashboard.png)
+
+![An item's history: created, edited, moved to In progress](media/screenshots/item.png)
+
 ## Run it
 
 ```sh
@@ -23,6 +39,10 @@ Sign-in is by email link. Without SMTP settings, the link is printed to `docker 
 The first person to sign in becomes the admin. Admins share and manage all boards; everyone else posts and votes on boards shared with them. To add more admins, list their emails in `ADMIN_EMAILS`.
 
 ## Embed
+
+Drop the board into your own site as a pop-up:
+
+![The board opened as a pop-up on a product website](media/screenshots/embed.png)
 
 ```html
 <script id="ideafit" src="https://your-ideafit-host/embed.js" data-board="BOARD_ID"></script>
