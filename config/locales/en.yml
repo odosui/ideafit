@@ -29,3 +29,15 @@
 
 en:
   hello: "Hello world"
+  item_update_mailer:
+    status_changed:
+      subject:
+        planned: "“%{title}” is planned"
+        in_progress: "Work has started on “%{title}”"
+        done: "“%{title}” has shipped"
+        rejected: "“%{title}” was declined"
+      message:
+        planned: "Good news: it's on the roadmap."
+        in_progress: "The team has started working on it."
+        done: "It's done and available now. Thanks for the feedback!"
+        rejected: "The team decided not to do it for now."

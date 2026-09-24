@@ -8,7 +8,7 @@ module Item::StatusHistory
   def change_status!(new_status, by:)
     transaction do
       update!(status: new_status)
-      status_changes.create!(user: by, status:) if saved_change_to_status?
+      notify_status_change_later(status_changes.create!(user: by, status:)) if saved_change_to_status?
     end
   end
 

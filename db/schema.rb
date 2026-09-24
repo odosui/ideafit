@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_24_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_24_110000) do
   create_table "boards", force: :cascade do |t|
     t.string "color_scheme", default: "teal", null: false
     t.datetime "created_at", null: false
@@ -60,6 +60,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_24_100000) do
     t.integer "board_id", null: false
     t.datetime "created_at", null: false
     t.string "kind"
+    t.string "notified_status"
     t.string "status", default: "fresh"
     t.string "text"
     t.string "title"

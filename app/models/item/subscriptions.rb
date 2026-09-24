@@ -11,6 +11,10 @@ module Item::Subscriptions
     User.where(id: subscriptions.active.select(:user_id))
   end
 
+  def emailed_subscriptions(except:)
+    subscriptions.active.where.not(user: except).joins(:user).merge(User.with_email_updates).includes(:user)
+  end
+
   def subscribed?(user)
     user.present? && subscriptions.active.exists?(user:)
   end

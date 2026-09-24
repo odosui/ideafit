@@ -1,0 +1,7 @@
+<%= @item.title %> on <%= @item.board.name %>
+
+<%= t(".message.#{@status}") %>
+
+See it on the board: <%= @item_url %>
+
+<%= render "mailers/unsubscribe_footer" %>

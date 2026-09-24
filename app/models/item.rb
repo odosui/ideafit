@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   include EditHistory
   include Voting
   include Subscriptions
+  include StatusNotifications
 
   belongs_to :user # author
   belongs_to :board
