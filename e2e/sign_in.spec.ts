@@ -17,8 +17,9 @@ test('a visitor signs in from the board with a magic link', async ({
   await page.getByRole('button', { name: 'Add Idea' }).click()
   await page.getByLabel('Your Email').fill(email)
   await page.getByRole('button', { name: 'Email me a sign-in link' }).click()
+  // E2E runs without SMTP, so the link goes to the server logs
   await expect(
-    page.getByRole('heading', { name: 'Check your email' }),
+    page.getByRole('heading', { name: 'Find your link in the server logs' }),
   ).toBeVisible()
 
   await page.goto(magicLinkFor(email, boardPath))

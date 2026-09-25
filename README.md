@@ -4,6 +4,9 @@
 
 # Ideafit
 
+[![CI](https://github.com/odosui/ideafit/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/odosui/ideafit/actions/workflows/ci.yml)
+[![Docker image](https://img.shields.io/docker/v/hiquest/ideafit?sort=semver&label=docker)](https://hub.docker.com/r/hiquest/ideafit)
+
 **Self-hosted open-source feedback boards for your websites.**
 
 Ideafit gives your users one place to suggest ideas, report bugs and ask questions, and to vote on what matters most to them. You triage it all from a simple dashboard, and when something ships, everyone who asked for it gets an email. It runs as a single Docker container with a SQLite file, so there's no database server to manage.
@@ -56,6 +59,14 @@ Every item keeps its history:
 ![An item's history: created, edited, moved to In progress](media/screenshots/item.png)
 
 ## Run it
+
+### One click on Railway
+
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/ideafit)
+
+Once it's up, open your service's domain and sign in: the first person to sign in becomes the admin. Until you add SMTP settings, your sign-in link is in the service's Deploy Logs (search for `sign_in`).
+
+### With Docker
 
 ```sh
 docker run -d --name ideafit -p 3000:80 -v ideafit:/rails/storage hiquest/ideafit
