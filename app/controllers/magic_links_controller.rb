@@ -22,7 +22,7 @@ class MagicLinksController < ApplicationController
     end
 
     MagicLinkMailer.sign_in_link(user, return_to: return_to_param).deliver_later
-    render :sent
+    render Deliveries::LogDelivery.active? ? :sent_to_logs : :sent
   end
 
   def show

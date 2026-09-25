@@ -21,6 +21,16 @@ class MagicLinksCreateTest < ActionDispatch::IntegrationTest
     assert_select "h1", "Check your email"
   end
 
+  test "points to the server logs when email isn't set up" do
+    ActionMailer::Base.delivery_method = :log
+
+    post magic_links_path, params: { email: "author@example.com" }
+
+    assert_select "h1", "Find your link in the server logs"
+  ensure
+    ActionMailer::Base.delivery_method = :test
+  end
+
   test "passes a local return_to into the link" do
     assert_enqueued_email_with MagicLinkMailer, :sign_in_link,
       args: [users(:author), { return_to: "/b/roadmap0pid/ideas" }] do

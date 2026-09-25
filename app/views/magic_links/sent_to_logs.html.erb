@@ -1,0 +1,18 @@
+<div class="auth-card__icon">📜</div>
+<h1>Find your link in the server logs</h1>
+<p>
+  This server can't send email yet, so the sign-in link for
+  <strong><%= params[:email] %></strong> was written to its logs.
+  It works once and expires in 15 minutes.
+</p>
+<p>
+  <strong>Railway:</strong> open the service, then <em>Deploy Logs</em>, and search for <code>sign_in</code>.<br>
+  <strong>Docker:</strong> run <code>docker logs ideafit</code>.
+</p>
+<p>
+  To email links instead, set <code>SMTP_ADDRESS</code> and the other SMTP settings.
+  Not running this server? Ask whoever does to set up email.
+</p>
+<div class="auth-footer">
+  <%= link_to "Use a different email", new_user_session_path(return_to: params[:return_to]) %>
+</div>
