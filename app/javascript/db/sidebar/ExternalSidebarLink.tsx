@@ -9,7 +9,7 @@ interface Props {
 const ExternalSidebarLink: React.FC<Props> = ({ href, icon, label }) => (
   <a
     href={href}
-    className="db-sidebar__item db-sidebar__item--external"
+    className="db-sidebar__item"
     target="_blank"
     rel="noopener noreferrer"
   >
