@@ -22,3 +22,18 @@ test('the bugs tab speaks about bugs and adds bugs', async ({ page }) => {
   await expect(page.getByText('Dark mode')).toBeVisible()
   await expect(page.getByText('Save button does nothing')).toBeHidden()
 })
+
+test('an empty filter says what is missing', async ({ page }) => {
+  const board = createOwnedBoard()
+  await signIn(page, board.email)
+  await page.goto(`/b/${board.pid}/questions`)
+
+  await page.getByRole('tab', { name: 'Done' }).click()
+  await expect(page.getByText('No questions are done yet.')).toBeVisible()
+
+  await page.getByRole('tab', { name: 'Rejected' }).click()
+  await expect(page.getByText('No rejected questions.')).toBeVisible()
+
+  await page.getByRole('tab', { name: 'All' }).click()
+  await expect(page.getByText('Be the first to add a question!')).toBeVisible()
+})

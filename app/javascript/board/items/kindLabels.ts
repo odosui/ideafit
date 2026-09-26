@@ -1,6 +1,7 @@
 import { ItemKind } from '../../shared/items/itemKind'
 
 interface KindLabels {
+  plural: string
   addButton: string
   empty: string
   added: string
@@ -14,6 +15,7 @@ const labelsFor = (
   article: string,
   emoji: string,
 ): KindLabels => ({
+  plural: `${noun.toLowerCase()}s`,
   addButton: `Add ${noun}`,
   empty: `Be the first to add ${article} ${noun.toLowerCase()}! ${emoji}`,
   added: `${noun} added! 🍕`,

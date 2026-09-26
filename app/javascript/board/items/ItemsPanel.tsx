@@ -6,6 +6,7 @@ import { useRequireSignIn } from '../signIn/useRequireSignIn'
 import BoardToolbar from '../toolbar/BoardToolbar'
 import { Item } from '../types'
 import { useFollowToggle } from './actions/follow/useFollowToggle'
+import { emptyMessage } from './empty/emptyMessage'
 import NewItemArea from './form/NewItemArea'
 import { labelsForKind } from './kindLabels'
 import ItemList from './list/ItemList'
@@ -85,7 +86,7 @@ const ItemsPanel: React.FC<Props> = ({ pid, kind }) => {
         </div>
       </div>
       {!loading && items?.length === 0 && (
-        <div className="board-empty">{labels.empty}</div>
+        <div className="board-empty">{emptyMessage(kind, filter)}</div>
       )}
     </>
   )
