@@ -18,30 +18,21 @@ Ideafit gives your users one place to suggest ideas, report bugs and ask questio
 **For your users**
 
 - Post ideas, bugs and questions, each in its own tab
-- Vote on what matters, and see what's planned, in progress and done
+- Vote, and see what's planned, in progress and done
 - Follow items to get an email when their status changes. Posting or voting follows automatically.
-- Sign in with an email link. No passwords.
-- Unsubscribe from any email in one click, without signing in
 
 **For your team**
 
 - A dashboard to search, filter and sort everything posted
 - A Kanban board: drag items between statuses
-- Simple, privacy-friendly analytics: totals, weekly activity, most voted items
 - Statuses: New, Planned, In progress, Ready to ship, Shipped, Declined. Declined items drop off the public board.
+- Simple, privacy-friendly analytics: totals, weekly activity, most voted items
 - A history for every item: who created it, edited it and changed its status
 - Email when something new is posted, right away or as a daily digest
 - As many boards as you need, each with its own description and color scheme
-
-**For your site**
-
 - A public link for every board
 - Embed a board on your own site as a pop-up with one script tag
-
-**For whoever runs it**
-
 - One Docker container and one volume. Back up the volume and you've backed up everything.
-- Works without email setup: sign-in links go to the logs until you add SMTP
 - MIT licensed
 
 ## A quick tour
