@@ -39,3 +39,5 @@ end
 group :development do
   gem "web-console"
 end
+
+gem "csv", "~> 3.3"

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   include AdminGrant
   include EmailUpdates
   include NewItemEmails
+  include Searchable
 
   devise :rememberable
 

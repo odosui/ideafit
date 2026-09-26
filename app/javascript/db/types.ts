@@ -12,6 +12,15 @@ export interface BoardItem {
   created_at: string
 }
 
+export interface BoardParticipant {
+  id: number
+  name: string | null
+  email: string
+  items: number
+  votes: number
+  last_active_at: string
+}
+
 interface HistoryEventBase {
   id: number
   by: string

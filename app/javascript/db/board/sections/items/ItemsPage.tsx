@@ -18,7 +18,7 @@ const ItemsPage: React.FC<Props> = ({ board }) => {
 
   return (
     <section className="items-page">
-      <ItemsToolbar query={query} onChange={changeQuery} />
+      <ItemsToolbar pid={board.pid} query={query} onChange={changeQuery} />
       <ItemsResult pid={board.pid} items={items} onChanged={replaceItem} />
     </section>
   )

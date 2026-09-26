@@ -1,19 +1,22 @@
 import * as React from 'react'
+import ExportCsvLink from '../export/ExportCsvLink'
 import { ITEM_KINDS } from '../options/itemKinds'
 import { ITEM_SORTS } from '../options/itemSorts'
 import { ITEM_STATUSES } from '../options/itemStatuses'
 import { ItemQuery } from '../query/itemQuery'
 import FilterSelect from './FilterSelect'
+import ToolbarMenu from './menu/ToolbarMenu'
 import SearchField from './SearchField'
 
 interface Props {
+  pid: string
   query: ItemQuery
   onChange: (changes: Partial<ItemQuery>) => void
 }
 
 const ALL = { value: '' as const, label: 'All' }
 
-const ItemsToolbar: React.FC<Props> = ({ query, onChange }) => (
+const ItemsToolbar: React.FC<Props> = ({ pid, query, onChange }) => (
   <div className="items-toolbar">
     <SearchField value={query.q} onChange={(q) => onChange({ q })} />
     <FilterSelect
@@ -34,6 +37,9 @@ const ItemsToolbar: React.FC<Props> = ({ query, onChange }) => (
       options={ITEM_SORTS}
       onChange={(sort) => onChange({ sort })}
     />
+    <ToolbarMenu>
+      {(close) => <ExportCsvLink pid={pid} query={query} onDone={close} />}
+    </ToolbarMenu>
   </div>
 )
 

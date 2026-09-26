@@ -29,6 +29,18 @@
 
 en:
   hello: "Hello world"
+  items:
+    kinds:
+      idea: "Idea"
+      bug: "Bug"
+      question: "Question"
+    statuses:
+      fresh: "New"
+      planned: "Planned"
+      in_progress: "In progress"
+      ready: "Ready to ship"
+      done: "Shipped"
+      rejected: "Declined"
   item_update_mailer:
     status_changed:
       subject:

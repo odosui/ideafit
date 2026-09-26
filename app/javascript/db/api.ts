@@ -3,8 +3,15 @@ import { CurrentUser } from '../shared/currentUser'
 import { AccountChanges } from './account/accountChanges'
 import { BoardAnalytics } from './board/sections/analytics/query/boardAnalytics'
 import { ItemQuery } from './board/sections/items/query/itemQuery'
+import { ParticipantQuery } from './board/sections/participants/query/participantQuery'
 import { ItemStatus } from '../shared/items/itemStatus'
-import { Board, BoardChanges, BoardItem, HistoryEvent } from './types'
+import {
+  Board,
+  BoardChanges,
+  BoardItem,
+  BoardParticipant,
+  HistoryEvent,
+} from './types'
 
 export default {
   boards: {
@@ -26,6 +33,10 @@ export default {
       api('PATCH', `/items/${id}`, { status }),
     history: (id: number): Promise<HistoryEvent[]> =>
       api('get', `/items/${id}/history`),
+  },
+  participants: {
+    list: (pid: string, query: ParticipantQuery): Promise<BoardParticipant[]> =>
+      api('get', `/boards/${pid}/participants`, query),
   },
   analytics: {
     show: (pid: string): Promise<BoardAnalytics> =>
