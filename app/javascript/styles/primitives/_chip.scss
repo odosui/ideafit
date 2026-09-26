@@ -27,6 +27,10 @@
     --tone: var(--color-warning);
   }
 
+  &--info {
+    --tone: var(--color-info);
+  }
+
   &--success {
     --tone: var(--color-success);
   }

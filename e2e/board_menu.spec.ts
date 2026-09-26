@@ -10,7 +10,7 @@ test('the owner switches board sections from the sidebar', async ({ page }) => {
   const sections = page.getByRole('navigation', { name: 'Board sections' })
   await sections.getByRole('link', { name: 'Kanban' }).click()
   await expect(page).toHaveURL(new RegExp(`/db/boards/${board.pid}/kanban$`))
-  await expect(page.getByText('This section is coming soon.')).toBeVisible()
+  await expect(page.getByRole('region', { name: 'Planned' })).toBeVisible()
 
   await sections.getByRole('link', { name: 'Settings' }).click()
   await expect(page.getByLabel('Name')).toBeVisible()

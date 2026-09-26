@@ -4,6 +4,7 @@ class Board < ApplicationRecord
   belongs_to :workspace
   belongs_to :user # creator
   has_many :items, inverse_of: :board, dependent: :destroy
+  has_many :votes, through: :items
 
   normalizes :description, with: ->(description) { description.strip.presence }
 

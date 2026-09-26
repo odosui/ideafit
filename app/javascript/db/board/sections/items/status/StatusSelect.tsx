@@ -1,11 +1,10 @@
 import * as React from 'react'
 import Chip from '../../../../../shared/Chip'
 import StackedLabels from '../../../../../shared/StackedLabels'
-import showToast from '../../../../../shared/toaster'
-import api from '../../../../api'
 import { BoardItem } from '../../../../types'
 import { ItemStatus, toneOf } from '../../../../../shared/items/itemStatus'
 import { ITEM_STATUSES, labelOfStatus } from '../options/itemStatuses'
+import { changeStatus } from './changeStatus'
 
 const STATUS_LABELS = ITEM_STATUSES.map((option) => option.label)
 
@@ -19,13 +18,9 @@ const StatusSelect: React.FC<Props> = ({ item, onChanged }) => {
 
   const handleChange = async (status: ItemStatus) => {
     setSaving(true)
-    const saved = await api.items.setStatus(item.id, status).catch(() => null)
+    const changed = await changeStatus(item, status)
     setSaving(false)
-    if (!saved?.status)
-      return showToast("Couldn't change the status. Please try again.", 'error')
-
-    onChanged({ ...item, status: saved.status })
-    showToast(`Status changed to ${labelOfStatus(saved.status)}`)
+    if (changed) onChanged(changed)
   }
 
   return (

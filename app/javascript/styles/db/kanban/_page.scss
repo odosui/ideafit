@@ -1,0 +1,20 @@
+@use '../../foundation' as *;
+
+.kanban-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  height: calc(100vh - #{$app-header-height} - 2 * var(--space-6));
+  min-height: 24rem;
+}
+
+.kanban-board {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(6, minmax(10rem, 1fr));
+  min-height: 0;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-muted);
+  overflow-x: auto;
+}

@@ -24,6 +24,13 @@ class ItemTest < ActiveSupport::TestCase
     assert_includes Item.with_progress("open"), items(:export_csv)
   end
 
+  test "with_progress counts items ready to ship as open" do
+    items(:export_csv).ready!
+
+    assert_includes Item.with_progress("open"), items(:export_csv)
+    assert_not_includes Item.with_progress("done"), items(:export_csv)
+  end
+
   test "with_status filters by status unless blank" do
     assert_equal [items(:spam)], Item.with_status("rejected").to_a
     assert_equal Item.count, Item.with_status(nil).count

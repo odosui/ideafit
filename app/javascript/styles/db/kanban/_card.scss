@@ -1,0 +1,86 @@
+.kanban-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+  transition:
+    box-shadow var(--duration-fast) var(--ease),
+    opacity var(--duration-fast) var(--ease);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  &--dragging {
+    opacity: 0.4;
+  }
+
+  &__move {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    margin-left: auto;
+    align-items: center;
+    justify-content: center;
+    width: var(--space-4);
+    height: var(--space-4);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-faint);
+    transition: background-color var(--duration-fast) var(--ease);
+
+    &:hover {
+      background-color: var(--color-surface-hover);
+      color: var(--color-text);
+    }
+
+    &:focus-within {
+      box-shadow: var(--shadow-focus);
+    }
+  }
+
+  &__title {
+    font-weight: 600;
+    color: var(--color-text);
+    overflow-wrap: break-word;
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-1);
+    color: var(--color-text-faint);
+  }
+
+  &__kind,
+  &__votes {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  &__kind-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  &__votes {
+    font-variant-numeric: tabular-nums;
+
+    i {
+      font-size: 0.75em;
+    }
+  }
+}

@@ -26,7 +26,9 @@ Ideafit gives your users one place to suggest ideas, report bugs and ask questio
 **For your team**
 
 - A dashboard to search, filter and sort everything posted
-- Statuses: New, Planned, In progress, Shipped, Declined. Declined items drop off the public board.
+- A Kanban board: drag items between statuses
+- Simple, privacy-friendly analytics: totals, weekly activity, most voted items
+- Statuses: New, Planned, In progress, Ready to ship, Shipped, Declined. Declined items drop off the public board.
 - A history for every item: who created it, edited it and changed its status
 - Email when something new is posted, right away or as a daily digest
 - As many boards as you need, each with its own description and color scheme
@@ -53,6 +55,14 @@ Voting on an item follows it, and the Follow button toggles email updates:
 The admin dashboard, sorted by votes:
 
 ![The admin dashboard listing items with votes, authors and statuses](media/screenshots/dashboard.png)
+
+Drag items across a Kanban board as work moves along:
+
+![A Kanban board with columns for New, Planned, In progress, Ready to ship, Shipped and Declined](media/screenshots/kanban.png)
+
+Analytics counted from the items and votes you already have. No visitor tracking, no cookies:
+
+![Board analytics: totals, new items and votes per week, items by status and kind, most voted items](media/screenshots/analytics.png)
 
 Every item keeps its history:
 

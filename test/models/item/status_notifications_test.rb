@@ -54,6 +54,12 @@ class Item::StatusNotificationsTest < ActiveSupport::TestCase
     assert_enqueued_emails 2
   end
 
+  test "ready to ship sends nothing, followers hear once it ships" do
+    change_and_notify("ready", from: "in_progress")
+
+    assert_enqueued_emails 0
+  end
+
   test "moving back to new sends nothing" do
     change_and_notify("fresh", from: "planned")
 

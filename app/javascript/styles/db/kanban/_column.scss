@@ -1,0 +1,38 @@
+.kanban-column {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-left: 1px solid var(--color-line);
+  transition: background-color var(--duration-fast) var(--ease);
+
+  &:first-child {
+    border-left: none;
+  }
+
+  &--over {
+    background-color: var(--color-accent-soft);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  &__count {
+    font-size: var(--text-1);
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-faint);
+  }
+
+  &__cards {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    overflow-y: auto;
+  }
+}

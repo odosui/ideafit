@@ -5,6 +5,7 @@ import { ItemStatus, toneOf } from '../../../shared/items/itemStatus'
 const PUBLIC_LABELS: Partial<Record<ItemStatus, string>> = {
   planned: 'Planned',
   in_progress: 'Work in progress',
+  ready: 'Ready to ship',
   done: 'Done',
   rejected: 'Rejected',
 }

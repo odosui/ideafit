@@ -1,6 +1,7 @@
 import { api } from '../shared/api'
 import { CurrentUser } from '../shared/currentUser'
 import { AccountChanges } from './account/accountChanges'
+import { BoardAnalytics } from './board/sections/analytics/query/boardAnalytics'
 import { ItemQuery } from './board/sections/items/query/itemQuery'
 import { ItemStatus } from '../shared/items/itemStatus'
 import { Board, BoardChanges, BoardItem, HistoryEvent } from './types'
@@ -25,6 +26,10 @@ export default {
       api('PATCH', `/items/${id}`, { status }),
     history: (id: number): Promise<HistoryEvent[]> =>
       api('get', `/items/${id}/history`),
+  },
+  analytics: {
+    show: (pid: string): Promise<BoardAnalytics> =>
+      api('get', `/boards/${pid}/analytics`),
   },
   account: {
     update: (changes: AccountChanges): Promise<CurrentUser> =>

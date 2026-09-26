@@ -21,6 +21,7 @@ class Item < ApplicationRecord
     fresh: "fresh",
     planned: "planned",
     in_progress: "in_progress",
+    ready: "ready",
     done: "done",
     rejected: 'rejected'
   }, validate: true
@@ -33,7 +34,7 @@ class Item < ApplicationRecord
   scope :with_progress, ->(filter) {
     case filter
     when 'done' then done
-    when 'open' then where(status: %w[fresh planned in_progress])
+    when 'open' then where(status: %w[fresh planned in_progress ready])
     when 'rejected' then rejected
     else not_rejected
     end

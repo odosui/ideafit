@@ -42,6 +42,15 @@ class Api::ItemsUpdateTest < ActionDispatch::IntegrationTest
     assert @item.reload.planned?
   end
 
+  test "board owner marks an item ready to ship" do
+    sign_in users(:board_owner)
+
+    patch api_item_path(@item), params: { status: "ready" }, as: :json
+
+    assert_response :success
+    assert @item.reload.ready?
+  end
+
   test "author cannot change the status" do
     sign_in users(:author)
 
