@@ -14,4 +14,10 @@
   h1 {
     text-align: center;
   }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
 }

@@ -7,6 +7,7 @@
 
 .board-layout {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-5);
   max-width: $unit16 + $unit7;
   margin: var(--space-5) auto;

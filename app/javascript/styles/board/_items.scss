@@ -33,16 +33,19 @@
     font-family: var(--font-body);
     font-size: var(--text-4);
     font-weight: 600;
+    overflow-wrap: anywhere;
   }
 
   &__text {
     margin-bottom: var(--space-3);
     color: var(--color-text-muted);
     white-space: pre-line;
+    overflow-wrap: anywhere;
   }
 
   &__footer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-2);
@@ -51,6 +54,7 @@
   &__actions {
     display: flex;
     align-items: center;
+    margin-left: auto;
     gap: var(--space-1);
   }
 }

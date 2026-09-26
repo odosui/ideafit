@@ -12,7 +12,7 @@ const SignInModal: React.FC<Props> = ({ open, onClose }) => (
   <GenericModal isOpen={open} onRequestClose={onClose} title="">
     <div className="login-form">
       <h1>Sign in to post and vote</h1>
-      <form className="login-form" method="POST" action="/sign_in">
+      <form className="login-form__fields" method="POST" action="/sign_in">
         <label className="field">
           Your Email
           <input

@@ -9,8 +9,10 @@
 
 .modal {
   position: fixed;
-  inset: var(--space-3);
+  inset: var(--space-6) var(--space-3) auto;
   z-index: var(--layer-modal);
+  max-height: calc(100% - 2 * var(--space-6));
+  overflow-y: auto;
   border-radius: var(--radius-lg);
   background-color: var(--color-surface);
   box-shadow: var(--shadow-lg);

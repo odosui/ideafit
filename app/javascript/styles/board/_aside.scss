@@ -19,10 +19,12 @@
 
   &__title {
     font-size: var(--text-5);
+    overflow-wrap: anywhere;
   }
 
   &__description {
     white-space: pre-line;
+    overflow-wrap: anywhere;
     color: var(--color-text-faint);
   }
 
