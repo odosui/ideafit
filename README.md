@@ -67,6 +67,8 @@ Every item keeps its history:
 
 Once it's up, open your service's domain and sign in: the first person to sign in becomes the admin. Until you add SMTP settings, your sign-in link is in the service's Deploy Logs (search for `sign_in`).
 
+Railway blocks outgoing SMTP below the Pro plan, so send email through [Mailgun's HTTP API](#email) there instead.
+
 ### With Docker
 
 ```sh
@@ -82,6 +84,15 @@ To configure the public URL, email and admins, grab [`.env.example`](.env.exampl
 Sign-in is by email link. Without SMTP settings, the link is printed to `docker logs ideafit`.
 
 The first person to sign in becomes the admin. Admins share and manage all boards; everyone else posts and votes on boards shared with them. To add more admins, list their emails in `ADMIN_EMAILS`.
+
+## Email
+
+Ideafit sends sign-in links, status updates to followers, and new-item emails to admins. Set `MAIL_FROM` and either:
+
+- SMTP: `SMTP_ADDRESS`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`
+- Mailgun's HTTP API, for hosts that block outgoing SMTP: `MAILGUN_API_KEY` (a sending key for the domain), `MAILGUN_DOMAIN`, and `MAILGUN_API_URL=https://api.eu.mailgun.net` if the domain is in Mailgun's EU region. It takes precedence over SMTP.
+
+Without either, emails are written to the log. Emails go out from a background queue that runs inside the web server, so there's no separate worker to run.
 
 ## Embed
 

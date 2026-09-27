@@ -44,6 +44,9 @@ USER rails
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build --chown=rails:rails /rails /rails
 
+# One container: background jobs (emails) run inside Puma.
+ENV SOLID_QUEUE_IN_PUMA="true"
+
 ENTRYPOINT ["bin/docker-entrypoint"]
 EXPOSE 80
 CMD ["bin/thrust", "bin/rails", "server"]

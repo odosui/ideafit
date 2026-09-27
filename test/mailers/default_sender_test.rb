@@ -7,6 +7,12 @@ class DefaultSenderTest < ActiveSupport::TestCase
     assert_equal "Acme <hello@acme.com>", DefaultSender.address(env)
   end
 
+  test "sends as noreply at the Mailgun domain" do
+    env = { "MAILGUN_API_KEY" => "key-123", "MAILGUN_DOMAIN" => "mg.acme.com", "APP_URL" => "https://feedback.acme.com" }
+
+    assert_equal "Ideafit <noreply@mg.acme.com>", DefaultSender.address(env)
+  end
+
   test "falls back to the SMTP login when it's an email address" do
     env = { "SMTP_USERNAME" => "me@gmail.com", "APP_URL" => "https://feedback.acme.com" }
 

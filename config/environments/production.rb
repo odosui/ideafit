@@ -56,7 +56,11 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.delivery_method = ENV["SMTP_ADDRESS"].present? ? :smtp : :log
+  config.action_mailer.delivery_method =
+    if ENV["MAILGUN_API_KEY"].present? then :mailgun
+    elsif ENV["SMTP_ADDRESS"].present? then :smtp
+    else :log
+    end
   config.action_mailer.smtp_settings = {
     address: ENV["SMTP_ADDRESS"],
     port: ENV["SMTP_PORT"].presence&.to_i || 587,
