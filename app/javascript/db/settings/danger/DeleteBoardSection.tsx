@@ -1,6 +1,6 @@
 import * as React from 'react'
-import api from '../api'
-import { Board } from '../types'
+import api from '../../api'
+import { Board } from '../../types'
 
 interface Props {
   board: Board
@@ -28,7 +28,7 @@ const DeleteBoardSection: React.FC<Props> = ({ board }) => {
   }
 
   return (
-    <section className="settings-form__danger">
+    <section className="settings-panel settings-panel--danger">
       <div>
         <h3>Delete board</h3>
         <p>

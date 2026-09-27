@@ -50,6 +50,8 @@ Rails.application.routes.draw do
     resources :boards, only: [:index, :show], param: :pid
     get "boards/:pid/:section", to: "boards#show", as: :board_section,
       constraints: { section: /settings|kanban|items|participants|analytics/ }
+    get "boards/:pid/settings/:tab", to: "boards#show", as: :board_settings_tab,
+      constraints: { tab: /import|danger/ }
     get "boards/:pid/items/:id(/:tab)", to: "items#show", as: :board_item,
       constraints: { tab: /history/ }
     resource :settings, only: :show

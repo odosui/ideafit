@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ColorScheme } from '../types'
+import { ColorScheme } from '../../types'
 import { COLOR_SCHEMES } from './colorSchemes'
 
 interface Props {

@@ -7,7 +7,7 @@ interface Props {
 }
 
 const TransferSection: React.FC<Props> = ({ board }) => (
-  <section className="settings-form__section">
+  <section className="settings-panel">
     <div>
       <h3>Import and export</h3>
       <p>
@@ -17,7 +17,7 @@ const TransferSection: React.FC<Props> = ({ board }) => (
         tokens with the same user ids.
       </p>
     </div>
-    <div className="settings-form__actions">
+    <div className="settings-panel__actions">
       <a className="btn" href={`/api/boards/${board.pid}/export`} download>
         <i className="fas fa-file-download" aria-hidden="true" />
         Export JSON

@@ -17,6 +17,14 @@ class Db::BoardsShowTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "the owner opens a settings tab" do
+    sign_in users(:board_owner)
+
+    get db_board_settings_tab_path(boards(:roadmap).pid, "import")
+
+    assert_response :success
+  end
+
   test "another admin of the workspace sees it too" do
     workspaces(:main).add_member(users(:stranger))
     sign_in users(:stranger)

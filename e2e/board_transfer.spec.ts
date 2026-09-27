@@ -17,6 +17,7 @@ test('the owner imports a file and sees the items on the board', async ({
   const board = createOwnedBoard()
   await signIn(page, board.email)
   await page.goto(`/db/boards/${board.pid}/settings`)
+  await page.getByRole('link', { name: 'Import & export' }).click()
 
   await page.getByLabel('Ideafit JSON file').setInputFiles({
     name: 'board.json',
@@ -36,7 +37,7 @@ test('the owner imports a file and sees the items on the board', async ({
 test('the owner exports the board as JSON', async ({ page }) => {
   const board = createOwnedBoard()
   await signIn(page, board.email)
-  await page.goto(`/db/boards/${board.pid}/settings`)
+  await page.goto(`/db/boards/${board.pid}/settings/import`)
 
   const download = page.waitForEvent('download')
   await page.getByRole('link', { name: 'Export JSON' }).click()

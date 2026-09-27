@@ -1,4 +1,4 @@
-import { ColorScheme } from '../types'
+import { ColorScheme } from '../../types'
 
 export const COLOR_SCHEMES: [ColorScheme, string][] = [
   ['teal', 'Teal'],
