@@ -21,6 +21,14 @@ class MagicLinksCreateTest < ActionDispatch::IntegrationTest
     assert_select "h1", "Check your email"
   end
 
+  test "never picks a site's user with the same email" do
+    embed_user(email: "visitor@example.com")
+
+    assert_difference -> { User.global.count }, 1 do
+      post magic_links_path, params: { email: "visitor@example.com" }
+    end
+  end
+
   test "points to the server logs when email isn't set up" do
     ActionMailer::Base.delivery_method = :log
 

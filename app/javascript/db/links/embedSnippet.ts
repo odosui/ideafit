@@ -1,8 +1,13 @@
-export const embedSnippet = (pid: string) => {
-  const origin = window.location.origin
+const scriptTag = (pid: string, attributes = '') =>
+  `<script id="ideafit" src="${window.location.origin}/embed.js" data-board="${pid}"${attributes}></script>`
 
-  return [
-    `<script id="ideafit" src="${origin}/embed.js" data-board="${pid}"></script>`,
-    `<button onclick="IdeaFit.show()">Feedback</button>`,
+const FEEDBACK_BUTTON = `<button onclick="IdeaFit.show()">Feedback</button>`
+
+export const embedSnippet = (pid: string) =>
+  [scriptTag(pid), FEEDBACK_BUTTON].join('\n')
+
+export const identifiedEmbedSnippet = (pid: string) =>
+  [
+    scriptTag(pid, ' data-token="TOKEN_FROM_YOUR_SERVER"'),
+    FEEDBACK_BUTTON,
   ].join('\n')
-}

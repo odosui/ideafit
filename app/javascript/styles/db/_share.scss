@@ -45,3 +45,13 @@
     }
   }
 }
+
+.share-card__examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.share-card__secret {
+  font-family: var(--font-mono);
+}

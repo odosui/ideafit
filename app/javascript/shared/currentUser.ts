@@ -4,6 +4,7 @@ export interface CurrentUser {
   email: string
   name: string | null
   admin: boolean
+  embedded: boolean
   email_updates: boolean
   new_item_emails: NewItemEmails
 }

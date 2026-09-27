@@ -41,3 +41,5 @@ group :development do
 end
 
 gem "csv", "~> 3.3"
+
+gem "jwt", "~> 3.3"

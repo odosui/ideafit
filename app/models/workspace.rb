@@ -1,4 +1,7 @@
 class Workspace < ApplicationRecord
+  include EmbedSecret
+  include EmbedUsers
+
   DEFAULT_NAME = "Ideafit".freeze
 
   has_many :memberships, dependent: :delete_all

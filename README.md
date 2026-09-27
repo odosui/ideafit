@@ -98,6 +98,79 @@ Drop the board into your own site as a pop-up:
 <button onclick="IdeaFit.show()">Feedback</button>
 ```
 
+### Sign your users in
+
+Your users are already signed in on your site, so the widget can sign them in too. Your server signs a short-lived token (a JWT) for the current user with your workspace's signing secret, and the widget passes it to Ideafit. Find the secret, and signing examples for Node, Ruby, Python and PHP, on a board's **Share** page.
+
+The token is signed with HS256 and carries:
+
+| Claim    | Required | What it is                                                     |
+| -------- | -------- | -------------------------------------------------------------- |
+| `id`     | yes      | Your user's id. Ideafit knows the user by it, never by email.  |
+| `exp`    | yes      | Expiry, a Unix time at most 24 hours ahead.                    |
+| `name`   |          | Shown to admins. Cut to 50 characters.                         |
+| `email`  |          | Shown to admins. Unverified, so Ideafit never emails it.       |
+| `avatar` |          | An `https://` image URL.                                       |
+
+```js
+// Node, with jsonwebtoken
+const token = jwt.sign(
+  { id: user.id, name: user.name, email: user.email },
+  process.env.IDEAFIT_SECRET,
+  { algorithm: 'HS256', expiresIn: '1h' },
+)
+```
+
+Render it into the script tag, or hand it over once you have it:
+
+```html
+<script id="ideafit" src="https://your-ideafit-host/embed.js" data-board="BOARD_ID" data-token="TOKEN"></script>
+```
+
+```js
+IdeaFit.identify(token) // null signs the user out of the widget
+```
+
+Keep the secret on your server: whoever has it can act as any of your users. Users signed in this way can post, vote and follow on your workspace's boards, and never manage them. Regenerating the secret keeps the previous one working until the next regeneration, so you can update your site without downtime. The secret is encrypted with `SECRET_KEY_BASE`; if you change that, generate a new secret.
+
+## Import and export
+
+Move a board's items, votes and the people behind them in and out as Ideafit JSON, from the board's **Settings**, or on the command line:
+
+```sh
+bin/rails "boards:export[BOARD_ID]" > board.json
+bin/rails "boards:import[BOARD_ID]" < board.json
+# with Docker: docker exec -i ideafit bin/rails "boards:import[BOARD_ID]" < board.json
+```
+
+```json
+{
+  "format": "ideafit",
+  "version": 1,
+  "users": [
+    { "id": "42", "name": "Ada Lovelace", "email": "ada@example.com", "avatar": "https://example.com/ada.png" }
+  ],
+  "items": [
+    {
+      "id": "feature-17",
+      "kind": "idea",
+      "title": "Dark mode",
+      "text": "Easier on the eyes at night",
+      "status": "planned",
+      "author": "42",
+      "created_at": "2025-03-01T12:00:00Z",
+      "voters": ["42"]
+    }
+  ]
+}
+```
+
+- `users[].id` is your site's user id, the same one you put in the token's `id` claim, so imported people find their votes once your site signs them in. The rest of a user is optional.
+- `kind` is `idea`, `bug` or `question`. `status` is `new` (the default), `planned`, `in_progress`, `ready`, `shipped` or `declined`.
+- `author` and `voters` refer to users in the file, or to users imported earlier.
+- Items keep their `created_at`, and importing sends no emails.
+- An import is all or nothing, and names the entry it stopped at. Importing again updates items that have an `id` instead of duplicating them.
+
 ## Develop
 
 ```sh

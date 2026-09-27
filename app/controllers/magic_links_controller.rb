@@ -15,7 +15,7 @@ class MagicLinksController < ApplicationController
   def new; end
 
   def create
-    user = User.find_or_create_by(email: params[:email])
+    user = User.global.find_or_create_by(email: params[:email])
     unless user.persisted?
       flash.now[:alert] = "Please enter a valid email address."
       return render :new, status: :unprocessable_content

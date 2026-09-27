@@ -1,28 +1,34 @@
-import csrfToken from './csrfToken'
-import { signInPath } from './authPaths'
+import { apiAuth } from './apiAuth'
 
 type Params = { [k: string]: string | boolean }
 
 export async function api(method: string, url: string, data?: Params) {
+  let response = await request(method, url, data)
+
+  if (response.status === 401 && (await apiAuth().renew())) {
+    response = await request(method, url, data)
+  }
+  if (response.status === 401) {
+    apiAuth().onUnauthorized()
+    return
+  }
+  return await response.json()
+}
+
+function request(method: string, url: string, data?: Params) {
   const isGet = method === 'get'
   const query = isGet && data ? `?${toQuery(data)}` : ''
 
-  const response = await fetch(`/api${url}${query}`, {
+  return fetch(`/api${url}${query}`, {
     method,
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'X-CSRF-Token': csrfToken(),
+      ...apiAuth().headers(),
     },
     credentials: 'include',
     body: !isGet && data ? JSON.stringify(data) : undefined,
   })
-
-  if (response.status === 401) {
-    window.location.href = signInPath()
-    return
-  }
-  return await response.json()
 }
 
 function toQuery(data: Params) {

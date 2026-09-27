@@ -24,6 +24,12 @@ Rails.application.routes.draw do
       resources :items, only: :index, module: :boards
       resources :participants, only: :index, module: :boards
       resource :analytics, only: :show, module: :boards
+      resource :embed_secret, only: [:show, :create], module: :boards
+      resource :export, only: :show, module: :boards
+      resource :import, only: :create, module: :boards
+    end
+    namespace :embed do
+      resources :sessions, only: :create
     end
     resource :account, only: :update
 

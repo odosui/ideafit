@@ -3,6 +3,8 @@ import { CurrentUser } from '../shared/currentUser'
 import { AccountChanges } from './account/accountChanges'
 import { BoardAnalytics } from './board/sections/analytics/query/boardAnalytics'
 import { ItemQuery } from './board/sections/items/query/itemQuery'
+import { EmbedSecret } from './board/sections/share/identity/embedSecret'
+import { ImportResult } from './settings/transfer/importResult'
 import { ParticipantQuery } from './board/sections/participants/query/participantQuery'
 import { ItemStatus } from '../shared/items/itemStatus'
 import {
@@ -22,6 +24,14 @@ export default {
       api('PATCH', `/boards/${pid}`, { ...changes }),
     remove: (pid: string): Promise<{ success: boolean }> =>
       api('DELETE', `/boards/${pid}`),
+    import: (pid: string, document: string): Promise<ImportResult> =>
+      api('post', `/boards/${pid}/import`, { document }),
+  },
+  embedSecret: {
+    show: (pid: string): Promise<EmbedSecret> =>
+      api('get', `/boards/${pid}/embed_secret`),
+    regenerate: (pid: string): Promise<EmbedSecret> =>
+      api('post', `/boards/${pid}/embed_secret`, {}),
   },
   items: {
     list: (pid: string, query: ItemQuery): Promise<BoardItem[]> =>

@@ -4,6 +4,7 @@ import api from '../api'
 import { Board, BoardChanges } from '../types'
 import ColorSchemePicker from './ColorSchemePicker'
 import DeleteBoardSection from './DeleteBoardSection'
+import TransferSection from './transfer/TransferSection'
 
 interface Props {
   board: Board
@@ -86,6 +87,7 @@ const BoardSettingsPage: React.FC<Props> = ({ board }) => {
         )}
       </div>
 
+      <TransferSection board={board} />
       <DeleteBoardSection board={board} />
     </form>
   )

@@ -1,4 +1,6 @@
 class Api::ItemsController < Api::BaseController
+  include EmbedAuthentication
+  include BoardParticipation
 
   before_action :authenticate_user!, only: [:create, :update, :upvote, :downvote, :destroy]
 
@@ -17,8 +19,7 @@ class Api::ItemsController < Api::BaseController
   end
 
   def create
-    board = Board.find_by_pid!(params[:board_pid])
-    item = board.items.post!(
+    item = participating_board.items.post!(
       by: current_user,
       kind: params[:kind],
       title: params[:title],
@@ -39,19 +40,19 @@ class Api::ItemsController < Api::BaseController
   end
 
   def upvote
-    item = Item.find(params[:id])
+    item = participating_item
     item.upvote!(current_user)
     render json: ItemSerializer.new(item.reload, viewer: current_user)
   end
 
   def downvote
-    item = Item.find(params[:id])
+    item = participating_item
     item.downvote!(current_user)
     render json: ItemSerializer.new(item.reload, viewer: current_user)
   end
 
   def destroy
-    item = Item.find(params[:id])
+    item = participating_item
     unless ItemDeletionPolicy.allowed?(current_user, item)
       return render_forbidden('You are not allowed to delete this item')
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_24_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_27_090200) do
   create_table "boards", force: :cascade do |t|
     t.string "color_scheme", default: "teal", null: false
     t.datetime "created_at", null: false
@@ -59,6 +59,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_24_120000) do
   create_table "items", force: :cascade do |t|
     t.integer "board_id", null: false
     t.datetime "created_at", null: false
+    t.string "external_id"
     t.string "kind"
     t.string "notified_status"
     t.string "status", default: "fresh"
@@ -67,6 +68,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_24_120000) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.integer "votes_count", default: 0, null: false
+    t.index ["board_id", "external_id"], name: "index_items_on_board_id_and_external_id", unique: true
     t.index ["board_id"], name: "index_items_on_board_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
@@ -214,9 +216,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_24_120000) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "avatar_url"
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
     t.boolean "email_updates", default: true, null: false
+    t.integer "embed_workspace_id"
+    t.string "external_id"
     t.datetime "magic_link_used_at"
     t.string "name"
     t.string "new_item_emails", default: "instant", null: false
@@ -224,7 +229,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_24_120000) do
     t.datetime "remember_created_at", precision: nil
     t.string "remember_token"
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, where: "embed_workspace_id IS NULL"
+    t.index ["embed_workspace_id", "external_id"], name: "index_users_on_embed_workspace_id_and_external_id", unique: true
+    t.index ["embed_workspace_id"], name: "index_users_on_embed_workspace_id"
   end
 
   create_table "votes", force: :cascade do |t|
@@ -249,7 +256,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_24_120000) do
 
   create_table "workspaces", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "embed_secret"
     t.string "name", null: false
+    t.string "previous_embed_secret"
     t.datetime "updated_at", null: false
   end
 
@@ -269,6 +278,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_24_120000) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "users", "workspaces", column: "embed_workspace_id"
   add_foreign_key "votes", "items"
   add_foreign_key "votes", "users"
   add_foreign_key "workspace_memberships", "users"

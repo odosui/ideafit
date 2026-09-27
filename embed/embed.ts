@@ -1,13 +1,24 @@
+import { onFrameReady, sendIdentity } from './identity'
+
 const modalPadding = '48px'
 
 const IdeaFit: {
   host: string
   boardId: string | null
+  token: string | null
+  frame: HTMLIFrameElement | null
   show: () => void
+  identify: (token: string | null) => void
   setup: () => void
 } = {
   host: '',
   boardId: null,
+  token: null,
+  frame: null,
+  identify: (token) => {
+    IdeaFit.token = token
+    sendIdentity(IdeaFit.frame, IdeaFit.host, token)
+  },
   setup: () => {
     const script = document.getElementById('ideafit')
     if (!script) {
@@ -22,6 +33,9 @@ const IdeaFit: {
         throw new Error('IdeaFit boardId is not set')
       }
       IdeaFit.boardId = boardId
+
+      // a JWT your server signed for the signed-in user
+      IdeaFit.token = IdeaFit.token || script.getAttribute('data-token')
 
       // optional options, defaults to the origin the script was served from
       IdeaFit.host =
@@ -71,7 +85,8 @@ const IdeaFit: {
     modalContent.appendChild(closeButton)
 
     closeButton.addEventListener('click', function () {
-      backdrop.style.display = 'none'
+      backdrop.remove()
+      IdeaFit.frame = null
     })
 
     // Create iframe
@@ -81,8 +96,14 @@ const IdeaFit: {
     iframe.style.height = 'calc(100% - 50px)'
     iframe.src = `${IdeaFit.host}/b/${IdeaFit.boardId}?embed=1`
     modalContent.appendChild(iframe)
+    IdeaFit.frame = iframe
   },
 }
+
+onFrameReady(
+  () => IdeaFit.frame,
+  () => sendIdentity(IdeaFit.frame, IdeaFit.host, IdeaFit.token),
+)
 
 Object.assign(window, { IdeaFit })
 
