@@ -14,10 +14,18 @@ async function serveHostPage(page: Page, html: string) {
   return `http://127.0.0.1:${(server.address() as AddressInfo).port}/`
 }
 
+async function expectWidgetBuilt(page: Page, baseURL: string) {
+  const response = await page.request.get(`${baseURL}/embed.js`)
+  if (!response.ok()) {
+    throw new Error('public/embed.js is missing: run `npm run build:embed`')
+  }
+}
+
 export async function openHostSite(
   page: Page,
   { baseURL, pid, token }: { baseURL: string; pid: string; token?: string },
 ) {
+  await expectWidgetBuilt(page, baseURL)
   const tokenAttribute = token ? ` data-token="${token}"` : ''
   const url = await serveHostPage(
     page,

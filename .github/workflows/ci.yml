@@ -59,7 +59,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
 
       - name: Build frontend
-        run: bin/vite build
+        run: bin/vite build && npm run build:embed
 
       - name: Playwright
         run: npx playwright test
