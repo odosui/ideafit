@@ -36,6 +36,7 @@ class Item < ApplicationRecord
     when 'done' then done
     when 'open' then where(status: %w[fresh planned in_progress ready])
     when 'rejected' then rejected
+    when 'roadmap' then where(status: %w[planned in_progress ready done])
     else not_rejected
     end
   }

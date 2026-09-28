@@ -10,7 +10,7 @@ module ItemUpdateMailerHelper
   end
 
   def item_on_board_url(item)
-    public_board_url(item.board.pid, kind: item.kind.pluralize)
+    public_board_url(item.board.pid, view: item.kind.pluralize)
   end
 
   def unsubscribe_from_item_url(subscription)

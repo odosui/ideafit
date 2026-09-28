@@ -28,4 +28,8 @@ export default {
       api('post', `/items/${id}/edits`, { title, text }),
     remove: (id: number): Promise<void> => api('DELETE', `/items/${id}`),
   },
+  roadmap: {
+    list: (board_pid: string): Promise<Item[]> =>
+      api('get', '/items', { board_pid, filter: 'roadmap' }),
+  },
 }

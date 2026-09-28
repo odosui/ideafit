@@ -8,4 +8,5 @@ export const e2eEnv = {
   PORT: String(E2E_PORT),
   PIDFILE: 'tmp/pids/e2e.pid',
   APP_URL: E2E_URL,
+  MAIL_DELIVERY: 'log',
 }

@@ -1,17 +1,17 @@
 import * as React from 'react'
-import { ItemKind } from '../../shared/items/itemKind'
+import { BoardView } from '../routing/boardView'
 import BoardIntro from './BoardIntro'
-import KindTabs from './KindTabs'
+import BoardNav from './nav/BoardNav'
 
 interface Props {
-  kind: ItemKind
-  onKindChange: (kind: ItemKind) => void
+  view: BoardView
+  onViewChange: (view: BoardView) => void
 }
 
-const BoardAside: React.FC<Props> = ({ kind, onKindChange }) => (
+const BoardAside: React.FC<Props> = ({ view, onViewChange }) => (
   <aside className="board-aside">
     <BoardIntro />
-    <KindTabs kind={kind} onChange={onKindChange} />
+    <BoardNav view={view} onChange={onViewChange} />
   </aside>
 )
 

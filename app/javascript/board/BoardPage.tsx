@@ -1,25 +1,30 @@
 import * as React from 'react'
 import readServerData from '../shared/server'
-import { ItemKind } from '../shared/items/itemKind'
 import BoardAside from './aside/BoardAside'
 import Header from './Header'
 import ItemsPanel from './items/ItemsPanel'
+import RoadmapPanel from './roadmap/RoadmapPanel'
+import { BoardView, isKindView } from './routing/boardView'
 
 const { embedded } = readServerData()
 
 interface Props {
   pid: string
-  kind: ItemKind
-  onKindChange: (kind: ItemKind) => void
+  view: BoardView
+  onViewChange: (view: BoardView) => void
 }
 
-const BoardPage: React.FC<Props> = ({ pid, kind, onKindChange }) => (
+const BoardPage: React.FC<Props> = ({ pid, view, onViewChange }) => (
   <div className="board-page">
     {!embedded && <Header />}
     <div className="board-layout">
-      <BoardAside kind={kind} onKindChange={onKindChange} />
+      <BoardAside view={view} onViewChange={onViewChange} />
       <main className="board-main">
-        <ItemsPanel pid={pid} kind={kind} />
+        {isKindView(view) ? (
+          <ItemsPanel pid={pid} kind={view} />
+        ) : (
+          <RoadmapPanel pid={pid} />
+        )}
       </main>
     </div>
   </div>

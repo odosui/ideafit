@@ -37,7 +37,8 @@ Rails.application.configure do
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.delivery_method = :letter_opener_web
+  # E2E sets MAIL_DELIVERY=log to exercise the no-email sign-in page
+  config.action_mailer.delivery_method = ENV.fetch("MAIL_DELIVERY", "letter_opener_web").to_sym
   config.action_mailer.perform_deliveries = true
 
   app_url = URI(ENV.fetch("APP_URL", "http://localhost:5100"))

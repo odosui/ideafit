@@ -26,6 +26,15 @@ class Api::ItemsIndexTest < ActionDispatch::IntegrationTest
     assert_equal ["Crash on login"], titles
   end
 
+  test "the roadmap shows every kind that is planned, in progress, ready or done" do
+    items(:dark_mode).update!(status: "planned")
+    items(:export_csv).update!(status: "ready")
+
+    get api_items_path, params: { board_pid: "roadmap0pid", filter: "roadmap" }, as: :json
+
+    assert_equal ["Dark mode", "Crash on login", "Export to CSV"], titles
+  end
+
   test "marks what the viewer voted for and what they can edit" do
     sign_in users(:author)
 

@@ -1,5 +1,5 @@
-import { ItemKind } from '../../shared/items/itemKind'
-import { kindFromPath, pathForKind } from './kindPaths'
+import { BoardView } from './boardView'
+import { pathForView, viewFromPath } from './viewPaths'
 
 const BOARD_ROOT = /^\/b\/[^/]+/
 
@@ -8,23 +8,23 @@ const pathInBoard = () => window.location.pathname.replace(BOARD_ROOT, '')
 // Old links looked like /b/<pid>#/ideas
 const legacyHashPath = () => window.location.hash.replace(/^#/, '')
 
-export const boardPathForKind = (kind: ItemKind) =>
-  boardRoot() + pathForKind(kind)
+export const boardPathForView = (view: BoardView) =>
+  boardRoot() + pathForView(view)
 
-export const kindFromLocation = (): ItemKind =>
-  kindFromPath(pathInBoard()) ?? kindFromPath(legacyHashPath()) ?? 'idea'
+export const viewFromLocation = (): BoardView =>
+  viewFromPath(pathInBoard()) ?? viewFromPath(legacyHashPath()) ?? 'idea'
 
-export const showKindInLocation = (kind: ItemKind) => {
-  const path = boardPathForKind(kind)
+export const showViewInLocation = (view: BoardView) => {
+  const path = boardPathForView(view)
   if (window.location.pathname === path && !window.location.hash) return
 
   window.history.replaceState(null, '', path + window.location.search)
 }
 
-export const pushKindToLocation = (kind: ItemKind) => {
+export const pushViewToLocation = (view: BoardView) => {
   window.history.pushState(
     null,
     '',
-    boardPathForKind(kind) + window.location.search,
+    boardPathForView(view) + window.location.search,
   )
 }
