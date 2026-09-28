@@ -4,6 +4,10 @@ import { AccountChanges } from './account/accountChanges'
 import { BoardAnalytics } from './board/sections/analytics/query/boardAnalytics'
 import { ItemQuery } from './board/sections/items/query/itemQuery'
 import { Outbox, OutboxDelivery } from './board/sections/outbox/query/outbox'
+import {
+  EmbedEmails,
+  EmbedEmailsRejection,
+} from './board/sections/share/emails/embedEmails'
 import { EmbedSecret } from './board/sections/share/identity/embedSecret'
 import { ImportResult } from './settings/transfer/importResult'
 import { ParticipantQuery } from './board/sections/participants/query/participantQuery'
@@ -33,6 +37,15 @@ export default {
       api('get', `/boards/${pid}/embed_secret`),
     regenerate: (pid: string): Promise<EmbedSecret> =>
       api('post', `/boards/${pid}/embed_secret`, {}),
+  },
+  embedEmails: {
+    show: (pid: string): Promise<EmbedEmails> =>
+      api('get', `/boards/${pid}/embed_emails`),
+    update: (
+      pid: string,
+      settings: { trust_emails: boolean; page_url: string },
+    ): Promise<EmbedEmails | EmbedEmailsRejection> =>
+      api('PATCH', `/boards/${pid}/embed_emails`, settings),
   },
   items: {
     list: (pid: string, query: ItemQuery): Promise<BoardItem[]> =>

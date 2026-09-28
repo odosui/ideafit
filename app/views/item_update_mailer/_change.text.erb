@@ -2,5 +2,5 @@
 
 * <%= item.title %> — <%= t("items.statuses.#{item.notified_status}") %>
   <%= t("item_update_mailer.statuses_changed.message.#{item.notified_status}") %>
-  <%= item_on_board_url(item) %>
+  <%= item_url_for(item, subscription.user) %>
   Stop emails about this item: <%= unsubscribe_from_item_url(subscription) %>

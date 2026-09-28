@@ -1,0 +1,54 @@
+@use '../foundation' as *;
+
+.email-consent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background-color: var(--color-accent-soft);
+
+  &__title {
+    margin-bottom: var(--space-1);
+    font-family: var(--font-body);
+    font-size: var(--text-2);
+    font-weight: 600;
+  }
+
+  &__text {
+    font-size: var(--text-1);
+    color: var(--color-text-muted);
+    overflow-wrap: anywhere;
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--space-2);
+  }
+}
+
+.email-updates-switch {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-size: var(--text-1);
+  font-weight: 600;
+  cursor: pointer;
+
+  input {
+    margin-top: 3px;
+    accent-color: var(--color-accent);
+  }
+
+  &__address {
+    display: block;
+    font-weight: 400;
+    color: var(--color-text-faint);
+    overflow-wrap: anywhere;
+  }
+}

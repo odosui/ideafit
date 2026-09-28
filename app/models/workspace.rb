@@ -1,6 +1,7 @@
 class Workspace < ApplicationRecord
   include EmbedSecret
   include EmbedUsers
+  include EmbedEmails
 
   DEFAULT_NAME = "Ideafit".freeze
 

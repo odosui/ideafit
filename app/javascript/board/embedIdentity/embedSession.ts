@@ -33,5 +33,7 @@ export const embedSession = {
     return exchanged !== null
   },
 
+  replaceUser: (user: CurrentUser) => session && change({ ...session, user }),
+
   clear: () => change(null),
 }

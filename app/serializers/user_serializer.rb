@@ -10,6 +10,7 @@ class UserSerializer
       admin: @user.admin?,
       embedded: @user.embedded?,
       email_updates: @user.email_updates,
+      embed_email_consent: @user.embed_email_consent,
       new_item_emails: @user.new_item_emails,
     }
   end

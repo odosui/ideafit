@@ -115,13 +115,13 @@ Your users are already signed in on your site, so the widget can sign them in to
 
 The token is signed with HS256 and carries:
 
-| Claim    | Required | What it is                                                     |
-| -------- | -------- | -------------------------------------------------------------- |
-| `id`     | yes      | Your user's id. Ideafit knows the user by it, never by email.  |
-| `exp`    | yes      | Expiry, a Unix time at most 24 hours ahead.                    |
-| `name`   |          | Shown to admins. Cut to 50 characters.                         |
-| `email`  |          | Shown to admins. Unverified, so Ideafit never emails it.       |
-| `avatar` |          | An `https://` image URL.                                       |
+| Claim    | Required | What it is                                                                  |
+| -------- | -------- | --------------------------------------------------------------------------- |
+| `id`     | yes      | Your user's id. Ideafit knows the user by it, never by email.               |
+| `exp`    | yes      | Expiry, a Unix time at most 24 hours ahead.                                 |
+| `name`   |          | Shown to admins. Cut to 50 characters.                                      |
+| `email`  |          | Shown to admins. Emailed only if you [opt in](#email-your-signed-in-users). |
+| `avatar` |          | An `https://` image URL.                                                    |
 
 ```js
 // Node, with jsonwebtoken
@@ -143,6 +143,12 @@ IdeaFit.identify(token) // null signs the user out of the widget
 ```
 
 Keep the secret on your server: whoever has it can act as any of your users. Users signed in this way can post, vote and follow on your workspace's boards, and never manage them. Regenerating the secret keeps the previous one working until the next regeneration, so you can update your site without downtime. The secret is encrypted with `SECRET_KEY_BASE`; if you change that, generate a new secret.
+
+### Email your signed-in users
+
+Ideafit can't verify the `email` in the token, so by default it never emails users your site signs in. If your site only passes verified emails, turn on **Email status updates to the address in the token** on a board's **Share** page; it applies to the whole workspace. Set the page on your site that embeds the board too, and emails to those users link there, where they're already signed in, instead of to the board on Ideafit.
+
+Each user is then asked once, the next time they open the board, whether they want these emails; nothing is sent until they say yes. If your site later passes a different email, they're asked again. They can switch emails on or off from the board's sidebar, and every email has links to stop them.
 
 ## Import and export
 

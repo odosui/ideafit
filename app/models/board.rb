@@ -1,4 +1,6 @@
 class Board < ApplicationRecord
+  include EmbedPage
+
   COLOR_SCHEMES = %w[teal indigo terracotta ink plum].freeze
 
   belongs_to :workspace

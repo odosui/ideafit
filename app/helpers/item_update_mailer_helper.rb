@@ -9,8 +9,17 @@ module ItemUpdateMailerHelper
     MailColors::BOARD_ACCENTS.fetch(board.color_scheme, MailColors::BOARD_ACCENTS["teal"])
   end
 
-  def item_on_board_url(item)
-    public_board_url(item.board.pid, view: item.kind.pluralize)
+  # A host site's users are signed in on its page, not on Ideafit's own.
+  def board_url_for(board, user)
+    embed_page_url_for(board, user) || public_board_url(board.pid)
+  end
+
+  def item_url_for(item, user)
+    embed_page_url_for(item.board, user) || public_board_url(item.board.pid, view: item.kind.pluralize)
+  end
+
+  def embed_page_url_for(board, user)
+    board.embed_page_url if user.embedded?
   end
 
   def unsubscribe_from_item_url(subscription)

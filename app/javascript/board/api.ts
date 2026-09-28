@@ -1,4 +1,5 @@
 import { api } from '../shared/api'
+import { CurrentUser } from '../shared/currentUser'
 import { ItemKind } from '../shared/items/itemKind'
 import { ItemFilter } from './items/query/itemFilter'
 import { ApiError, Item } from './types'
@@ -31,5 +32,9 @@ export default {
   roadmap: {
     list: (board_pid: string): Promise<Item[]> =>
       api('get', '/items', { board_pid, filter: 'roadmap' }),
+  },
+  emailConsent: {
+    answer: (granted: boolean): Promise<CurrentUser | ApiError> =>
+      api('PATCH', '/embed/email_consent', { granted }),
   },
 }

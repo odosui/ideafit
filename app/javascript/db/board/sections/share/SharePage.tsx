@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Board } from '../../../types'
 import EmbedSnippetCard from './EmbedSnippetCard'
+import EmbedEmailsCard from './emails/EmbedEmailsCard'
 import EmbedIdentityCard from './identity/EmbedIdentityCard'
 import PublicLinkCard from './PublicLinkCard'
 
@@ -13,6 +14,7 @@ const SharePage: React.FC<Props> = ({ board }) => (
     <PublicLinkCard pid={board.pid} />
     <EmbedSnippetCard pid={board.pid} />
     <EmbedIdentityCard pid={board.pid} />
+    <EmbedEmailsCard pid={board.pid} />
   </section>
 )
 

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       resources :participants, only: :index, module: :boards
       resource :analytics, only: :show, module: :boards
       resource :embed_secret, only: [:show, :create], module: :boards
+      resource :embed_emails, only: [:show, :update], module: :boards
       resource :export, only: :show, module: :boards
       resource :import, only: :create, module: :boards
       resource :outbox, only: :show, module: :boards do
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
     end
     namespace :embed do
       resources :sessions, only: :create
+      resource :email_consent, only: :update
     end
     resource :account, only: :update
 

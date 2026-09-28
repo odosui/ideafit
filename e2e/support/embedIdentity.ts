@@ -17,3 +17,7 @@ export function identityJwt(secret: string, claims: Record<string, string>) {
     .digest('base64url')
   return `${unsigned}.${signature}`
 }
+
+export function trustEmbedEmails(pid: string) {
+  railsRunner('e2e/support/trust_embed_emails.rb', pid)
+}

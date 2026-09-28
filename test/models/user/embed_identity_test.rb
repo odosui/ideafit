@@ -25,12 +25,6 @@ class User::EmbedIdentityTest < ActiveSupport::TestCase
     assert_not user.admin?
   end
 
-  test "gets no email updates until they verify their email" do
-    user = embed_user(email: "visitor@example.com")
-
-    assert_not_includes User.with_email_updates, user
-  end
-
   test "an embed session finds only that user" do
     user = embed_user
     token = user.generate_token_for(:embed_session)

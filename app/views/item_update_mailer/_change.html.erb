@@ -3,7 +3,7 @@
   <td style="padding:16px 0;border-top:1px solid #eeebe1;">
     <span style="<%= status_badge_style(item.notified_status) %>"><%= t("items.statuses.#{item.notified_status}") %></span>
     <p style="margin:8px 0 4px;font-size:16px;font-weight:600;line-height:1.4;">
-      <%= link_to item.title, item_on_board_url(item), style: "color:#0a0a0a;text-decoration:none;" %>
+      <%= link_to item.title, item_url_for(item, subscription.user), style: "color:#0a0a0a;text-decoration:none;" %>
     </p>
     <p style="margin:0;color:#525864;"><%= t("item_update_mailer.statuses_changed.message.#{item.notified_status}") %></p>
     <p style="margin:8px 0 0;font-size:12px;">

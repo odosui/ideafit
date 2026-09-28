@@ -5,6 +5,7 @@ class User < ApplicationRecord
   include NewItemEmails
   include Searchable
   include EmbedIdentity
+  include EmbedEmailConsent
 
   devise :rememberable
 

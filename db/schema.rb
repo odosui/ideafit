@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_28_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_28_110000) do
   create_table "boards", force: :cascade do |t|
     t.string "color_scheme", default: "teal", null: false
     t.datetime "created_at", null: false
     t.text "description"
+    t.string "embed_page_url"
     t.string "name"
     t.string "pid", null: false
     t.datetime "updated_at", null: false
@@ -219,6 +220,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_090000) do
     t.string "avatar_url"
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
+    t.datetime "email_consent_answered_at"
     t.boolean "email_updates", default: true, null: false
     t.integer "embed_workspace_id"
     t.string "external_id"
@@ -259,6 +261,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_28_090000) do
     t.string "embed_secret"
     t.string "name", null: false
     t.string "previous_embed_secret"
+    t.boolean "trust_embed_emails", default: false, null: false
     t.datetime "updated_at", null: false
   end
 
