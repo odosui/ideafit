@@ -3,21 +3,42 @@ require "test_helper"
 class ItemUpdateMailerTest < ActionMailer::TestCase
   setup do
     items(:dark_mode).upvote!(users(:stranger))
-    subscription = items(:dark_mode).subscriptions.find_by(user: users(:stranger))
-    @mail = ItemUpdateMailer.status_changed(subscription, "done")
+    items(:export_csv).upvote!(users(:stranger))
+    items(:dark_mode).update!(status: "done", notified_status: "done")
+    items(:export_csv).update!(status: "planned", notified_status: "planned")
   end
 
-  test "tells the follower what happened" do
-    assert_equal ["stranger@example.com"], @mail.to
-    assert_equal "“Dark mode” has shipped", @mail.subject
-    assert_includes @mail.text_part.body.decoded, "It's done and available now."
+  test "a single change is named in the subject" do
+    mail = ItemUpdateMailer.statuses_changed([subscription(:dark_mode)])
+
+    assert_equal ["stranger@example.com"], mail.to
+    assert_equal "“Dark mode” has shipped", mail.subject
+    assert_includes mail.text_part.body.decoded, "It's done and available now."
   end
 
-  test "links to the item's board and to unsubscribing" do
-    body = @mail.text_part.body.decoded
+  test "several changes go in one email" do
+    mail = ItemUpdateMailer.statuses_changed([subscription(:dark_mode), subscription(:export_csv)])
+    body = mail.text_part.body.decoded
+
+    assert_equal "2 updates on Roadmap", mail.subject
+    assert_includes body, "Dark mode — Shipped"
+    assert_includes body, "Export to CSV — Planned"
+    assert_includes mail.html_part.body.decoded, "Good news: it&#39;s on the roadmap."
+  end
+
+  test "links to the board and to unsubscribing" do
+    mail = ItemUpdateMailer.statuses_changed([subscription(:dark_mode), subscription(:export_csv)])
+    body = mail.text_part.body.decoded
 
     assert_includes body, "/b/roadmap0pid/ideas"
-    assert_includes body, "/unsubscribe/item/"
-    assert @mail["List-Unsubscribe"]
+    assert_equal 2, body.scan(%r{/unsubscribe/item/}).size
+    assert_includes body, "/unsubscribe/all/"
+    assert_match %r{/unsubscribe/all/}, mail["List-Unsubscribe"].value
+  end
+
+  private
+
+  def subscription(item)
+    items(item).subscriptions.find_by(user: users(:stranger))
   end
 end

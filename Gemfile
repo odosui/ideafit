@@ -33,11 +33,11 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "bundler-audit", require: false
   gem "brakeman", require: false
-  gem "letter_opener"
 end
 
 group :development do
   gem "web-console"
+  gem "letter_opener_web"
 end
 
 gem "csv", "~> 3.3"

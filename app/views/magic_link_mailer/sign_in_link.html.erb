@@ -1,3 +1,6 @@
-<p>Click the link below to sign in to Ideafit:</p>
-<p><%= link_to "Sign in to Ideafit", @url %></p>
-<p>The link works once and expires in 15 minutes. If you didn't ask for it, you can ignore this email.</p>
+<%= render "mailers/heading", text: "Sign in to Ideafit" %>
+<p style="margin:0;">Click the button below to sign in.</p>
+<%= render "mailers/button", label: "Sign in to Ideafit", url: @url %>
+<p style="margin:24px 0 0;font-size:13px;color:#525864;">
+  The link works once and expires in 15 minutes. If you didn't ask for it, you can ignore this email.
+</p>

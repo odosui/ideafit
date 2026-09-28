@@ -1,27 +1,21 @@
-# Emails followers about a status change once the admin has settled on it:
-# only the latest change in a burst is sent, and never the same status twice.
+# Followers hear about a status once an admin sends the board's outbox,
+# and never about the same status twice. "New" and "ready to ship" stay quiet.
 module Item::StatusNotifications
   extend ActiveSupport::Concern
 
   NOTIFIED_STATUSES = %w[planned in_progress done rejected].freeze
-  SETTLE_TIME = 10.minutes
 
-  def notify_status_change_later(change)
-    Item::StatusNotificationJob.set(wait: SETTLE_TIME).perform_later(change)
+  included do
+    scope :awaiting_status_notification, -> {
+      where(status: NOTIFIED_STATUSES).where("items.notified_status IS NULL OR items.notified_status != items.status")
+    }
   end
 
-  def notify_status_change(change)
-    return unless change == status_changes.last && status_worth_notifying?
+  def status_notification_subscriptions
+    emailed_subscriptions(except: status_changes.last&.user)
+  end
 
+  def mark_status_notified!
     update!(notified_status: status)
-    emailed_subscriptions(except: change.user).each do |subscription|
-      ItemUpdateMailer.status_changed(subscription, status).deliver_later
-    end
-  end
-
-  private
-
-  def status_worth_notifying?
-    NOTIFIED_STATUSES.include?(status) && status != notified_status
   end
 end

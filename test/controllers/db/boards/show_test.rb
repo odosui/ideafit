@@ -17,6 +17,14 @@ class Db::BoardsShowTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "the owner opens the outbox" do
+    sign_in users(:board_owner)
+
+    get db_board_section_path(boards(:roadmap).pid, "outbox")
+
+    assert_response :success
+  end
+
   test "the owner opens a settings tab" do
     sign_in users(:board_owner)
 

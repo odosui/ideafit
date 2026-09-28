@@ -3,6 +3,7 @@ import { CurrentUser } from '../shared/currentUser'
 import { AccountChanges } from './account/accountChanges'
 import { BoardAnalytics } from './board/sections/analytics/query/boardAnalytics'
 import { ItemQuery } from './board/sections/items/query/itemQuery'
+import { Outbox, OutboxDelivery } from './board/sections/outbox/query/outbox'
 import { EmbedSecret } from './board/sections/share/identity/embedSecret'
 import { ImportResult } from './settings/transfer/importResult'
 import { ParticipantQuery } from './board/sections/participants/query/participantQuery'
@@ -43,6 +44,17 @@ export default {
       api('PATCH', `/items/${id}`, { status }),
     history: (id: number): Promise<HistoryEvent[]> =>
       api('get', `/items/${id}/history`),
+  },
+  outbox: {
+    show: (pid: string): Promise<Outbox> => api('get', `/boards/${pid}/outbox`),
+    deliver: (pid: string, fingerprint: string): Promise<OutboxDelivery> =>
+      api('post', `/boards/${pid}/outbox/delivery`, { fingerprint }),
+    drop: (
+      pid: string,
+      itemId: number,
+      status: ItemStatus,
+    ): Promise<{ success: boolean; error?: string }> =>
+      api('DELETE', `/boards/${pid}/outbox/changes/${itemId}`, { status }),
   },
   participants: {
     list: (pid: string, query: ParticipantQuery): Promise<BoardParticipant[]> =>

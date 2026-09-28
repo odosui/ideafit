@@ -1,0 +1,8 @@
+<%= t(".heading", board: @board.name) %>
+
+<%= t(".intro", count: @subscriptions.size) %>
+<%= render partial: "change", collection: @subscriptions, as: :subscription %>
+
+<%= t(".open_board") %>: <%= public_board_url(@board.pid) %>
+
+<%= render "mailers/unsubscribe_footer" %>

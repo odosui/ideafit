@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   root "db/boards#index"
   get "home", to: "participant_home#show", as: :participant_home
 
@@ -27,6 +29,10 @@ Rails.application.routes.draw do
       resource :embed_secret, only: [:show, :create], module: :boards
       resource :export, only: :show, module: :boards
       resource :import, only: :create, module: :boards
+      resource :outbox, only: :show, module: :boards do
+        resource :delivery, only: :create, module: :outboxes
+        resources :changes, only: :destroy, module: :outboxes
+      end
     end
     namespace :embed do
       resources :sessions, only: :create
@@ -49,7 +55,7 @@ Rails.application.routes.draw do
   namespace :db do
     resources :boards, only: [:index, :show], param: :pid
     get "boards/:pid/:section", to: "boards#show", as: :board_section,
-      constraints: { section: /settings|kanban|items|participants|analytics/ }
+      constraints: { section: /settings|kanban|items|participants|analytics|outbox/ }
     get "boards/:pid/settings/:tab", to: "boards#show", as: :board_settings_tab,
       constraints: { tab: /import|danger/ }
     get "boards/:pid/items/:id(/:tab)", to: "items#show", as: :board_item,

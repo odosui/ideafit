@@ -1,14 +1,13 @@
-# Mail to someone following an item, with unsubscribe links for the footer.
+# Mail to someone following items, with a way to stop all such emails.
 module SubscriberMail
   extend ActiveSupport::Concern
   include OneClickUnsubscribe
 
   private
 
-  def mail_to_subscriber(subscription, **options, &)
-    @unsubscribe_item_url = unsubscribe_item_url(subscription.generate_token_for(:unsubscribe))
-    @unsubscribe_all_url = unsubscribe_all_url(subscription.user.generate_token_for(:unsubscribe))
-    one_click_unsubscribe(@unsubscribe_item_url)
-    mail(to: subscription.user.email, **options, &)
+  def mail_to_subscriber(user, **options, &)
+    @unsubscribe_all_url = unsubscribe_all_url(user.generate_token_for(:unsubscribe))
+    one_click_unsubscribe(@unsubscribe_all_url)
+    mail(to: user.email, **options, &)
   end
 end

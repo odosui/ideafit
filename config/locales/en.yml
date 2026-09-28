@@ -42,7 +42,15 @@ en:
       done: "Shipped"
       rejected: "Declined"
   item_update_mailer:
-    status_changed:
+    statuses_changed:
+      digest_subject:
+        one: "1 update on %{board}"
+        other: "%{count} updates on %{board}"
+      heading: "News from %{board}"
+      intro:
+        one: "Here's an update on an item you follow."
+        other: "Here's what changed on %{count} items you follow."
+      open_board: "Open the board"
       subject:
         planned: "“%{title}” is planned"
         in_progress: "Work has started on “%{title}”"

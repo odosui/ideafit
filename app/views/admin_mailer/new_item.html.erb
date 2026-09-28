@@ -4,4 +4,4 @@
   <p style="white-space: pre-line;"><%= truncate(@item.text, length: 500) %></p>
 <% end %>
 <p><%= link_to "Open in the dashboard", dashboard_item_url(@item) %></p>
-<%= render "mailers/admin_footer" %>
+<% content_for :footer, render("mailers/admin_footer") %>

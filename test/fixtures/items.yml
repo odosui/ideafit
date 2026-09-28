@@ -18,6 +18,7 @@ crash_on_login:
   kind: bug
   title: Crash on login
   status: done
+  notified_status: done
   votes_count: 1
 
 spam:
@@ -26,4 +27,5 @@ spam:
   kind: idea
   title: Buy cheap stuff
   status: rejected
+  notified_status: rejected
   votes_count: 0

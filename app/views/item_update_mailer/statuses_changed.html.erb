@@ -1,0 +1,7 @@
+<%= render "mailers/heading", text: t(".heading", board: @board.name) %>
+<p style="margin:0 0 16px;color:#525864;"><%= t(".intro", count: @subscriptions.size) %></p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+  <%= render partial: "change", collection: @subscriptions, as: :subscription %>
+</table>
+<%= render "mailers/button", label: t(".open_board"), url: public_board_url(@board.pid), color: board_accent(@board) %>
+<% content_for :footer, render("mailers/unsubscribe_footer") %>
