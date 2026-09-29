@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       resources :items, only: :index, module: :boards
       resources :participants, only: :index, module: :boards
       resource :analytics, only: :show, module: :boards
+      resource :counts, only: :show, module: :boards
       resource :embed_secret, only: [:show, :create], module: :boards
       resource :embed_emails, only: [:show, :update], module: :boards
       resource :export, only: :show, module: :boards

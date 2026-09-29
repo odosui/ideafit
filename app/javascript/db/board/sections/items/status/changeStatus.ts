@@ -3,6 +3,7 @@ import { ItemStatus } from '../../../../../shared/items/itemStatus'
 import api from '../../../../api'
 import { BoardItem } from '../../../../types'
 import { labelOfStatus } from '../options/itemStatuses'
+import { markBoardCountsStale } from '../../../counts/boardCountsStale'
 
 export const changeStatus = async (
   item: BoardItem,
@@ -15,5 +16,6 @@ export const changeStatus = async (
   }
 
   showToast(`Status changed to ${labelOfStatus(saved.status)}`)
+  markBoardCountsStale()
   return { ...item, status: saved.status }
 }

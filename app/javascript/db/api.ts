@@ -1,6 +1,7 @@
 import { api } from '../shared/api'
 import { CurrentUser } from '../shared/currentUser'
 import { AccountChanges } from './account/accountChanges'
+import { BoardCounts } from './board/counts/boardCounts'
 import { BoardAnalytics } from './board/sections/analytics/query/boardAnalytics'
 import { ItemQuery } from './board/sections/items/query/itemQuery'
 import { Outbox, OutboxDelivery } from './board/sections/outbox/query/outbox'
@@ -72,6 +73,10 @@ export default {
   participants: {
     list: (pid: string, query: ParticipantQuery): Promise<BoardParticipant[]> =>
       api('get', `/boards/${pid}/participants`, query),
+  },
+  counts: {
+    show: (pid: string): Promise<BoardCounts> =>
+      api('get', `/boards/${pid}/counts`),
   },
   analytics: {
     show: (pid: string): Promise<BoardAnalytics> =>

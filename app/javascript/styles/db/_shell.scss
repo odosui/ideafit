@@ -88,3 +88,25 @@ $sidebar-width: $unit10;
     padding: var(--space-6);
   }
 }
+
+.sidebar-counter {
+  margin-left: auto;
+  font-size: var(--text-0);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+
+  &--action {
+    min-width: 20px;
+    padding: 3px var(--space-1);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-accent);
+    color: var(--color-text-on-accent);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &--stat {
+    color: var(--color-text-faint);
+    font-weight: 400;
+  }
+}
