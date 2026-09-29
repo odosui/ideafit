@@ -11,7 +11,7 @@ class BoardsShowTest < ActionDispatch::IntegrationTest
   end
 
   test "renders the board page for each kind" do
-    %w[ideas bugs questions].each do |kind|
+    %w[ideas bugs questions roadmap settings].each do |kind|
       get "/b/roadmap0pid/#{kind}"
 
       assert_response :success

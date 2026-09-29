@@ -1,11 +1,10 @@
 import * as React from 'react'
 import readServerData from '../shared/server'
 import BoardAside from './aside/BoardAside'
+import BoardPanel from './BoardPanel'
 import EmailConsentBanner from './emailConsent/EmailConsentBanner'
 import Header from './Header'
-import ItemsPanel from './items/ItemsPanel'
-import RoadmapPanel from './roadmap/RoadmapPanel'
-import { BoardView, isKindView } from './routing/boardView'
+import { BoardView } from './routing/boardView'
 
 const { embedded } = readServerData()
 
@@ -22,11 +21,7 @@ const BoardPage: React.FC<Props> = ({ pid, view, onViewChange }) => (
       <BoardAside view={view} onViewChange={onViewChange} />
       <main className="board-main">
         <EmailConsentBanner />
-        {isKindView(view) ? (
-          <ItemsPanel pid={pid} kind={view} />
-        ) : (
-          <RoadmapPanel pid={pid} />
-        )}
+        <BoardPanel pid={pid} view={view} />
       </main>
     </div>
   </div>

@@ -3,6 +3,7 @@ import KindIcon from '../../../shared/items/KindIcon'
 import { BoardView } from '../../routing/boardView'
 import BoardNavLink from './BoardNavLink'
 import RoadmapIcon from './RoadmapIcon'
+import SettingsNavLink from './SettingsNavLink'
 
 const KIND_LINKS = [
   { view: 'idea', label: 'Ideas', icon: <KindIcon kind="idea" /> },
@@ -33,6 +34,7 @@ const BoardNav: React.FC<Props> = ({ view, onChange }) => (
       active={view === 'roadmap'}
       onSelect={onChange}
     />
+    <SettingsNavLink view={view} onChange={onChange} />
   </nav>
 )
 

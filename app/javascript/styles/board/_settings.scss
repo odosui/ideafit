@@ -1,0 +1,14 @@
+.board-settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 32rem;
+
+  &__title {
+    font-size: var(--text-4);
+  }
+
+  &__empty {
+    color: var(--color-text-faint);
+  }
+}

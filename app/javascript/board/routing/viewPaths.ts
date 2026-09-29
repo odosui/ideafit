@@ -5,6 +5,7 @@ const PATHS_BY_VIEW: Record<BoardView, string> = {
   bug: '/bugs',
   question: '/questions',
   roadmap: '/roadmap',
+  settings: '/settings',
 }
 
 export const pathForView = (view: BoardView) => PATHS_BY_VIEW[view]
