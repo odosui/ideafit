@@ -59,6 +59,10 @@ Every item keeps its history:
 
 ![An item's history: created, edited, moved to In progress](media/screenshots/item.png)
 
+## Who uses it
+
+- [Candl](https://www.candlapp.com), a private book tracker with reading notes, goals and stats: [feedback board](https://ideafit.candlapp.com/b/8cc6cb737272ca92/ideas)
+
 ## Run it
 
 ### One click on Railway
