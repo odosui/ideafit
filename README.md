@@ -13,6 +13,10 @@ Ideafit gives your users one place to suggest ideas, report bugs and ask questio
 
 ![A public Ideafit board with ideas, votes and statuses](media/screenshots/public-board.png)
 
+## Who uses it
+
+- [Candl](https://www.candlapp.com), a private book tracker with reading notes, goals and stats: [feedback board](https://ideafit.candlapp.com/b/8cc6cb737272ca92/ideas)
+
 ## Features
 
 **For your users**
@@ -58,10 +62,6 @@ Analytics counted from the items and votes you already have. No visitor tracking
 Every item keeps its history:
 
 ![An item's history: created, edited, moved to In progress](media/screenshots/item.png)
-
-## Who uses it
-
-- [Candl](https://www.candlapp.com), a private book tracker with reading notes, goals and stats: [feedback board](https://ideafit.candlapp.com/b/8cc6cb737272ca92/ideas)
 
 ## Run it
 
