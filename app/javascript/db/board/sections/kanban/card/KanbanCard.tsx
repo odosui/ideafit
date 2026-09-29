@@ -6,6 +6,8 @@ import { itemPath } from '../../items/item/itemPath'
 import { labelOfKind } from '../../items/options/itemKinds'
 import { putCard } from '../drag/cardTransfer'
 import MoveSelect from './MoveSelect'
+import KanbanCardPreview from './preview/KanbanCardPreview'
+import { useHoverPreview } from './preview/useHoverPreview'
 
 interface Props {
   pid: string
@@ -15,8 +17,10 @@ interface Props {
 
 const KanbanCard: React.FC<Props> = ({ pid, item, onMove }) => {
   const [dragging, setDragging] = React.useState(false)
+  const preview = useHoverPreview()
 
   const startDrag = (event: React.DragEvent) => {
+    preview.hide()
     putCard(event.dataTransfer, item.id)
     setDragging(true)
   }
@@ -27,6 +31,7 @@ const KanbanCard: React.FC<Props> = ({ pid, item, onMove }) => {
       draggable
       onDragStart={startDrag}
       onDragEnd={() => setDragging(false)}
+      {...preview.handlers}
     >
       <a
         className="kanban-card__title"
@@ -48,6 +53,9 @@ const KanbanCard: React.FC<Props> = ({ pid, item, onMove }) => {
         </span>
         <MoveSelect item={item} onMove={onMove} />
       </div>
+      {preview.anchor && !dragging && (
+        <KanbanCardPreview item={item} anchor={preview.anchor} />
+      )}
     </div>
   )
 }
